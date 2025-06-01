@@ -5,8 +5,8 @@ function isLogin(){
 }
 
 function openSearch() {
-    const header = document.getElementById("main-header");
-    const search = document.getElementById("main-header-search");
+    const header = document.getElementById("btns-main-header");
+    const search = document.getElementById("search-bar");
     const h2Search = document.getElementById("h2-search");
 
     header.style.display = "none";
@@ -15,8 +15,8 @@ function openSearch() {
 }
 
 function closeSearch() {
-    const header = document.getElementById("main-header");
-    const search = document.getElementById("main-header-search");
+    const header = document.getElementById("btns-main-header");
+    const search = document.getElementById("search-bar");
     const h2Search = document.getElementById("h2-search");
 
     header.style.display = "flex";

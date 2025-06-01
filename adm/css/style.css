@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, Inter, "avenir next", avenir, "segoe ui", "helvetica neue", helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "avenir next", avenir, "segoe ui", "helvetica neue", helvetica, Ubuntu, roboto, noto, arial, sans-serif;
     text-transform: uppercase;
     list-style: none;
     text-decoration: none;
@@ -120,10 +120,16 @@ main {
             }
         }
 
-        & div {
+        & section {
             display: flex;
             align-self: end;
             gap: 20px;
+        }
+        & h1{
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 20px;
         }
     }
 
@@ -135,72 +141,68 @@ main {
         display: none;
     }
 
-    & #main-header-search {
-        display: none;
-        margin-bottom: 30px;
-        & .search-bar {
-            display: flex;
+    & #search-bar {
+    display: none;
+    background-color: var(--white);
+    border: none;
+    color: var(--black);
+    width: 100%;
+    border-radius: 15px;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    padding: 0 15px;
+    align-self: end;
+
+        & input[type="search"] {
             background-color: var(--white);
-            border: none;
-            color: var(--black);
-            width: 100%;
-            border-radius: 15px;
-            align-items: center;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: text;
             transition: all 0.2s ease-in-out;
-            padding: 0 15px;
-            align-self: end;
+            padding: 15px 5px;
+            width: 100%;
+            border: none;
+            transition: all 0.2s ease-in-out;
 
-            & input[type="search"] {
-                background-color: var(--white);
-                font-size: 1rem;
+            &::placeholder {
+                color: var(--lite-gray);
                 font-weight: 800;
-                cursor: text;
-                transition: all 0.2s ease-in-out;
-                padding: 15px 5px;
-                width: 100%;
-                border: none;
-                transition: all 0.2s ease-in-out;
+            }
 
-                &::placeholder {
-                    color: var(--lite-gray);
-                    font-weight: 800;
-                }
+            &:focus {
+                outline: none;
+            }
 
-                &:focus {
-                    outline: none;
-                }
+            &::-webkit-search-cancel-button {
+                display: none;
+            }
+        }
 
-                &::-webkit-search-cancel-button {
-                    display: none;
-                }
+        & svg {
+            width: 15px;
+            stroke: var(--black);
+            stroke-width: 5px;
+        }
+
+        &:has(input[type="search"]:focus) {
+            background-color: var(--yellow);
+
+            & input[type="search"],
+            button {
+                background-color: var(--yellow);
             }
 
             & svg {
-                width: 15px;
                 stroke: var(--black);
-                stroke-width: 5px;
             }
+        }
 
-            &:has(input[type="search"]:focus) {
-                background-color: var(--yellow);
+        & button {
+            padding: 0;
+            background-color: transparent;
 
-                & input[type="search"],
-                button {
-                    background-color: var(--yellow);
-                }
-
-                & svg {
-                    stroke: var(--black);
-                }
-            }
-
-            & button {
-                padding: 0;
+            &:hover {
                 background-color: transparent;
-
-                &:hover {
-                    background-color: transparent;
-                }
             }
         }
     }

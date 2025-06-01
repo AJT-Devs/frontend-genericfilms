@@ -19,12 +19,12 @@
     <nav aria-label="Menu de navegação">
         <ul>
             <li><a href="./cinemas.html" class="this-page" aria-label="Clique para acessar área de Cinemas">Cinemas</a></li>
-            <li><a href="./movies.html" aria-label="Clique para acessar área de Filmes">Filmes</a></li>
             <li><a href="./sessions.html" aria-label="Clique para acessar área de Sessões">Sessões</a></li>
+            <li><a href="./movies.html" aria-label="Clique para acessar área de Filmes">Filmes</a></li>
             <li><a href="./users.html" aria-label="Clique para acessar área de Usuário">Usuários</a></li>
         </ul>
     </nav>
-    <a href="./user" class="perfil" aria-label="Clique para acessar usuário de [Administrador]">Login em: [Administrador]</a>
+    <a href="./perfil.html" class="perfil" aria-label="Clique para acessar usuário de [Administrador]">Login em: [Administrador]</a>
     </header>
 
 
@@ -32,36 +32,35 @@
 
         <header class="main-header" id="main-header" aria-label="Cabeçalho da lista de Cinemas">
             <h1>Cinemas</h1>
-            <div>
-                <button onclick="openSearch()" id="search" aria-label="Clique para buscar cinemas" title="Buscar Cinemas">
+
+            <section class="btns-main-header" id="btns-main-header" aria-label="Botões principais da lista de Cinemas">
+
+                <button onclick="openSearch()" id="search" aria-label="Clique para buscar Cinema" title="Buscar Cinema">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
                     </i>
                     Buscar
                 </button>
-                <button id="add-cinema" onclick="addCinema()" aria-label="Clique para adicionar um novo cinema" title="Adicionar Cinema">
+                <button onclick="addCinema()" aria-label="Clique para adicionar uma nova Sala" title="Adicionar Cinema">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                     </i>
                     Cinema
                 </button>
-            </div>
-        </header>
+            </section>
 
-        <header class="main-header" id="main-header-search" aria-label="Cabeçalho da lista de Cinemas">
-            <h1>Cinemas</h1>
-                <section class="search-bar">
+            <section class="search-bar" id="search-bar" aria-label="Barra de busca">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
                     </i>
-                    <input type="search" placeholder="Buscar" id="search" onchange="searchCinema()" class="search-open" aria-label="Clique para buscar cinemas" title="Buscar Cinemas"></input>
+                    <input type="search" placeholder="Buscar" id="search" onchange="searchCinemas()" class="search-open" aria-label="Clique para buscar Cinema" title="Buscar Cinema"></input>
                     <button id="close-search" onclick="closeSearch()" aria-label="Clique para fechar a busca" title="Fechar Busca">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                         </i>
                     </button>
 
-                </section>
+            </section>
         </header>
 
         <h2 id="h2-search">Resultado</h2>
