@@ -39,8 +39,15 @@ function addRoom() {
 function editRoom(btn) {
     const card = btn.closest(".card");
     const roomId = card.getAttribute("id");
-    
-    console.log(card, roomId);
 
     window.location.href = `../../adm/screens/edit/edit-room.html?id=${roomId}`;
+}
+
+//Go to Sessions Function
+
+function goToSessions(btn){
+    const card = btn.closest(".card");
+    const roomId = card.getAttribute("id");
+
+    window.location.href = `../../adm/screens/sessions.html?sala=${roomId}`;
 }

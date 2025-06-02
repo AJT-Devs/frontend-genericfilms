@@ -31,6 +31,7 @@ function getAllCinemas() {
 }
 
 //Add Cinema Function
+
 function addCinema() {
    window.location.href = "../../adm/screens/register/register-cinema.html";
 }
