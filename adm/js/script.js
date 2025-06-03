@@ -73,7 +73,12 @@ function enableBtnFooter(){
 
         input.addEventListener('input', ()=>{
             let todosPreenchidos = inputs.every(input => input.value.trim() !== "");
+            if(!repeatPassword){
+                    btn.disabled = !todosPreenchidos;
+                    return 0;
+            }
             if(input.id === 'repeat-password') {
+
                 if(repeatPassword.value !== password.value){
                 repeatPassword.style.border = "2px solid #EDC526"
                 message.style.display = "inline";
@@ -116,8 +121,13 @@ enableBtnFooter();
 
 //Change Password
 
-function confirmChangePassword(){
+function clickBtnFooter(){
     //Logica de enviar alteração
 
-    window.location.href = "http://127.0.0.1:5500/adm/screens/perfil.html"
+    console.log(window.location.href);
+
+    if(document.querySelector('title').textContent === "ADM - Login"){
+        window.location.href = origin + "/adm/screens/cinemas.html";
+    }
+    else window.history.back();
 }

@@ -7,6 +7,13 @@ function searchCinema() {
 //Delete Cinema Function
 
 function deleteCinema(card) {
+    // feach("http://localhost:3000/cinema", {
+    //     method: "DELETE",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({ id: card.getAttribute("id") })
+    // })
     // Aqui você pode adicionar a lógica para remover o item do banco de dados.
     card.remove();
 }
@@ -28,6 +35,7 @@ function getAllCinemas() {
     const cardsList = document.getElementById("cards-list");
     // cardsList é a section onde os cards de cinema serão exibidos.
     // Aqui você pode adicionar a lógica para buscar os cinemas do banco de dados.
+    
 }
 
 //Add Cinema Function
