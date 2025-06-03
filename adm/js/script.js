@@ -117,11 +117,13 @@ function compareRepeatPassword(){
     }
 }
 
-enableBtnFooter();
+
+//enableBtnFooter();
 
 //Change Password
 
 function clickBtnFooter(){
+
     //Logica de enviar alteração
 
     console.log(window.location.href);

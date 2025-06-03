@@ -8,7 +8,7 @@
     <meta name="keywords" content="cinema, tickets, movies, screenings, Generic Films">
     <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/style.css">
-    <title>ADM - Cadastrar Cinema</title>
+    <title>ADM - Editar Administrador</title>
 <body>
     <header class="simple-header">
         <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
@@ -16,7 +16,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             </i>
         </button>
-        <p id="title-pagina-p">Cadastrar Cinema</p>
+        <p id="title-pagina-p">Editar Administrador</p>
         <button id="btn-sair" onclick="goToStart()" title="Sair" aria-label="Clique para sair da página e voltar para o início" style="visibility: auto;">
             <i>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -27,38 +27,37 @@
 
     <main class="main-forms">
         <header>
-            <h1>Cadastrar Cinema</h1>
+            <h1>Editar Administrador</h1>
         </header>
 
         <main id="main-forms">
 
-            <form action="">
-                <label for="lacalization">Localização*</label>
-                <input type="text" placeholder="Informe o melhor ponto de referência" id="lacalization" title="Informe o melhor ponto de referência" oninput="enableBtnFooter()">
-                <div class="div-group-inputs">
-                    <div>
-                        <label for="uf">UF*</label>
-                        <input type="text" placeholder="SP" id="uf" oninput="enableBtnFooter()">
-                    </div>
-                    <div>
-                        <label for="city">Cidade*</label>
-                        <input type="text" placeholder="Caraguatatuba" id="city" oninput="enableBtnFooter()">
-                    </div>
-                </div>
-                <label for="adress">Endereço*</label>
-                <input type="text" id="adress" placeholder="Bairro A, Rua exemplo, n°1234, CEP 00000-00" oninput="enableBtnFooter()">
-            </form>
+            <form action="" id="form-edit-adm">
+                <label for="full-name-adm">Nome Completo*</label>
+                <input type="text" placeholder="Nome do usuário" id="full-name-adm" title="[Nome do usuário]" value="[Nome do usuário]" oninput="enableBtnFooter()">
+                
+                <label for="email-adm">E-mail Corporativo*</label>
+                <input type="text" id="email-adm" placeholder="Email do usuário" value="[Email do usuário]" oninput="enableBtnFooter()">
+                
+                <label for="cargo">Cargo*</label>
+                <input type="text" id="cargo" placeholder="Informe o cargo" value="[Cargo]" oninput="enableBtnFooter()">
+
+                <label for="password-adm">Senha*</label>
+                <input type="password" id="password-adm" placeholder="Senha do usuário" value="[Senha do usuário]" oninput="enableBtnFooter()">
+            
+        </form> 
 
         </main>
 
     </main>
     
     <footer class="btn-footer">
-        <button id="btn-footer" title="Cadastrar Cinema" aria-label="Clique para Cadastrar Cinema" disabled onclick="clickBtnFooter()">
-            <h2>Cadastrar Cinema</h2>
+        <button id="btn-footer" title="Editar Usuário" aria-label="Clique para Editar Usuário" disabled onclick="clickBtnFooter()">
+            <h2>Editar Administrador</h2>
         </button>
     </footer>
 
     <script src="../../js/script.js"></script>
+    <script src="../../js/controller/user.js"></script>
 </body>
 </html>

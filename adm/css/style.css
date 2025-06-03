@@ -164,11 +164,15 @@ main {
             &:hover {
                 background-color: var(--yellow);
             }
-
+            
             & svg {
                 width: 15px;
                 stroke: var(--black);
                 stroke-width: 5px;
+            }
+            &:focus{
+                outline: none;
+                background-color: var(--yellow);
             }
         }
 

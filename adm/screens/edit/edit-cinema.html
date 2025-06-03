@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="@joaoapassos, @AngeLoLTPK, @TulioKenji">
+    <meta name="description" content="Ticket sales website for the fictitious cinema chain Generic Films. A Web Development II project featuring complete information on screenings and Rooms.">
+    <meta name="keywords" content="cinema, tickets, movies, screenings, Generic Films">
+    <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>ADM - Editar Cinema</title>
+<body>
+    <header class="simple-header">
+        <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
+            <i>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            </i>
+        </button>
+        <p id="title-pagina-p">Editar Cinema</p>
+        <button id="btn-sair" onclick="goToStart()" title="Sair" aria-label="Clique para sair da página e voltar para o início" style="visibility: auto;">
+            <i>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </i>
+        </button>
+    </header>
+
+
+    <main class="main-forms">
+        <header>
+            <h1>Editar Cinema</h1>
+        </header>
+
+        <main id="main-forms">
+
+            <form action="">
+                <label for="lacalization">Localização*</label>
+                <input type="text" placeholder="Informe o melhor ponto de referência" id="lacalization" title="Informe o melhor ponto de referência" value="[Localização]" oninput="enableBtnFooter()">
+                <div class="div-group-inputs">
+                    <div>
+                        <label for="uf">UF*</label>
+                        <input type="text" placeholder="SP" id="uf" oninput="enableBtnFooter()" value="[UF]">
+                    </div>
+                    <div>
+                        <label for="city">Cidade*</label>
+                        <input type="text" placeholder="Caraguatatuba" id="city" oninput="enableBtnFooter()" value="[Cidade]">
+                    </div>
+                </div>
+                <label for="adress">Endereço*</label>
+                <input type="text" id="adress" placeholder="Bairro A, Rua exemplo, n°1234, CEP 00000-00" oninput="enableBtnFooter()" value="[Endereço completo]">
+            </form>
+
+        </main>
+
+    </main>
+    
+    <footer class="btn-footer">
+        <button id="btn-footer" title="Editar Cinema" aria-label="Clique para Editar Cinema"  onclick="clickBtnFooter()"> <!-- disabled -->
+            <h2>Editar Cinema</h2>
+        </button>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+</body>
+</html>
