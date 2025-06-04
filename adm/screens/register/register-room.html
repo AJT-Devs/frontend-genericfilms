@@ -34,17 +34,17 @@
 
             <form action="">
                 <label for="lacalization">Cinema</label>
-                <input type="text" placeholder="Localização" id="lacalization" title="[Localização]" value="[Localização]" disabled oninput="enableBtnFooter()">
+                <input type="text" placeholder="Localização" id="lacalization" title="[Localização]" value="[Localização]" disabled oninput="enableBtnFooter()" required>
                 <label for="name-room">Nome*</label>
-                <input type="text" id="name-room" placeholder="Sala 1" oninput="enableBtnFooter()">
+                <input type="text" id="name-room" placeholder="Sala 1" oninput="enableBtnFooter()" required>
                 <div class="div-group-inputs">
                     <div>
                         <label for="num-seats">Total de poltronas*</label>
-                        <input type="text" placeholder="100" id="num-seats" value="100" oninput="enableBtnFooter()">
+                        <input type="text" placeholder="100" id="num-seats" value="100" oninput="enableBtnFooter()" required>
                     </div>
                     <div>
                         <label for="num-pcd">Vagas para PCD*</label>
-                        <input type="text" placeholder="4" id="num-pcd" value="4" oninput="enableBtnFooter()">
+                        <input type="text" placeholder="4" id="num-pcd" value="4" oninput="enableBtnFooter()" required>
                     </div>
                 </div>
             </form>

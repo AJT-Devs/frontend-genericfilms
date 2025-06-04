@@ -58,47 +58,47 @@ function clientChangeToAdmFormRegister(e){
     const formClient = `
             <form action="" id="form-register-cliente">
                 <label for="full-name">Nome Completo*</label>
-                <input type="text" placeholder="Nome do cliente" id="full-name" title="[Nome do cliente]" oninput="enableBtnFooter()">
+                <input type="text" placeholder="Nome do cliente" id="full-name" title="[Nome do cliente]" oninput="enableBtnFooter()" required>
                 
                 <div class="div-group-inputs">
                     <div>
                         <label for="cpf">CPF*</label>
-                        <input type="text" id="cpf" placeholder="000.000.000-00" oninput="enableBtnFooter()">
+                        <input type="text" id="cpf" placeholder="000.000.000-00" oninput="enableBtnFooter()" required>
                     </div>
                     <div>
                         <label for="data-nasc">Data de Nascimento*</label>
-                        <input type="text" placeholder="DD/MM/AAAA" id="data-nasc" oninput="enableBtnFooter()">
+                        <input type="date" placeholder="DD/MM/AAAA" id="data-nasc" onclick="enableBtnFooter()" required>
                     </div>
                 </div>
                 <div class="div-group-inputs">
                     <div>
                         <label for="email">E-mail*</label>
-                        <input type="text" id="email" placeholder="Email do cliente" oninput="enableBtnFooter()">
+                        <input type="email" id="email" placeholder="Email do cliente" oninput="enableBtnFooter()" required>
                     </div>
                     <div>
                         <label for="tel">Telefone*</label>
-                        <input type="text" placeholder="(00) 0000-0000" id="tel" oninput="enableBtnFooter()">
+                        <input type="text" placeholder="(00) 0000-0000" id="tel" oninput="enableBtnFooter()" required>
                     </div>
                 </div>
 
                 <label for="password">Senha*</label>
-                <input type="password" id="password" placeholder="Senha do cliente" oninput="enableBtnFooter()">
+                <input type="password" id="password" placeholder="Senha do cliente" oninput="enableBtnFooter()" required>
             
             </form>
     `;
     const formAdm = `
        <form action="" id="form-register-adm">
                 <label for="full-name-adm">Nome Completo*</label>
-                <input type="text" placeholder="Nome do usuário" id="full-name-adm" title="[Nome do usuário]" oninput="enableBtnFooter()">
+                <input type="text" placeholder="Nome do usuário" id="full-name-adm" title="[Nome do usuário]" oninput="enableBtnFooter()" required>
                 
                 <label for="email-adm">E-mail Corporativo*</label>
-                <input type="text" id="email-adm" placeholder="Email do usuário" oninput="enableBtnFooter()">
+                <input type="email" id="email-adm" placeholder="Email do usuário" oninput="enableBtnFooter()" required>
                 
                 <label for="cargo">Cargo*</label>
-                <input type="text" id="cargo" placeholder="Informe o cargo" oninput="enableBtnFooter()">
+                <input type="text" id="cargo" placeholder="Informe o cargo" oninput="enableBtnFooter()" required>
 
                 <label for="password-adm">Senha*</label>
-                <input type="password" id="password-adm" placeholder="Senha do usuário" oninput="enableBtnFooter()">
+                <input type="password" id="password-adm" placeholder="Senha do usuário" oninput="enableBtnFooter()" required>
             
         </form> 
     `;

@@ -34,16 +34,16 @@
 
             <form action="" id="form-edit-adm">
                 <label for="full-name-adm">Nome Completo*</label>
-                <input type="text" placeholder="Nome do usuário" id="full-name-adm" title="[Nome do usuário]" value="[Nome do usuário]" oninput="enableBtnFooter()">
+                <input type="text" placeholder="Nome do usuário" id="full-name-adm" title="[Nome do usuário]" value="[Nome do usuário]" oninput="enableBtnFooter()" required>
                 
                 <label for="email-adm">E-mail Corporativo*</label>
-                <input type="text" id="email-adm" placeholder="Email do usuário" value="[Email do usuário]" oninput="enableBtnFooter()">
+                <input type="text" id="email-adm" placeholder="Email do usuário" value="[Email do usuário]" oninput="enableBtnFooter()" required>
                 
                 <label for="cargo">Cargo*</label>
-                <input type="text" id="cargo" placeholder="Informe o cargo" value="[Cargo]" oninput="enableBtnFooter()">
+                <input type="text" id="cargo" placeholder="Informe o cargo" value="[Cargo]" oninput="enableBtnFooter()" required>
 
-                <label for="password-adm">Senha*</label>
-                <input type="password" id="password-adm" placeholder="Senha do usuário" value="[Senha do usuário]" oninput="enableBtnFooter()">
+                <label for="password-adm">Senha</label>
+                <input type="password" id="password-adm" placeholder="Senha do usuário" oninput="enableBtnFooter()">
             
         </form> 
 
@@ -52,7 +52,7 @@
     </main>
     
     <footer class="btn-footer">
-        <button id="btn-footer" title="Editar Usuário" aria-label="Clique para Editar Usuário" disabled onclick="clickBtnFooter()">
+        <button id="btn-footer" title="Editar Usuário" aria-label="Clique para Editar Usuário" onclick="clickBtnFooter()"> <!-- disabled -->
             <h2>Editar Administrador</h2>
         </button>
     </footer>

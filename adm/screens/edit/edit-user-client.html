@@ -34,31 +34,31 @@
 
             <form action="" id="form-edit-cliente">
                 <label for="full-name">Nome Completo*</label>
-                <input type="text" placeholder="Nome do cliente" id="full-name" title="[Nome do cliente]" value="[Nome do cliente]" oninput="enableBtnFooter()">
+                <input type="text" placeholder="Nome do cliente" id="full-name" title="[Nome do cliente]" value="[Nome do cliente]" oninput="enableBtnFooter()" required>
                 
                 <div class="div-group-inputs">
                     <div>
                         <label for="cpf">CPF*</label>
-                        <input type="text" id="cpf" placeholder="000.000.000-00" value="[000.000.000-00]" oninput="enableBtnFooter()">
+                        <input type="text" id="cpf" placeholder="000.000.000-00" value="[000.000.000-00]" oninput="enableBtnFooter()" required>
                     </div>
                     <div>
                         <label for="data-nasc">Data de Nascimento*</label>
-                        <input type="text" placeholder="DD/MM/AAAA" id="data-nasc" value="[DD/MM/AAAA]" oninput="enableBtnFooter()">
+                        <input type="date" placeholder="DD/MM/AAAA" id="data-nasc" value="01-02-2000" onclick="enableBtnFooter()" required>
                     </div>
                 </div>
                 <div class="div-group-inputs">
                     <div>
                         <label for="email">E-mail*</label>
-                        <input type="text" id="email" placeholder="Email do cliente" value="Email do cliente" oninput="enableBtnFooter()">
+                        <input type="text" id="email" placeholder="Email do cliente" value="Email do cliente" oninput="enableBtnFooter()" required>
                     </div>
                     <div>
                         <label for="tel">Telefone*</label>
-                        <input type="text" placeholder="(00) 0000-0000" id="tel" value="[(00) 0000-0000]" oninput="enableBtnFooter()">
+                        <input type="text" placeholder="(00) 0000-0000" id="tel" value="[(00) 0000-0000]" oninput="enableBtnFooter()" required>
                     </div>
                 </div>
 
-                <label for="password">Alterar senha*</label>
-                <input type="password" id="password" placeholder="Senha do cliente" value="[Senha do cliente]" oninput="enableBtnFooter()">
+                <label for="password">Alterar senha</label>
+                <input type="password" id="password" placeholder="Alterar senha do cliente" oninput="enableBtnFooter()">
             
             </form>
 
@@ -67,7 +67,7 @@
     </main>
     
     <footer class="btn-footer">
-        <button id="btn-footer" title="Editar Cliente" aria-label="Clique para Editar Cliente" disabled onclick="clickBtnFooter()">
+        <button id="btn-footer" title="Editar Cliente" aria-label="Clique para Editar Cliente" onclick="clickBtnFooter()"> <!-- disabled -->
             <h2>Editar Cliente</h2>
         </button>
     </footer>

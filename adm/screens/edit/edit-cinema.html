@@ -34,19 +34,19 @@
 
             <form action="">
                 <label for="lacalization">Localização*</label>
-                <input type="text" placeholder="Informe o melhor ponto de referência" id="lacalization" title="Informe o melhor ponto de referência" value="[Localização]" oninput="enableBtnFooter()">
+                <input type="text" placeholder="Informe o melhor ponto de referência" id="lacalization" title="Informe o melhor ponto de referência" value="[Localização]" oninput="enableBtnFooter()" required>
                 <div class="div-group-inputs">
                     <div>
                         <label for="uf">UF*</label>
-                        <input type="text" placeholder="SP" id="uf" oninput="enableBtnFooter()" value="[UF]">
+                        <input type="text" placeholder="SP" id="uf" oninput="enableBtnFooter()" value="[UF]" maxlength="2" required>
                     </div>
                     <div>
                         <label for="city">Cidade*</label>
-                        <input type="text" placeholder="Caraguatatuba" id="city" oninput="enableBtnFooter()" value="[Cidade]">
+                        <input type="text" placeholder="Caraguatatuba" id="city" oninput="enableBtnFooter()" value="[Cidade]" required>
                     </div>
                 </div>
                 <label for="adress">Endereço*</label>
-                <input type="text" id="adress" placeholder="Bairro A, Rua exemplo, n°1234, CEP 00000-00" oninput="enableBtnFooter()" value="[Endereço completo]">
+                <input type="text" id="adress" placeholder="Bairro A, Rua exemplo, n°1234, CEP 00000-00" oninput="enableBtnFooter()" value="[Endereço completo]" required>
             </form>
 
         </main>

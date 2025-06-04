@@ -2,6 +2,7 @@
 
 function isLogin(){
     // Adicionar verificação se é um adm logado, se não redirecionar para a página de login
+
 }
 
 function openSearch() {
@@ -68,30 +69,51 @@ function enableBtnFooter(){
     btn.disabled = true;
 
     const inputs = Array.from(document.querySelectorAll('input'));
+    const selects = Array.from(document.querySelectorAll('select'));
 
     inputs.forEach(input => {
 
         input.addEventListener('input', ()=>{
-            let todosPreenchidos = inputs.every(input => input.value.trim() !== "");
-            if(!repeatPassword){
-                    btn.disabled = !todosPreenchidos;
-                    return 0;
-            }
-            if(input.id === 'repeat-password') {
+            let todosInputsPreenchidos = inputs.every(input => input.required ? input.value.trim() !== '' : true);
+            
 
-                if(repeatPassword.value !== password.value){
-                repeatPassword.style.border = "2px solid #EDC526"
-                message.style.display = "inline";
-
+            if(repeatPassword){
+                if(input.id === 'repeat-password') {
+    
+                    if(repeatPassword.value !== password.value){
+                    repeatPassword.style.border = "2px solid #EDC526"
+                    message.style.display = "inline";
+    
+                    }
+                    else{
+                        repeatPassword.style.border = "2px solid #3D3D3D"
+                        message.style.display = "none";
+                        btn.disabled = !todosInputsPreenchidos;
+                    }
                 }
-                else{
-                    repeatPassword.style.border = "2px solid #3D3D3D"
-                    message.style.display = "none";
-                    btn.disabled = !todosPreenchidos;
+
+                if(selects){
+                selects.addEventListener('change', () => {
+                        todosSelectsPreenchidos = select.every(select => select.required ? select.value.trim() !== '' : true);
+
+                        btn.disabled = !todosInputsPreenchidos && !todosSelectsPreenchidos;
+                    });
+                } 
+                
+            }
+            else{
+                btn.disabled = !todosInputsPreenchidos && !todosSelectsPreenchidos;
+                if(selects){
+                selects.addEventListener('change', () => {
+                        todosSelectsPreenchidos = select.every(select => select.required ? select.value.trim() !== '' : true);
+
+                        btn.disabled = !todosInputsPreenchidos && !todosSelectsPreenchidos;
+                    });
                 }
             }
         });
       });
+
 
     // console.log(inputs)
 }

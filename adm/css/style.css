@@ -344,11 +344,30 @@ main {
             display: flex;
             flex-direction: column;
             width: 100%;
+            position: relative;
+
+            svg{
+                position: absolute;
+                stroke-width: 2px;
+                top: 45%;
+                right: 10px;
+            }
         }
     
     }
 
-    & input{
+    & .div-select{
+        position: relative;
+
+            svg{
+                position: absolute;
+                stroke-width: 2px;
+                top: 30%;
+                right: 10px;
+            }
+        }
+
+    & input, select{
         width: 100%;
         margin: 10px 0 20px 0;
         padding: 13px;
@@ -373,7 +392,10 @@ main {
             color: var(--lite-gray);
         }
     }
-
+    & select{
+        cursor: pointer;
+        appearance: none;
+    }
     & label{
         font-weight: 800;
         font-size: 1rem;

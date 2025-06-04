@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="@joaoapassos, @AngeLoLTPK, @TulioKenji">
+    <meta name="description" content="Ticket sales website for the fictitious cinema chain Generic Films. A Web Development II project featuring complete information on screenings and Rooms.">
+    <meta name="keywords" content="cinema, tickets, movies, screenings, Generic Films">
+    <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>ADM - Cadastrar Sessão</title>
+<body>
+    <header class="simple-header">
+        <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
+            <i>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            </i>
+        </button>
+        <p id="title-pagina-p">Cadastrar Sessão</p>
+        <button id="btn-sair" onclick="goToStart()" title="Sair" aria-label="Clique para sair da página e voltar para o início" style="visibility: auto;">
+            <i>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </i>
+        </button>
+    </header>
+
+
+    <main class="main-forms">
+        <header>
+            <h1>Cadastrar Sessão</h1>
+        </header>
+
+        <main id="main-forms">
+
+            <form action="">
+                <div class="div-group-inputs">
+                    <div>
+                        <label for="cinema">Cinema</label>
+                        <input type="text" placeholder="Cinema" id="cinema" value="[Cinema]" oninput="enableBtnFooter()" disabled required>
+                    </div>
+                    <div>
+                        <label for="room">Sala</label>
+                        <input type="text" placeholder="sala" id="room" value="[Sala 1]" oninput="enableBtnFooter()" required>
+                    </div>
+                </div>
+                <label for="select-movie">Filme*</label>
+                <div class="div-select">
+                    <select name="" id="select-movie" required oninput="enableBtnFooter()">
+                        <option value="" selected>Selecione o filme</option>
+                        <option value="filme1">Filme 1</option>
+                        <option value="filme2">Filme 2</option>
+                        <option value="filme3">Filme 3</option>
+    
+                    </select>
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                    </i>
+                </div>
+                <div class="div-group-inputs">
+                    <div>
+                        <label for="date">Data</label>
+                        <input type="date" placeholder="DD/MM/AAAA" id="date" onclick="enableBtnFooter()" required>
+                    </div>
+                    <div>
+                        <label for="price">Preço do Ingresso (Inteiro)</label>
+                        <input type="text" placeholder="R$ 22,00" id="price" value="R$ 22,00" oninput="enableBtnFooter()" required>
+                    </div>
+                </div>
+                <div class="div-group-inputs">
+                    <div>
+                        <label for="timeStart">Hora de inicio</label>
+                        <input type="time" placeholder="HH:MM" id="timeStart" onclick="enableBtnFooter()" required>
+                    </div>
+                    <div>
+                        <label for="timeEnd">Hora de termino</label>
+                        <input type="time" placeholder="HH:MM" id="TimeEnd" onclick="enableBtnFooter()" required>
+                    </div>
+                    
+                </div>
+                <div class="div-group-inputs">
+                    <div>
+                        <label for="select-format">Formato</label>
+                        <select name="" id="select-format" required oninput="enableBtnFooter()">
+                            <option value="2D" selected>2D</option>
+                            <option value="3D">3D</option>
+                        </select>
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                        </i>
+                    </div>
+                    <div>
+                        <label for="select-language">Idioma</label>
+                        <select name="" id="select-language" required oninput="enableBtnFooter()">
+                            <option value="Dublado" selected>Dublado</option>
+                            <option value="Legendado">Legendado</option>
+                            <option value="Ingles">Ingles</option>
+                            <option value="Original">Original</option>
+                        </select>
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                        </i>
+                    </div>
+                </div>
+                
+
+            </form>
+
+        </main>
+
+    </main>
+    
+    <footer class="btn-footer">
+        <button id="btn-footer" title="Cadastrar Sessão" aria-label="Clique para Cadastrar Sessão" disabled onclick="clickBtnFooter()">
+            <h2>Cadastrar Sessão</h2>
+        </button>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+</body>
+</html>
