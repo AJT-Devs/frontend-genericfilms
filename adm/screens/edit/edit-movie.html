@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="@joaoapassos, @AngeLoLTPK, @TulioKenji">
+    <meta name="description" content="Ticket sales website for the fictitious cinema chain Generic Films. A Web Development II project featuring complete information on screenings and Rooms.">
+    <meta name="keywords" content="cinema, tickets, movies, screenings, Generic Films">
+    <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>ADM - Editar Filme</title>
+<body>
+    <header class="simple-header">
+        <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
+            <i>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            </i>
+        </button>
+        <p id="title-pagina-p">Editar Filme</p>
+        <button id="btn-sair" onclick="goToStart()" title="Sair" aria-label="Clique para sair da página e voltar para o início" style="visibility: auto;">
+            <i>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </i>
+        </button>
+    </header>
+
+
+    <main class="main-forms">
+        <header>
+            <h1>Editar Filme</h1>
+        </header>
+
+        <main id="main-forms">
+
+            <form action="" id="form-register-cliente" style="margin-bottom: 60px;">
+                <label for="title-movie">Titulo: Subtitulo</label>
+                <input type="text" placeholder="Titulo do filme: Subtitulo do filme" value="[Titulo do filme: Subtitulo do filme]" id="title-movie" title="[Titulo do filme: Subtitulo do filme]" required>
+                
+                <div class="div-group-inputs div-inputs-movie">
+                    <div class="div-poster-movie">
+                        <label for="">Capa</label>
+                        <label for="poster-movie">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            </span>
+                            <input type="file" id="poster-movie" hidden required>
+                        </label>
+                    </div>
+                    <div class="div-banner-movie">
+                        <label for="">Banner</label>
+                        <label for="banner-movie">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            </span>
+                            <input type="file" id="banner-movie" hidden required>
+                        </label>
+                    </div>
+                </div>
+                <label for="resume-movie">Sinopse</label>
+                <textarea id="resume-movie" placeholder="Resumo sobre a filme...">[Resumo sobre a filme...]</textarea>
+                <label for="link-trailer-movie">Link Trailer</label>
+                <input type="url" id="link-trailer-movie" placeholder="Link do trailer" value="[Link do trailer]" required>
+                <div class="div-group-inputs">
+                    <div>
+                        <label for="classification-movie">Classificação</label>
+                        <div class="div-select">
+                            <select name="" id="classification-movie" required>
+                                <option value="?" selected>?</option>
+                                <option value="L">L</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
+                                <option value="14">14</option>
+                                <option value="16">16</option>
+                                <option value="18">18</option>
+                            </select>
+                            <i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                            </i>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="release-date-movie">Data de estreia</label>
+                        <input type="date" placeholder="DD/MM/AAAA" id="release-date-movie" required>
+                    </div>
+                </div>
+                <div class="div-group-inputs">
+                    <div>
+                        <label for="duration-movie">Duração (Em minutos)</label>
+                        <input type="text" placeholder="120" id="duration-movie" value="120" required>
+                    </div>
+                    <div>
+                        <label for="status-movie">Status</label>
+                        <div class="div-select">
+                            <select name="" id="status-movie" required>
+                                <option value="Em cartaz" selected>Em cartaz</option>
+                                <option value="Em breve">Em breve</option>
+                                <option value="Indisponível">Indisponível</option>
+                            </select>
+                            <i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                            </i>
+                        </div>
+                    </div>
+                </div>
+                <label for="director-movie">Diretor(es)</label>
+                <input type="text" id="director-movie" placeholder="Nome do(s) diretor(es)" value="[Nome do(s) diretor(es)]" required>
+                <label for="cast-movie">Elenco</label>
+                <input type="text" id="cast-movie" placeholder="Nome do pessoal do elenco" value="[Nome do pessoal do elenco]" required>
+
+            
+            </form>
+
+        </main>
+
+    </main>
+    
+    <footer class="btn-footer">
+        <button id="btn-footer" title="Editar Filme" aria-label="Clique para Editar Filme" disabled onclick="clickBtnFooter()">
+            <h2>Editar Filme</h2>
+        </button>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/controller/user.js"></script>
+</body>
+</html>

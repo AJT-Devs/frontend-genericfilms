@@ -6,6 +6,7 @@
     text-transform: uppercase;
     list-style: none;
     text-decoration: none;
+    transition: all .2s ease-in-out;
 }
 
 svg {
@@ -107,14 +108,14 @@ header {
         align-items: center;
         justify-content: center;
         padding: 2px;
-        transition: all .2s ease-in-out;
+
 
         & svg{
             height: 25px;
             width: 25px;
             stroke: var(--lite-gray);
             stroke-width: 3px;
-            transition: all .2s ease-in-out;
+    
         }
         
         &:hover{
@@ -345,13 +346,6 @@ main {
             flex-direction: column;
             width: 100%;
             position: relative;
-
-            svg{
-                position: absolute;
-                stroke-width: 2px;
-                top: 45%;
-                right: 10px;
-            }
         }
     
     }
@@ -367,7 +361,7 @@ main {
             }
         }
 
-    & input, select{
+    & input, select, textarea, label[for="poster-movie"], label[for="banner-movie"]{
         width: 100%;
         margin: 10px 0 20px 0;
         padding: 13px;
@@ -391,20 +385,80 @@ main {
             font-size: 1rem;
             color: var(--lite-gray);
         }
+        
+            
     }
     & select{
         cursor: pointer;
         appearance: none;
     }
+    & textarea{
+        height: 150px;
+        resize: none;
+    }
     & label{
         font-weight: 800;
         font-size: 1rem;
     }
-
+    
     & #message-error-repeat-password{
         display: none;
         text-transform: none;
         color: var(--yellow);
+    }
+    & .div-inputs-movie{
+        & .div-banner-movie{
+            width: 800px;
+        }
+        & .div-poster-movie{
+            width: 300px;
+        }
+    }
+    
+    & label[for="poster-movie"], label[for="banner-movie"]{
+        height: auto;
+        cursor: pointer;
+        /* background-image: url('https://pbs.twimg.com/media/GsUdy3_XQAEz4n1.jpg'); */
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover{
+            background-color: var(--yellow);
+            color: var(--black);
+            & svg{
+                fill: var(--black);
+                stroke: var(--black);
+            }
+        }
+        input[type="file"]{
+            display: none;
+        }
+        span {
+            display: inline-flex;
+            align-items: center;
+            svg{
+                stroke: var(--white);
+                width: clamp(25px, 50vw, 50px);
+                display: inline-block;
+                position: relative;
+                left: 0;
+            }   
+        }
+    }
+    & label[for="poster-movie"]{
+        aspect-ratio: 2/3;
+    }
+    & label[for="banner-movie"]{
+        aspect-ratio: 16/9;
+    }
+
+    & textarea{
+        padding: 25px 25px;
     }
 }
 
@@ -505,7 +559,7 @@ footer {
         border: none;
         color: var(--black);
         background-color: var(--white);
-        transition: all .2s ease-in-out;
+
     
         &:hover{
             background-color: var(--yellow);
