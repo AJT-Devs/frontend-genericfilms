@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="@joaoapassos, @AngeLoLTPK, @TulioKenji">
+    <meta name="description" content="Ticket sales website for the fictitious cinema chain Generic Films. A Web Development II project featuring complete information on screenings and Rooms.">
+    <meta name="keywords" content="cinema, tickets, movies, screenings, Generic Films">
+    <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>ADM - Cadastrar Reserva</title>
+<body>
+    <header class="simple-header">
+        <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
+            <i>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            </i>
+        </button>
+        <p id="title-pagina-p">Cadastrar Reserva</p>
+        <button id="btn-sair" onclick="goToStart()" title="Sair" aria-label="Clique para sair da página e voltar para o início" style="visibility: auto;">
+            <i>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </i>
+        </button>
+    </header>
+
+
+    <main class="main-forms">
+        <header>
+            <h1>Cadastrar Reserva</h1>
+        </header>
+
+        <main id="main-forms">
+
+            <form action="">
+                <div class="div-group-inputs">
+                    <div>
+                        <label for="cinema">Cinema</label>
+                        <div class="div-select">
+                            <select name="" id="select-cinema" required>
+                                <option value="" selected>Selecione o cinema</option>
+                                <option value="id#0001">Cinema 1</option>
+                                <option value="id#0002">Cinema 2</option>
+                                <option value="id#0003">Cinema 3</option>
+            
+                            </select>
+                            <i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                            </i>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="select-movie">Filme</label>
+                        <div class="div-select">
+                            <select name="" id="select-movie" required>
+                                <option value="" selected>Selecione o filme</option>
+                                <option value="id#0001">Filme 1</option>
+                                <option value="id#0002">Filme 2</option>
+                                <option value="id#0003">Filme 3</option>
+            
+                            </select>
+                            <i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                            </i>
+                        </div>
+                    </div>
+                </div>
+                <label for="select-session">Sessão</label>
+                <div class="div-select">
+                    <select name="" id="select-session" required>
+                        <option value="" selected>Selecione a sessão</option>
+                        <option value="id#0001">Sessão 1</option>
+                        <option value="id#0002">Sessão 2</option>
+                        <option value="id#0003">Sessão 3</option>
+    
+                    </select>
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                    </i>
+                </div>
+
+                <label for="seats">Assentos (Max: 10)</label>
+                <input type="text" placeholder="e1-e2-e3-e4-e5" id="seats" required>
+
+                <div class="div-group-inputs">
+                    <div>
+                        <label for="numWhole">QTD Inteiras</label>
+                        <input type="number" placeholder="0" id="numWhole" required>
+                    </div>
+                    <div>
+                        <label for="numHalf">QTD Meias</label>
+                        <input type="number" placeholder="0" id="numHalf" required oninput="openSectionIsHalf(this)">
+                    </div>
+                </div>
+
+                <section id="is-half" style="display: block;">
+                    <!-- <label for="docHalfPass#0">Documento de meia entrada #0</label>
+                    <input type="text" placeholder="Informe o código do documento comprobatório " id="docHalfPass#0" required> -->
+                </section>
+
+                <label for="select-payment">Método de pagamento</label>
+                <div class="div-select">
+                    <select name="" id="select-payment" required>
+                        <option value="PIX">PIX</option>
+                        <option value="Cartão de crédito">Cartão de crédito</option>
+                        <option value="Cartão de débito">Cartão de débito</option>
+    
+                    </select>
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                    </i>
+                </div>
+                
+
+            </form>
+
+        </main>
+
+    </main>
+    
+    <footer class="btn-footer">
+        <button id="btn-footer" title="Cadastrar Reserva" aria-label="Clique para Cadastrar Reserva" disabled onclick="clickBtnFooter()">
+            <h2>Cadastrar Reserva</h2>
+        </button>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/controller/reserve.js"></script>
+</body>
+</html>

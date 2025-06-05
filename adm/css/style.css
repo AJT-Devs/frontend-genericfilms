@@ -575,3 +575,44 @@ footer {
         }
     }
 }
+
+#download-ticket-btn{
+    background-color: var(--white);
+    border: none;
+    color: var(--black);
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    width: fit-content;
+    position: absolute;
+    top: 25px;
+    right: 25px;
+
+    &:hover {
+        background-color: var(--yellow);
+    }
+    
+    & svg {
+        width: 15px;
+        stroke: var(--black);
+        stroke-width: 5px;
+    }
+    &:focus{
+        outline: none;
+        background-color: var(--yellow);
+    }
+}
+
+.preview-ticket-main{
+    padding: 0;
+    max-width: 600px;
+    div{
+        aspect-ratio: 21 / 29.7;
+        background-color: var(--lite-gray);
+    }
+}

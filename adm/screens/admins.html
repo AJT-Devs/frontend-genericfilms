@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="@joaoapassos, @AngeLoLTPK, @TulioKenji">
-    <meta name="description" content="Ticket sales website for the fictitious cinema chain Generic Films. A Web Development II project featuring complete information on screenings and Users.">
+    <meta name="description" content="Ticket sales website for the fictitious cinema chain Generic Films. A Web Development II project featuring complete information on screenings and Admins.">
     <meta name="keywords" content="cinema, tickets, movies, screenings, Generic Films">
     <link rel="icon" href="../../icons/favicon-adm.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
-    <title>ADM - Usuários</title>
+    <title>ADM - Administradores</title>
 </head>
-<body onload="isLogin(), getAllUsers()">
+<body onload="isLogin(), getAllAdmins()">
 
     <header>
         <i class="logo" id="vertical-logo" title="Generic Films" aria-label="Generic Films">
@@ -21,32 +21,32 @@
             <ul>
                 <li><a href="./cinemas.html" aria-label="Clique para acessar área de Cinemas">Cinemas</a></li>
                 <li><a href="./movies.html" aria-label="Clique para acessar área de Filmes">Filmes</a></li>
-                <li><a href="./users.html" class="this-page" aria-label="Clique para acessar área de Usuários">Usuários</a></li>
-                <li><a href="./admins.html" aria-label="Clique para acessar área de Administradores">Administradores</a></li>
+                <li><a href="./users.html" aria-label="Clique para acessar área de Usuários">Usuários</a></li>
+                <li><a href="./admins.html" class="this-page" aria-label="Clique para acessar área de Administradores">Administradores</a></li>
             </ul>
         </nav>
         <a href="./perfil.html" class="perfil" aria-label="Clique para acessar usuário de [Administrador]">Login em: [Administrador]</a>
     </header>
 
 
-    <main id="main-content" aria-label="Conteúdo principal da página de usuários">
+    <main id="main-content" aria-label="Conteúdo principal da página de Administradores">
 
-        <header class="main-header" id="main-header" aria-label="Cabeçalho da lista de Usuários">
-            <h1>Usuários</h1>
+        <header class="main-header" id="main-header" aria-label="Cabeçalho da lista de Administradores">
+            <h1>Administradores</h1>
 
-            <section class="btns-main-header" id="btns-main-header" aria-label="Botões principais da lista de Usuários">
+            <section class="btns-main-header" id="btns-main-header" aria-label="Botões principais da lista de Administradores">
 
-                <button onclick="openSearch()" id="search" aria-label="Clique para buscar Usuário" title="Buscar Usuário">
+                <button onclick="openSearch()" id="search" aria-label="Clique para buscar Administrador" title="Buscar Administrador">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
                     </i>
                     Buscar
                 </button>
-                <button onclick="addUser()" aria-label="Clique para adicionar um novo Usuário" title="Adicionar Usuário">
+                <button onclick="addAdmin()" aria-label="Clique para adicionar um novo Administrador" title="Adicionar Administrador">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                     </i>
-                    Usuário
+                    Administrador
                 </button>
             </section>
 
@@ -54,7 +54,7 @@
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
                     </i>
-                    <input type="search" placeholder="Buscar" id="search" onchange="searchUsers()" class="search-open" aria-label="Clique para buscar usuários" title="Buscar Usuários"></input>
+                    <input type="search" placeholder="Buscar" id="search" onchange="searchAdmins()" class="search-open" aria-label="Clique para buscar Administradores" title="Buscar Administradores"></input>
                     <button id="close-search" onclick="closeSearch()" aria-label="Clique para fechar a busca" title="Fechar Busca">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -66,18 +66,17 @@
 
         <h2 id="h2-search">Resultado</h2>
 
-        <main class="cards-list" id="cards-list" aria-label="Lista de Usuários">
-            <section class="card" id="1" tabindex="0" aria-label="[Nome do usuário] - [000.000.000-00]; [ID#0000]">
-                <div aria-label="[Nome do usuário] - [000.000.000-00] [ID#0000]">
+        <main class="cards-list" id="cards-list" aria-label="Lista de Administradores">
+            <section class="card" id="1" tabindex="0" aria-label="[Nome do Administrador] - [Cargo]; [ID#0000]">
+                <div aria-label="[Nome do Administrador] - [Cargo] [ID#0000]">
                     <i aria-label="Ícone de usuário">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round-icon lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg>  
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-Admin-round-icon lucide-circle-Admin-round"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg>  
                     </i>
-                    <p title="[Nome do usuário] - [000.000.000-00]">Nome do usuário - 000.000.000-00</p>
+                    <p title="[Nome do Administrador] - [Cargo]">[Nome do Administrador] - [Cargo]</p>
                     <p>ID#0000</p>
                 </div>
                 <div>
-                    <button onclick="goToReserves(this)">Reservas</button>
-                    <button onclick="editUser(this)">Editar</button>
+                    <button onclick="editAdmin(this)">Editar</button>
                     <button onclick="openModalConfirmDelete(this)">Deletar</button>
                 </div>
             </section>
@@ -103,7 +102,7 @@
     </section>
 
     <script src="../js/script.js"></script>
-    <script src="../js/controller/user.js"></script>
+    <script src="../js/controller/admin.js"></script>
     
 </body>
 </html>

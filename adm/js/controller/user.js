@@ -32,89 +32,23 @@ function getAllUsers() {
 
 //Add User Function
 function addUser() {
-   window.location.href = "../../adm/screens/register/register-user.html";
+   window.location.href = "../../adm/screens/register/register-user-client.html";
 }
 
 //Edit User Function
 function editUser(btn) {
     const card = btn.closest(".card");
     const userId = card.getAttribute("id");
-
-    //Logica para saber tipo de usuário (cliente ou adm)
-    const adm = false;
-    // const clint = true;
-
-    if(!adm){
-        window.location.href = `../../adm/screens/edit/edit-user-client.html?id=${userId}`;
-    }
-    else window.location.href = `../../adm/screens/edit/edit-user-adm.html?id=${userId}`;
+  
+    window.location.href = `../../adm/screens/edit/edit-user-client.html?id=${userId}`;
 
 }
 
-//Client and Adm choose form of Register and Edit
+//Go to Reserves of user
 
-function clientChangeToAdmFormRegister(e){
-    const main = document.getElementById('main-forms');
-    const formClient = `
-            <form action="" id="form-register-cliente">
-                <label for="full-name">Nome Completo*</label>
-                <input type="text" placeholder="Nome do cliente" id="full-name" title="[Nome do cliente]" oninput="enableBtnFooter()" required>
-                
-                <div class="div-group-inputs">
-                    <div>
-                        <label for="cpf">CPF*</label>
-                        <input type="text" id="cpf" placeholder="000.000.000-00" oninput="enableBtnFooter()" required>
-                    </div>
-                    <div>
-                        <label for="data-nasc">Data de Nascimento*</label>
-                        <input type="date" placeholder="DD/MM/AAAA" id="data-nasc" onclick="enableBtnFooter()" required>
-                    </div>
-                </div>
-                <div class="div-group-inputs">
-                    <div>
-                        <label for="email">E-mail*</label>
-                        <input type="email" id="email" placeholder="Email do cliente" oninput="enableBtnFooter()" required>
-                    </div>
-                    <div>
-                        <label for="tel">Telefone*</label>
-                        <input type="text" placeholder="(00) 0000-0000" id="tel" oninput="enableBtnFooter()" required>
-                    </div>
-                </div>
-
-                <label for="password">Senha*</label>
-                <input type="password" id="password" placeholder="Senha do cliente" oninput="enableBtnFooter()" required>
-            
-            </form>
-    `;
-    const formAdm = `
-       <form action="" id="form-register-adm">
-                <label for="full-name-adm">Nome Completo*</label>
-                <input type="text" placeholder="Nome do usuário" id="full-name-adm" title="[Nome do usuário]" oninput="enableBtnFooter()" required>
-                
-                <label for="email-adm">E-mail Corporativo*</label>
-                <input type="email" id="email-adm" placeholder="Email do usuário" oninput="enableBtnFooter()" required>
-                
-                <label for="cargo">Cargo*</label>
-                <input type="text" id="cargo" placeholder="Informe o cargo" oninput="enableBtnFooter()" required>
-
-                <label for="password-adm">Senha*</label>
-                <input type="password" id="password-adm" placeholder="Senha do usuário" oninput="enableBtnFooter()" required>
-            
-        </form> 
-    `;
-    const menu = e.closest("#menu-btn-type-users");
-
-    if(e.value == "Administrador"){
-        main.innerHTML = formAdm;
-        e.style.backgroundColor = "#EDC526";
-        menu.querySelector('button[value="Cliente"]').style.backgroundColor = "#FAFAFA";
-    }
-    else{
-        main.innerHTML = formClient;
-        e.style.backgroundColor = "#EDC526";
-        menu.querySelector('button[value="Administrador"]').style.backgroundColor = "#FAFAFA";
-    }
-
-    document.getElementById('btn-footer').disabled = true;
-
+function goToReserves(btn){
+    const card = btn.closest(".card");
+    const userId = card.getAttribute("id");
+  
+    window.location.href = `../../adm/screens/reserves.html?id=${userId}`;
 }

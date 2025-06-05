@@ -21,7 +21,8 @@
         <ul>
             <li><a href="./cinemas.html" class="this-page" aria-label="Clique para acessar área de Cinemas">Cinemas</a></li>
             <li><a href="./movies.html" aria-label="Clique para acessar área de Filmes">Filmes</a></li>
-            <li><a href="./users.html" aria-label="Clique para acessar área de Usuário">Usuários</a></li>
+            <li><a href="./users.html" aria-label="Clique para acessar área de Usuários">Usuários</a></li>
+            <li><a href="./admins.html" aria-label="Clique para acessar área de Administradores">Administradores</a></li>
         </ul>
     </nav>
     <a href="./perfil.html" class="perfil" aria-label="Clique para acessar usuário de [Administrador]">Login em: [Administrador]</a>
@@ -30,18 +31,18 @@
 
     <main id="main-content" aria-label="Conteúdo principal da página de Sessões">
 
-        <header class="main-header" id="main-header" aria-label="Cabeçalho da lista de Sessões">
+        <header class="main-header" id="main-header" aria-label="Cabeçalho da lista de Sessões de [Localização]">
             <h1>[Localização] - [Sala] - Sessões</h1>
 
-            <section class="btns-main-header" id="btns-main-header" aria-label="Botões principais da lista de Sessões">
+            <section class="btns-main-header" id="btns-main-header" aria-label="Botões principais da lista de Sessões de [Localização]">
 
-                <button onclick="openSearch()" id="search" aria-label="Clique para buscar Sessão" title="Buscar sessões">
+                <button onclick="openSearch()" id="search" aria-label="Clique para buscar Sessão" title="Buscar sessões de [Localização]">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
                     </i>
                     Buscar
                 </button>
-                <button onclick="addSession()" aria-label="Clique para adicionar um novo Filme" title="Adicionar Sessão">
+                <button onclick="addSession()" aria-label="Clique para adicionar uma nova Sessão" title="Adicionar Sessão">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                     </i>
@@ -49,7 +50,7 @@
                 </button>
             </section>
 
-            <section class="search-bar" id="search-bar" aria-label="Barra de busca">
+            <section class="search-bar" id="search-bar" aria-label="Barra de busca de [Localização]">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
                     </i>

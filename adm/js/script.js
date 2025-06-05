@@ -5,6 +5,10 @@ function isLogin() {
 
 }
 
+function renderHeader() {
+  
+}
+
 function openSearch() {
     const header = document.getElementById("btns-main-header");
     const search = document.getElementById("search-bar");
@@ -64,10 +68,13 @@ function goToChangePasswordAdm() {
 function checkFormStatus() {
   const inputsFilled = isInputsFilled();
   const selectsFilled = isSelectsFilled();
+  const textareaFilled = isTextareaFilled();
   const repeatPasswordOk = compareRepeatPassword();
   
   const btn = document.getElementById('btn-footer');
-  btn.disabled = !(inputsFilled && selectsFilled && repeatPasswordOk);
+  if(btn){
+    btn.disabled = !(inputsFilled && selectsFilled && textareaFilled && repeatPasswordOk);
+  }
 }
 
 // Função que verifica se todos os inputs obrigatórios estão preenchidos
@@ -86,6 +93,16 @@ function isSelectsFilled() {
   const selects = Array.from(document.querySelectorAll('select'));
   
   return selects.every(select => select.required ? select.value.trim() !== '' : true
+  );
+}
+
+// Função que verifica se todos os textarea obrigatórios estão preenchidos
+
+function isTextareaFilled() {
+  const textareas = Array.from(document.querySelectorAll('textarea'));
+  
+  return textareas.every(textarea =>
+    textarea.required ? textarea.value.trim() !== '' : true
   );
 }
 
@@ -117,14 +134,24 @@ function enableBtnFooter() {
   checkFormStatus();
 
   const inputs = Array.from(document.querySelectorAll('input'));
-  inputs.forEach(input => {
-    input.addEventListener('input', checkFormStatus);
-  });
+  if(inputs){
+    inputs.forEach(input => {
+      input.addEventListener('input', checkFormStatus);
+    });
+  }
 
   const selects = Array.from(document.querySelectorAll('select'));
-  selects.forEach(select => {
-    select.addEventListener('change', checkFormStatus);
-  });
+  if(selects){
+    selects.forEach(select => {
+      select.addEventListener('change', checkFormStatus);
+    });
+  }
+  const textareas = Array.from(document.querySelectorAll('textarea'));
+  if(textareas){
+    textareas.forEach(textarea => {
+      textarea.addEventListener('input', checkFormStatus);
+    });
+  }
 }
 
 document.addEventListener('DOMContentLoaded', enableBtnFooter);
@@ -140,3 +167,7 @@ function clickBtnFooter() {
     }
     else window.history.back();
 }
+
+
+// Funções que reconhecem os inputs do tipo file e exibem o nome e a imagem do arquivo dentro do input
+

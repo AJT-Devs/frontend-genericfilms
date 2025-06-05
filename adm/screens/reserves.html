@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="@joaoapassos, @AngeLoLTPK, @TulioKenji">
-    <meta name="description" content="Ticket sales website for the fictitious cinema chain Generic Films. A Web Development II project featuring complete information on screenings and Rooms.">
+    <meta name="description" content="Ticket sales website for the fictitious cinema chain Generic Films. A Web Development II project featuring complete information on screenings and movies.">
     <meta name="keywords" content="cinema, tickets, movies, screenings, Generic Films">
     <link rel="icon" href="../../icons/favicon-adm.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
-    <title>ADM - Salas de [Localização]</title>
+    <title>ADM - Reservas</title>
 </head>
-<body onload="isLogin(), getAllRooms()">
+<body onload="isLogin(), getAllReserves()">
 
     <header>
     <i class="logo" id="vertical-logo" title="Generic Films" aria-label="Generic Films">
@@ -19,9 +19,9 @@
     </i>
     <nav aria-label="Menu de navegação">
         <ul>
-            <li><a href="./cinemas.html" class="this-page" aria-label="Clique para acessar área de Cinemas">Cinemas</a></li>
+            <li><a href="./cinemas.html" aria-label="Clique para acessar área de Cinemas">Cinemas</a></li>
             <li><a href="./movies.html" aria-label="Clique para acessar área de Filmes">Filmes</a></li>
-            <li><a href="./users.html" aria-label="Clique para acessar área de Usuários">Usuários</a></li>
+            <li><a href="./users.html" class="this-page" aria-label="Clique para acessar área de Usuários">Usuários</a></li>
             <li><a href="./admins.html" aria-label="Clique para acessar área de Administradores">Administradores</a></li>
         </ul>
     </nav>
@@ -29,32 +29,32 @@
     </header>
 
 
-    <main id="main-content" aria-label="Conteúdo principal da página de Salas de [Localização]">
+    <main id="main-content" aria-label="Conteúdo principal da página de Reservas de [Usuário]">
 
-        <header class="main-header" id="main-header" aria-label="Cabeçalho da lista de Salas de [Localização]">
-            <h1>[Localização] - Salas</h1>
+        <header class="main-header" id="main-header" aria-label="Cabeçalho da lista de Reservas de [Usuário]">
+            <h1>[Usuário] - Reservas</h1>
 
-            <section class="btns-main-header" id="btns-main-header" aria-label="Botões principais da lista de Salas de [Localização]">
+            <section class="btns-main-header" id="btns-main-header" aria-label="Botões principais da lista de Reservas">
 
-                <button onclick="openSearch()" id="search" aria-label="Clique para buscar Sala" title="Buscar Sala">
+                <button onclick="openSearch()" id="search" aria-label="Clique para buscar Reserva" title="Buscar Reservas">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
                     </i>
                     Buscar
                 </button>
-                <button onclick="addRoom()" aria-label="Clique para adicionar uma nova Sala" title="Adicionar Sala">
+                <button onclick="addReserve()" aria-label="Clique para adicionar um nova Reserva" title="Adicionar Reserva">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                     </i>
-                    Sala
+                    Reserva
                 </button>
             </section>
 
-            <section class="search-bar" id="search-bar" aria-label="Barra de busca para Salas de [Localização]">
+            <section class="search-bar" id="search-bar" aria-label="Barra de busca">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
                     </i>
-                    <input type="search" placeholder="Buscar" id="search" onchange="searchRooms()" class="search-open" aria-label="Clique para buscar Sala" title="Buscar Sala"></input>
+                    <input type="search" placeholder="Buscar" id="search" onchange="searchReserves()" class="search-open" aria-label="Clique para buscar Reservas" title="Buscar Reservas"></input>
                     <button id="close-search" onclick="closeSearch()" aria-label="Clique para fechar a busca" title="Fechar Busca">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -66,18 +66,18 @@
 
         <h2 id="h2-search">Resultado</h2>
 
-        <main class="cards-list" id="cards-list" aria-label="Lista de Sala de [Localização]">
-            <section class="card" id="1" tabindex="0" aria-label="[Sala 1]; [ID#0000]">
-                <div aria-label="[Sala 1] [ID#0000]">
-                    <i aria-label="Ícone de poltrona">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tv-minimal-icon lucide-tv-minimal"><path d="M7 21h10"/><rect width="20" height="14" x="2" y="3" rx="2"/></svg>
+        <main class="cards-list" id="cards-list" aria-label="Lista de Reservas">
+            <section class="card" id="1" tabindex="0" aria-label="Reservas de [Usuário]; [ID#0000]">
+                <div aria-label="Reservas de [Usuário]; [ID#0000]">
+                    <i aria-label="Ícone de ingresso">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ticket-icon lucide-ticket"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>    
                     </i>
-                    <p title="[Sala 1]">Sala 1</p>
-                    <p>ID#0001</p>
+                    <p title="[Inteira - E5 - dd/mm - Titulo do filme - Sala - 00:00 - 00:00]">[Inteira - E5 - dd/mm - Titulo do filme - Sala - 00:00 - 00:00]</p>
+                    <p>ID#0000</p>
                 </div>
                 <div>
-                    <button onclick="goToSessions(this)">Sessões</button>
-                    <button onclick="editRoom(this)">Editar</button>
+                    <button onclick="goToTicketPreview(this)">Acessar ingresso</button>
+                    <button onclick="editReserve(this)">Editar</button>
                     <button onclick="openModalConfirmDelete(this)">Deletar</button>
                 </div>
             </section>
@@ -103,7 +103,7 @@
     </section>
 
     <script src="../js/script.js"></script>
-    <script src="../js/controller/room.js"></script>
+    <script src="../js/controller/reserve.js"></script>
     
 </body>
 </html>

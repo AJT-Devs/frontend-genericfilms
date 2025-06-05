@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="@joaoapassos, @AngeLoLTPK, @TulioKenji">
+    <meta name="description" content="Ticket sales website for the fictitious cinema chain Generic Films. A Web Development II project featuring complete information on screenings and Rooms.">
+    <meta name="keywords" content="cinema, tickets, movies, screenings, Generic Films">
+    <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>ADM - Cadastrar Administrador</title>
+<body>
+    <header class="simple-header">
+        <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
+            <i>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            </i>
+        </button>
+        <p id="title-pagina-p">Cadastrar Administrador</p>
+        <button id="btn-sair" onclick="goToStart()" title="Sair" aria-label="Clique para sair da página e voltar para o início" style="visibility: auto;">
+            <i>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </i>
+        </button>
+    </header>
+
+
+    <main class="main-forms">
+        <header>
+            <h1>Cadastrar Administrador</h1>
+        </header>
+
+        <main id="main-forms">
+
+            <form action="" id="form-register-adm">
+                <label for="full-name-adm">Nome Completo*</label>
+                <input type="text" placeholder="Nome do usuário" id="full-name-adm" title="[Nome do usuário]" oninput="enableBtnFooter()" required>
+                
+                <label for="email-adm">E-mail Corporativo*</label>
+                <input type="email" id="email-adm" placeholder="Email do usuário" oninput="enableBtnFooter()" required>
+                
+                <label for="cargo">Cargo*</label>
+                <input type="text" id="cargo" placeholder="Informe o cargo" oninput="enableBtnFooter()" required>
+
+                <label for="password-adm">Senha*</label>
+                <input type="password" id="password-adm" placeholder="Senha do usuário" oninput="enableBtnFooter()" required>
+        </form> 
+
+        </main>
+
+    </main>
+    
+    <footer class="btn-footer">
+        <button id="btn-footer" title="Cadastrar Administrador" aria-label="Clique para Cadastrar Administrador" disabled onclick="clickBtnFooter()">
+            <h2>Cadastrar Administrador</h2>
+        </button>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/controller/admin.js"></script>
+</body>
+</html>
