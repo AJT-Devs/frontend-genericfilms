@@ -39,20 +39,20 @@
                 <div class="div-group-inputs div-inputs-movie">
                     <div class="div-poster-movie">
                         <label for="">Capa</label>
-                        <label for="poster-movie">
+                        <label for="poster-movie" class="label-input-file" ondragover="onDrag(this)" ondragend="offDrag(this)" ondragleave="offDrag(this)" ondrop="offDrag(this)">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                             </span>
-                            <input type="file" id="poster-movie" hidden required accept="image/jpg, image/jpeg, image/png, image/webp">
+                            <input type="file" id="poster-movie" required accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
                         </label>
                     </div>
                     <div class="div-banner-movie">
                         <label for="">Banner</label>
-                        <label for="banner-movie">
+                        <label for="banner-movie" class="label-input-file" ondragover="onDrag(this)" ondragend="offDrag(this)" ondragleave="offDrag(this)" ondrop="offDrag(this)">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                             </span>
-                            <input type="file" id="banner-movie" hidden required accept="image/jpg, image/jpeg, image/png, image/webp">
+                            <input type="file" id="banner-movie" required accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
                         </label>
                     </div>
                 </div>

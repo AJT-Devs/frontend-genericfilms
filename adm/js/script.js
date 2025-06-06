@@ -160,7 +160,7 @@ function clickBtnFooter() {
 
     //Logica de enviar alteração
 
-    console.log(window.location.href);
+    // console.log(window.location.href);
 
     if (document.querySelector('title').textContent === "ADM - Login") {
         window.location.href = origin + "/adm/screens/cinemas.html";

@@ -40,7 +40,43 @@ function editMovie(btn) {
     const card = btn.closest(".card");
     const movieId = card.getAttribute("id");
     
-    console.log(card, movieId);
+    // console.log(card, movieId);
 
     window.location.href = `../../adm/screens/edit/edit-movie.html?id=${movieId}`;
+}
+
+function onDrag(label) {
+    label.classList.add("drag-input-file");
+    
+}
+function offDrag(label) {
+    label.classList.remove("drag-input-file");
+}
+
+function showImagePreview(input) {
+    const file = input.files[0];
+    const preview = document.querySelector(`label[for="${input.id}"]`);
+    preview.querySelector("span").style.display = "inline";
+
+    const formats = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
+    const type = file ? file.type : "";
+    if(!formats.includes(type)) {
+        alert("Formato de imagem inválido. Por favor, envie uma imagem JPEG, PNG, JPG ou WEBP.");
+        //futuro modal que vai surgir com a mensagem de erro
+        input.value = "";
+        preview.style.backgroundImage = "none";
+        return;
+    }
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.style.backgroundImage = `url(${e.target.result})`;
+        };
+        reader.readAsDataURL(file);
+
+        preview.querySelector("span").style.display = "none";
+    } else {
+        preview.style.backgroundImage = "none";
+    }
 }
