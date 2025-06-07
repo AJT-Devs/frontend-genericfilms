@@ -330,7 +330,7 @@ main {
 .main-forms{
     width: 70%;
     gap: 20px;
-    padding: clamp(20px, calc(15vw + 1rem), 60px) 0;
+    padding: clamp(20px, calc(15svh + 1rem), 100px) 0;
 
     & main{
         padding: 0;

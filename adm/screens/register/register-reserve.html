@@ -80,16 +80,16 @@
                 </div>
 
                 <label for="seats">Assentos (Max: 10)</label>
-                <input type="text" placeholder="e1-e2-e3-e4-e5" id="seats" required>
+                <input type="text" placeholder="e1-e2-e3-e4-e5" id="seats" required oninput="treatmentOfSeatsInput(this)">
 
                 <div class="div-group-inputs">
                     <div>
                         <label for="numWhole">QTD Inteiras</label>
-                        <input type="number" placeholder="0" id="numWhole" required>
+                        <input type="number" placeholder="0" id="numWhole" min="0" max="10"  required>
                     </div>
                     <div>
                         <label for="numHalf">QTD Meias</label>
-                        <input type="number" placeholder="0" id="numHalf" required oninput="openSectionIsHalf(this)">
+                        <input type="number" placeholder="0" id="numHalf" min="0" max="10" required oninput="openSectionIsHalf(this)">
                     </div>
                 </div>
 

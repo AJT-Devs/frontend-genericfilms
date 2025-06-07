@@ -53,29 +53,66 @@ function goToTicketPreview(btn){
     window.location.href = `../../adm/screens/preview-ticket.html?id=${reserveId}`;
 }
 
+let indexQtdMeias = 0;
+
 function openSectionIsHalf(qtdMeias){
-    const section = document.getElementById('is-half');
-    let i = 0;
-    const input = `
-        <label for="docHalfPass#${i}">Documento de meia entrada #${i}</label>
-        <input type="text" placeholder="Informe o código do documento comprobatório " id="docHalfPass#${i}" required>
-    `
+    let i;
+    const qtdInputs = +qtdMeias.value;
 
-    const qtdInputs = qtdMeias.value;
+    // console.log("qtdInputs = " +  qtdInputs)
 
-    addInputDocHalfPass(i, qtdInputs);
+    i =  qtdInputs - indexQtdMeias;
 
-    i += (i - qtdInputs);   
-}
+    // console.log("i = " + i)
+    // console.log("indexQtdMeias = " + indexQtdMeias)
 
-function addInputDocHalfPass(i, qtdInputs){
-    const section = document.getElementById('is-half');
+    if(i==0) return;
 
-    for(i; i<qtdInputs; i++){
-        const input = `
-            <label for="docHalfPass#${i}">Documento de meia entrada #${i}</label>
-            <input type="text" placeholder="Informe o código do documento comprobatório " id="docHalfPass#${i}" required>
-        `
-        section.innerHTML += input;
+    if(i>0){
+        while(i>0){
+        addInputDocHalfPass();
+
+        i--;
+    }
+    }
+    else if(i<0){
+        while(i<0){
+            removeInputDocHalfPass();
+            
+            i++;
+        }
     }
 }
+
+function addInputDocHalfPass(){
+    const section = document.getElementById('is-half');
+    const i = indexQtdMeias + 1;
+
+    const input = document.createElement('input');
+    input.setAttribute('type', 'text');
+    input.setAttribute('placeholder', 'Informe o código do documento comprobatório')
+    input.setAttribute('id', `docHalfPass#${i}`)
+    input.setAttribute('required', true);
+
+    const label = document.createElement('label');
+    label.setAttribute('for', `docHalfPass#${i}`);
+    label.innerText = `Documento de meia entrada #${i}`;
+
+
+    // console.log("Add input")
+    section.appendChild(label);
+    section.appendChild(input);
+    indexQtdMeias++;
+}
+function removeInputDocHalfPass(){
+    const section = document.getElementById('is-half');
+    const label = section.querySelectorAll('label')[indexQtdMeias - 1];
+    const input = section.querySelectorAll('input')[indexQtdMeias - 1];
+    // console.log("Remove input")
+
+    label.remove(); 
+    input.remove();
+    indexQtdMeias--;
+}
+
+
