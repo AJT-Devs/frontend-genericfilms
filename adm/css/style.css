@@ -636,3 +636,141 @@ footer {
         background-color: var(--lite-gray);
     }
 }
+
+.div-map-seats{
+    width: 100%;
+    padding: 20px 0;
+    display: block;
+    
+    & .div-map-seats-back, & .div-map-seats-front, & .div-map-screen{
+        width: 100%;
+        max-width: 620px;
+        margin: 0 auto;
+        display: flex;
+        flex-flow: column;
+        /* border: 1px solid red; */
+        justify-content: center;
+        position: relative;
+
+        & .div-map-seats-row{
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5%;
+            margin-bottom: 1.5%;
+
+            & .div-map-seat{
+                width: 5%;
+                aspect-ratio: 1 / 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: var(--white);
+                border-radius: clamp(1px, 1vw, 10px);
+                
+                & input{
+                    display: none;
+
+                    &:checked + label{
+                        background-color: var(--yellow);
+                        color: var(--black);
+                        opacity: 1;
+                    }
+
+                    &:disabled + label{
+                        background-color: var(--gray);
+                        color: transparent;
+                        cursor: not-allowed;
+                        opacity: 1;
+                    }
+                }
+                & :has(input:disabled){
+                    background-color: transparent;
+                }
+
+                
+                & label{
+                    width: 100%;
+                    height: 100%;
+                    font-size: clamp(0px, 1vw, 13px);
+                    font-weight: 800;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer; 
+                    border-radius: clamp(1px, 1vw, 10px);
+                    opacity: 0;
+
+                    & svg{
+                        stroke: var(--black);
+                    }
+                    &:has(svg){
+                        opacity: 1;
+                    }
+                }
+
+            }
+            & h4{
+                position: absolute;
+                left: 0;
+                color: var(--gray);
+                font-size: clamp(0px, 1vw, 15px);
+            }
+
+            & .div-map-seat-row-pcd{
+                background-color: transparent;
+                
+                & label{
+                    border: 2px solid var(--white);
+
+                    & svg{
+                        stroke: var(--white);
+                    }
+                }
+                & input{
+
+                    &:checked + label{
+                        border-color: var(--yellow);
+                        background-color: transparent;
+                        & svg{
+                            stroke: var(--yellow);
+                        }
+                    }
+                    &:disabled + label{
+                        background-color: transparent;
+                        cursor: not-allowed;
+                        border-color: var(--gray);
+
+                        & svg{
+                            stroke: var(--gray);
+                        }
+                    }
+                }
+            }
+                
+        }
+    }
+    & .div-map-seats-back{
+        margin-bottom: clamp(0px, 3.5%, 20px);      
+    }
+
+    & .div-map-screen{
+        align-items: center;
+        gap: 5px;
+        padding-top: 20px;
+        & svg{
+            width: clamp(0px, 50vw, 540px);
+
+            stroke: none;
+            fill: var(--gray);
+        }
+        label{
+            font-size: clamp(0px, 1vw, 13px);
+            color: var(--gray);
+            font-weight: 600;
+        }
+    }
+
+}
