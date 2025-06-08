@@ -92,7 +92,8 @@ function addInputDocHalfPass(){
     input.setAttribute('type', 'text');
     input.setAttribute('placeholder', 'Informe o código do documento comprobatório')
     input.setAttribute('id', `docHalfPass#${i}`)
-    input.setAttribute('required', true);
+    input.required = true;
+    input.addEventListener('input', checkFormStatus);
 
     const label = document.createElement('label');
     label.setAttribute('for', `docHalfPass#${i}`);
@@ -114,5 +115,3 @@ function removeInputDocHalfPass(){
     input.remove();
     indexQtdMeias--;
 }
-
-
