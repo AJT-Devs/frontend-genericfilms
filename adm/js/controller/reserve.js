@@ -57,11 +57,11 @@ let indexQtdMeias = 0;
 
 function openSectionIsHalf(qtdMeias){
     let i;
-    const qtdInputs = +qtdMeias.value;
+    // const qtdInputs = +qtdMeias.value;
 
     // console.log("qtdInputs = " +  qtdInputs)
 
-    i =  qtdInputs - indexQtdMeias;
+    i =  qtdMeias - indexQtdMeias;
 
     // console.log("i = " + i)
     // console.log("indexQtdMeias = " + indexQtdMeias)
@@ -114,4 +114,18 @@ function removeInputDocHalfPass(){
     label.remove(); 
     input.remove();
     indexQtdMeias--;
+}
+
+function validValueInputNumTicket(){
+    const input = document.querySelector('input[type="number"]');
+    const numMax = ifCheckboxFilled()
+
+    console.log(numMax)
+
+    if(!input) return;
+
+    if(input.value > numMax) input.value = numMax;
+    else if(input.value < 0) input.value = 0;
+    
+    openSectionIsHalf(input.value);
 }

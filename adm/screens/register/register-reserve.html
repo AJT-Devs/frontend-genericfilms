@@ -534,16 +534,8 @@
                 </div>
 
 
-                <div class="div-group-inputs">
-                    <div>
-                        <label for="numWhole">QTD Inteiras</label>
-                        <input type="number" placeholder="0" value="0" id="numWhole" min="0" max="10"  required>
-                    </div>
-                    <div>
-                        <label for="numHalf">QTD Meias</label>
-                        <input type="number" placeholder="0" value="0" id="numHalf" min="0" max="10" required oninput="openSectionIsHalf(this)">
-                    </div>
-                </div>
+                <label for="numHalf">Quantas meias</label>
+                <input type="number" placeholder="0" value="0" id="numHalf" min="0" max="10" required oninput="validValueInputNumTicket()">
 
                 <section id="is-half" style="display: block;">
                     <!-- <label for="docHalfPass#0">Documento de meia entrada #0</label>

@@ -667,7 +667,7 @@ footer {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: var(--white);
+                /* background-color: var(--white); */
                 border-radius: clamp(1px, 1vw, 10px);
                 
                 & input{
@@ -676,14 +676,12 @@ footer {
                     &:checked + label{
                         background-color: var(--yellow);
                         color: var(--black);
-                        opacity: 1;
                     }
 
                     &:disabled + label{
                         background-color: var(--gray);
                         color: transparent;
                         cursor: not-allowed;
-                        opacity: 1;
                     }
                 }
                 & :has(input:disabled){
@@ -701,7 +699,9 @@ footer {
                     justify-content: center;
                     cursor: pointer; 
                     border-radius: clamp(1px, 1vw, 10px);
-                    opacity: 0;
+                    background-color: var(--white);
+                    color: transparent;
+                    user-select: none;
 
                     & svg{
                         stroke: var(--black);
@@ -723,6 +723,7 @@ footer {
                 background-color: transparent;
                 
                 & label{
+                    background-color: transparent;
                     border: 2px solid var(--white);
 
                     & svg{

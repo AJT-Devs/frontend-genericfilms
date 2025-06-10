@@ -40,11 +40,11 @@ const origin = window.location.origin;
 
 function goToBack() {
 
-    if (document.referrer == (origin + "/adm/screens/edit/change-password.html")) {
-        window.history.go(-3);
-    }
+    // if (document.referrer == (origin + "/adm/screens/edit/change-password.html")) {
+    //     window.history.go(-3);
+    // }
 
-    else window.history.back();
+     window.history.back();
 }
 
 //Go to start
@@ -70,10 +70,11 @@ function checkFormStatus() {
   const selectsFilled = isSelectsFilled();
   const textareaFilled = isTextareaFilled();
   const repeatPasswordOk = compareRepeatPassword();
+  const checkboxFilled = ifCheckboxFilled();
   
   const btn = document.getElementById('btn-footer');
   if(btn){
-    btn.disabled = !(inputsFilled && selectsFilled && textareaFilled && repeatPasswordOk);
+    btn.disabled = !(inputsFilled && selectsFilled && textareaFilled && repeatPasswordOk && checkboxFilled);
   }
 }
 
@@ -104,6 +105,19 @@ function isTextareaFilled() {
   return textareas.every(textarea =>
     textarea.required ? textarea.value.trim() !== '' : true
   );
+}
+
+// Função que verifica se todos os inputs checkbox
+
+function ifCheckboxFilled() {
+  const checkboxes = Array.from(document.querySelectorAll('.div-map-seats input[type="checkbox"]'));
+
+  if (checkboxes.length === 0) return true;
+
+  const marked = checkboxes.filter(cb => cb.checked).length;
+  
+  // deve ter pelo menos um marcado
+  return marked > 0 ? marked : 0;
 }
 
 // Função para comparar os campos de senha e repetir senha
@@ -140,6 +154,18 @@ function enableBtnFooter() {
     });
   }
 
+  const checkboxes = Array.from(document.querySelectorAll('.div-map-seats input[type="checkbox"]'));
+  if(checkboxes){
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('input', ()=>{
+        const marked = checkboxes.filter(cb => cb.checked).length;
+        if(marked > 10){
+          checkbox.checked = false;
+        }
+        checkFormStatus();
+      });
+    });
+  }
   const selects = Array.from(document.querySelectorAll('select'));
   if(selects){
     selects.forEach(select => {
