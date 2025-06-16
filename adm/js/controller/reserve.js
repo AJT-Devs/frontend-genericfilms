@@ -1,78 +1,74 @@
 // Load reserves by reserve
-// async function loadReservesByUser(){
-//     //const urlParam = new URLSearchParams(window.location.search);
-//     //const reserveId = urlParam.get("id");
+async function loadReservesByUser(){
+    const urlParam = new URLSearchParams(window.location.search);
+    const reserveId = urlParam.get("id");
 
-//     const response = await fetch("http://localhost:3000/reserve/list");
-//     const data = await response.json();
+    const response = await fetch(`http://localhost:3000/reserve/list/${reserveId}`);
+    const data = await response.json();
 
-//     const listReserve = document.getElementById("cards-list");
-//     listReserve.innerHTML = "";
+    const listReserve = document.getElementById("cards-list");
+    listReserve.innerHTML = "";
 
-//     if(response.status === 500) {
-//         const error = await response.json();
-//         console.error("Erro 500: ", error);
-//         alert(error.message);
-//         return;
-//     }
-//     else if(response.status === 404) {
-//         const error = await response.json();
-//         console.error("Erro 404: ", error);
-//     }
+    if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+    }
 
-//     //console.log(data);
+    //console.log(data);
 
-//     const reserves = data || [];
+    const reserves = data || [];
 
-//     // console.log(reserves);
+    // console.log(reserves);
 
-//     reserves.forEach(reserve =>{
-//         console.log(reserve);
+    reserves.forEach(reserve =>{
+        console.log(reserve);
 
-//         // const constructor = {
-//         //     id: data.id,
-//         //     isPCD: data.isPCD ? "(PCD)" : "",
-//         //     seat: data.seat,
-//         //     isHalf: data.isHalf ? "Meia" : "Inteira",
-//         //     session: data.session,
-//         // }
+        const ticket = {
+            id: reserve.id,
+            isPCD: reserve.isPCD ? "(PCD)" : "",
+            isHalf: reserve.isHalf,
+            seat : reserve.seat,
+            typeReserve: reserve.typeReserve,
+            startDate : reserve.startDate,
+            startHour : reserve.startHour,
+            endHour : reserve.endHour,
+            format : reserve.format,
+            language : reserve.language,
+            roomName : reserve.name,   
+            cinemaName : reserve.name,
+            cinemaAddress : reserve.address,
+            cinemaCity : reserve.city,
+            cinemaUF : reserve.uf,
+            movieTitle : reserve.title,
+            moviePoster : reserve.poster,
+            price: reserve.price,
+            qrcode: reserve.qrcode
+        }
 
-//         listReserve.innerHTML += `
-//             <section class="card" id="${reserve.id}" tabindex="0" aria-label="${reserve.isHalf} - ${reserve.seat} - dd/mm - Titulo do filme - Sala - 00:00 - 00:00; [ID#0000]">
-//                 <div aria-label="Reservas de [Usuário]; [ID#0000]">
-//                     <i aria-label="Ícone de ingresso">
-//                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ticket-icon lucide-ticket"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>    
-//                     </i>
-//                     <p title="[Inteira - E5 - dd/mm - Titulo do filme - Sala - 00:00 - 00:00]">[Inteira - E5 - dd/mm - Titulo do filme - Sala - 00:00 - 00:00]</p>
-//                     <p>ID#0000</p>
-//                 </div>
-//                 <div>
-//                     <button onclick="goToTicketPreview(this)">Acessar ingresso</button>
-//                     <button onclick="openModalConfirmDelete(this)">Deletar</button>
-//                 </div>
-//             </section>
-//         `;
-//     })
+        listReserve.innerHTML += `
+            <section class="card" id="${ticket.id}" tabindex="0" aria-label="${ticket.typeReserve} - ${ticket.seat} - dd/mm - Titulo do filme - Localização - 00:00 - 00:00; [ID#0000]">
+                <div aria-label="Reservas de [Usuário]; [ID#0000]">
+                    <i aria-label="Ícone de ingresso">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-reserve-icon lucide-reserve"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>    
+                    </i>
+                    <p title="[Inteira - E5 - dd/mm - Titulo do filme - Localização - 00:00 - 00:00]">[Inteira - E5 - dd/mm - Titulo do filme - Localização - 00:00 - 00:00]</p>
+                    <p>ID#0000</p>
+                </div>
+                <div>
+                    <button onclick="goToreservePreview(this)">Acessar ingresso</button>
+                    <button onclick="openModalConfirmDelete(this)">Deletar</button>
+                </div>
+            </section>
+        `;
+    })
     
-// }
-
-// async function getSession(id){
-//     const response = await fetch(`http://localhost:3000/session/${id}`);
-//     if(response.status === 404) {
-//         const error = await response.json();
-//         console.error("Erro 404: ", error);
-//         return;
-//     }
-//     else if(response.status === 500) {
-//         const error = await response.json();
-//         console.error("Erro 500: ", error);
-//         alert(error.message);
-//         return;
-//     }
-//     return await response.json();
-// }
-
-//Delete Reserve Function
+}
 
 function deleteReserve(card) {
     // Aqui você pode adicionar a lógica para remover o item do banco de dados.
@@ -103,13 +99,13 @@ function editReserve(btn) {
 
 }
 
-//Go to ticket preview
+//Go to reserve preview
 
-function goToTicketPreview(btn){
+function goToreservePreview(btn){
     const card = btn.closest(".card");
     const reserveId = card.getAttribute("id");
   
-    window.location.href = `../../adm/screens/preview-ticket.html?id=${reserveId}`;
+    window.location.href = `../../adm/screens/preview-reserve.html?id=${reserveId}`;
 }
 
 let indexQtdMeias = 0;
@@ -175,7 +171,7 @@ function removeInputDocHalfPass(){
     indexQtdMeias--;
 }
 
-function validValueInputNumTicket(){
+function validValueInputNumreserve(){
     const input = document.querySelector('input[type="number"]');
     const numMax = ifCheckboxFilled()
 
