@@ -5,10 +5,6 @@ function isLogin() {
 
 }
 
-function renderHeader() {
-  
-}
-
 function openSearch() {
     const header = document.getElementById("btns-main-header");
     const search = document.getElementById("search-bar");
@@ -48,8 +44,52 @@ function closeSearch() {
 function closeModal(id) {
     const modal = document.getElementById(id);
     modal.closest(".area-modal").style.display = "none";
+    modal.style.display = "none";
+
+    if(id == "modal-message") modal.remove();
 }
 
+function openModalMessage(data){
+
+  //data = {title: erro ou sucessos, message: mensagem, error: erro especifico caso exista}
+
+  const message = {
+    title: data.title,
+    message: data.message,
+    error: data.error ? "Error: " + data.error : ""
+  };
+
+  const modalArea = document.querySelector('.area-modal');
+  const modal = `
+    <section class="modal" id="modal-message">
+        <h3>${message.title}</h3>
+        <p>${message.message}</p>
+        </br>
+        <p><i>${message.error}</i></p>
+        <div>
+            <button>Ok</button>
+        </div>
+    </section>
+  `;
+
+  modalArea.style.display = "flex";
+  modalArea.innerHTML += modal;
+  const modalMessage = document.getElementById('modal-message');
+  modalMessage.style.display = "block"
+
+  return new Promise(resolve => {
+    modalMessage.querySelector('button').addEventListener('click', ()=>{
+      closeModal('modal-message');
+      resolve(true);
+    })
+  })
+}
+
+
+async function testMessage(){
+  const mensagem = await openModalMessage({title: 'Erro', message: 'Isso é apenas uma mensagem de teste',error: 'CPF não cadastrado'})
+  console.log(mensagem)
+}
 // Go to back
 
 const origin = window.location.origin;

@@ -41,6 +41,7 @@ function openModalConfirmDelete(btn){
     const card = btn.closest(".card");
     const modal = document.getElementById("modal-confirm-delete");
     modal.closest(".area-modal").style.display = "flex";
+    modal.style.display = "block";
     const btnConfirmDelete = modal.querySelector("#btn-confirm-delete");
     btnConfirmDelete.addEventListener("click", function() {
         deleteAdmin(card);

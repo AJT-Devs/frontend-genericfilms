@@ -523,7 +523,8 @@ footer {
     z-index: 1000;
     display: none;
 
-    & #modal-confirm-delete{
+    & .modal{
+        display: none;
         background-color: var(--gray);
         min-width: 300px;
         padding: 20px;
@@ -548,12 +549,17 @@ footer {
             font-weight: 800;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
-            padding: 15px 20px;
+            padding: 10px 20px;
             border-radius: 15px;
 
             &:hover {
                 background-color: var(--yellow);
             }
+        }
+
+        & p, i{
+            text-transform: none;
+            font-size: 15px;
         }
     }
 }
