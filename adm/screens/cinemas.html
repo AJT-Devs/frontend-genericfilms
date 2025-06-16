@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <title>ADM - Cinemas</title>
 </head>
-<body onload="isLogin(), getAllCinemas()">
+<body onload="loadCinemas()">
     <header>
     <i class="logo" id="vertical-logo" title="Generic Films" aria-label="Generic Films">
         <!-- SVG logo for Generic Films -->
@@ -53,7 +53,7 @@
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
                     </i>
-                    <input type="search" placeholder="Buscar" id="search" on="searchCinemas()" class="search-open" aria-label="Clique para buscar Cinema" title="Buscar Cinema"></input>
+                    <input type="search" placeholder="Buscar" id="search" oninput="search()" class="search-open" aria-label="Clique para buscar Cinema" title="Buscar Cinema"></input>
                     <button id="close-search" onclick="closeSearch()" aria-label="Clique para fechar a busca" title="Fechar Busca">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -66,7 +66,7 @@
         <h2 id="h2-search">Resultado</h2>
 
         <main class="cards-list" id="cards-list" aria-label="Lista de Cinemas">
-            <section class="card" id="1" tabindex="0" aria-label="Generic Films em: [Nome do Cinema]; [ID#0000]">
+            <!-- <section class="card" id="1" tabindex="0" aria-label="Generic Films em: [Nome do Cinema]; [ID#0000]">
                 <div aria-label="Generic Films em: [Localização]; [ID#0000]">
                     <i aria-label="Ícone de localização">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
@@ -79,7 +79,7 @@
                     <button onclick="editCinema(this)">Editar</button>
                     <button onclick="openModalConfirmDelete(this)">Deletar</button>
                 </div>
-            </section>
+            </section> -->
             
         </main>
 

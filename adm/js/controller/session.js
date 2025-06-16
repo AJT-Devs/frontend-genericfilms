@@ -1,9 +1,3 @@
-//Search Function
-
-function searchSession() {
-    //Aqui será implementado o sistema de busca
-}
-
 //Delete Session Function
 
 function deleteSession(card) {

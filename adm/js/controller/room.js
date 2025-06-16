@@ -1,9 +1,3 @@
-//Search Function
-
-function searchRoom() {
-    //Aqui será implementado o sistema de busca
-}
-
 //Delete Room Function
 
 function deleteRoom(card) {

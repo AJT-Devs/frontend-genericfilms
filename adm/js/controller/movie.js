@@ -1,7 +1,45 @@
-//Search Function
+async function loadMovies() {
+    const response = await fetch("http://localhost:3000/movie/list");
+    const data = await response.json();
 
-function searchMovie() {
-    //Aqui será implementado o sistema de busca
+    const listMovie = document.getElementById("cards-list");
+    listMovie.innerHTML = "";
+
+    if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+    }
+
+    //console.log(data);
+
+    const movies = data.movies || [];
+
+    //console.log(movies);
+
+    movies.forEach(movie =>{
+        listMovie.innerHTML += `
+            <section class="card" id="${movie.id}" tabindex="0" aria-label="${movie.title}; ID#${movie.id}">
+                <div aria-label="${movie.title}; ID#${movie.id}">
+                    <i aria-label="Ícone de filme">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-film-icon lucide-film"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></svg>  
+                    </i>
+                    <p title="${movie.title}">${movie.title}</p>
+                    <p>ID#${movie.id}</p>
+                </div>
+                <div>
+                    <button onclick="editMovie(this)">Editar</button>
+                    <button onclick="openModalConfirmDelete(this)">Deletar</button>
+                </div>
+            </section>
+        `;
+    })
+
 }
 
 //Delete Movie Function
@@ -20,14 +58,6 @@ function openModalConfirmDelete(btn){
         deleteMovie(card);
         closeModal("modal-confirm-delete");
     });
-}
-
-//Get Movie Function
-
-function getAllMovies() {
-    const cardsList = document.getElementById("cards-list");
-    // cardsList é a section onde os cards de Movie serão exibidos.
-    // Aqui você pode adicionar a lógica para buscar os Movies do banco de dados.
 }
 
 //Add Movie Function

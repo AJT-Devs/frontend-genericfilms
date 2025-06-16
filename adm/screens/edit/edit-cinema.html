@@ -9,7 +9,7 @@
     <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/style.css">
     <title>ADM - Editar Cinema</title>
-<body>
+<body onload="fillEditForm()">
     <header class="simple-header">
         <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
             <i>
@@ -32,21 +32,21 @@
 
         <main id="main-forms">
 
-            <form action="">
-                <label for="lacalization">Localização*</label>
-                <input type="text" placeholder="Informe o melhor ponto de referência" id="lacalization" title="Informe o melhor ponto de referência" value="[Localização]" required>
+            <form action="" id="form-edit-cinema">
+                <label for="localization">Localização*</label>
+                <input type="text" placeholder="Informe o melhor ponto de referência" id="localization" name="localization" title="Informe o melhor ponto de referência" value="[Localização]" required>
                 <div class="div-group-inputs">
                     <div>
                         <label for="uf">UF*</label>
-                        <input type="text" placeholder="SP" id="uf" value="[UF]" maxlength="2" required>
+                        <input type="text" placeholder="SP" id="uf" value="[UF]" name="uf" maxlength="2" required>
                     </div>
                     <div>
                         <label for="city">Cidade*</label>
-                        <input type="text" placeholder="Caraguatatuba" id="city" value="[Cidade]" required>
+                        <input type="text" placeholder="Caraguatatuba" id="city" name="city" value="[Cidade]" required>
                     </div>
                 </div>
-                <label for="adress">Endereço*</label>
-                <input type="text" id="adress" placeholder="Bairro A, Rua exemplo, n°1234, CEP 00000-00" value="[Endereço completo]" required>
+                <label for="address">Endereço*</label>
+                <input type="text" id="address" name="address" placeholder="Bairro A, Rua exemplo, n°1234, CEP 00000-00" value="[Endereço completo]" required>
             </form>
 
         </main>
@@ -54,11 +54,12 @@
     </main>
     
     <footer class="btn-footer">
-        <button id="btn-footer" title="Editar Cinema" aria-label="Clique para Editar Cinema"  onclick="clickBtnFooter()"> <!-- disabled -->
+        <button id="btn-footer" title="Editar Cinema" aria-label="Clique para Editar Cinema"  onclick="updateCinema()"> <!-- disabled -->
             <h2>Editar Cinema</h2>
         </button>
     </footer>
 
     <script src="../../js/script.js"></script>
+    <script src="../../js/controller/cinema.js"></script>
 </body>
 </html>

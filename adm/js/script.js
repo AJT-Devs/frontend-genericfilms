@@ -19,6 +19,22 @@ function openSearch() {
     h2Search.style.display = "block";
 }
 
+function search() {
+    const searchInput = document.querySelector('input[type="search"]');
+    const searchTerm = searchInput.value.toLowerCase();
+    const cards = document.querySelectorAll(".card");
+    
+    cards.forEach(card => {
+        const p = card.querySelectorAll('p');
+        const cardText = Array.from(p).map(el => el.textContent.toLowerCase()).join(" ");
+        if (cardText.includes(searchTerm)) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+
 function closeSearch() {
     const header = document.getElementById("btns-main-header");
     const search = document.getElementById("search-bar");

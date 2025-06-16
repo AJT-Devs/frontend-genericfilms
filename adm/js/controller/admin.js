@@ -1,8 +1,34 @@
-//Search Function
+// async function loadAdmins() {
+//     const response = await fetch("http://localhost:3000/admin/all");
+//     const data = await response.json();
 
-function searchAdmin() {
-    //Aqui será implementado o sistema de busca
-}
+//     const listAdmin = document.getElementById("cards-list");
+//     listAdmin.innerHTML = "";
+
+//     if(response.status === 500) {
+//         const error = await response.json();
+//         console.error("Erro 500: ", error);
+//         alert(error.message);
+//         return;
+//     }
+//     else if(response.status === 404) {
+//         const error = await response.json();
+//         console.error("Erro 404: ", error);
+//     }
+
+//     //console.log(data);
+
+//     const admins = data.admins || [];
+
+//     //console.log(admins);
+
+//     admins.forEach(admin =>{
+//         listAdmin.innerHTML += `
+//            
+//         `;
+//     })
+
+// }
 
 //Delete Admin Function
 
@@ -22,17 +48,9 @@ function openModalConfirmDelete(btn){
     });
 }
 
-//Get Admin Function
-
-function getAllAdmins() {
-    const cardsList = document.getElementById("cards-list");
-    // cardsList é a section onde os cards de Admin serão exibidos.
-    // Aqui você pode adicionar a lógica para buscar os Admins do banco de dados.
-}
-
 //Add Admin Function
 function addAdmin() {
-   window.location.href = "../../adm/screens/register/register-user-adm.html";
+   window.location.href = "../../adm/screens/register/register-admin-adm.html";
 }
 
 //Edit Admin Function
@@ -40,6 +58,5 @@ function editAdmin(btn) {
     const card = btn.closest(".card");
     const adminId = card.getAttribute("id");
   
-    window.location.href = `../../adm/screens/edit/edit-user-adm.html?id=${adminId}`;
-
+    window.location.href = `../../adm/screens/edit/edit-admin-adm.html?id=${adminId}`;
 }
