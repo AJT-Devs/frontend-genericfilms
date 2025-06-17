@@ -9,7 +9,7 @@
     <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/style.css">
     <title>ADM - Editar Sala de [Localização]</title>
-<body>
+<body onload="loadEditRoom()">
     <header class="simple-header">
         <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
             <i>
@@ -32,19 +32,19 @@
 
         <main id="main-forms">
 
-            <form action="">
-                <label for="lacalization">Cinema</label>
-                <input type="text" placeholder="Localização" id="lacalization" title="[Localização]" value="[Localização]" disabled required>
+            <form action="" id="form-edit-room">
+                <label for="localization">Cinema</label>
+                <input type="text" placeholder="Localização" id="localization" name="localization" title="[Localização]" value="[Localização]" disabled required>
                 <label for="name-room">Nome*</label>
-                <input type="text" id="name-room" placeholder="Sala 1" value="[Sala 1]" required>
+                <input type="text" id="name-room" placeholder="Sala 1" value="[Sala 1]" name="name" required>
                 <div class="div-group-inputs">
                     <div>
                         <label for="num-seats">Total de poltronas*</label>
-                        <input type="text" placeholder="100" id="num-seats" value="[100]" required>
+                        <input type="text" placeholder="100" id="num-seats" value="[100]" name="numSeats" required>
                     </div>
                     <div>
                         <label for="num-pcd">Vagas para PCD*</label>
-                        <input type="text" placeholder="4" id="num-pcd" value="[4]" required>
+                        <input type="text" placeholder="4" id="num-pcd" value="[4]" name="numPCD" required>
                     </div>
                 </div>
             </form>
@@ -54,11 +54,12 @@
     </main>
     
     <footer class="btn-footer">
-        <button id="btn-footer" title="Editar Sala" aria-label="Clique para Editar Sala" onclick="clickBtnFooter()"> <!-- disabled -->
+        <button id="btn-footer" title="Editar Sala" aria-label="Clique para Editar Sala" onclick="updateRoom()"> <!-- disabled -->
             <h2>Editar Sala</h2>
         </button>
     </footer>
 
     <script src="../../js/script.js"></script>
+    <script src="../../js/controller/room.js"></script>
 </body>
 </html>

@@ -190,7 +190,7 @@ main {
             /* margin-bottom: 20px; */
         }
 
-        & #change-password-btn{
+        & #change-password-btn, #logout-btn{
             margin-left: auto;
         }
     }

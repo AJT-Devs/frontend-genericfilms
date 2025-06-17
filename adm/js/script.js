@@ -250,6 +250,45 @@ function clickBtnFooter() {
     else window.history.back();
 }
 
+// Função para realizar login administrador
+async function loginAdm() {
+  const form = document.getElementById('form-login-adm');
 
-// Funções que reconhecem os inputs do tipo file e exibem o nome e a imagem do arquivo dentro do input
+  if(!form) return;
 
+  const loginData = {
+    email: form.email.value,
+    password: form.password.value
+  };
+
+  const response = await fetch(`http://localhost:3000/admin/login`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(loginData)
+  });
+
+
+  if (response.status === 400) {
+    const error = await response.json();
+    console.error("Erro 400: ", error);
+    alert(error.message);
+    return;
+  }
+  else if (response.status === 404) {
+    const error = await response.json();
+    console.error("Erro 404: ", error);
+    alert(error.message);
+    return;
+  }
+  else if (response.status === 500) {
+    const error = await response.json();
+    console.error("Erro 500: ", error);
+    alert(error.message);
+    return;
+  }
+
+  window.location.href = origin + "/adm/screens/cinemas.html";
+}

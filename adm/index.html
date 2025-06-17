@@ -33,11 +33,11 @@
 
         <main id="information-user-adm">
 
-            <form action="">
+            <form action="" id="form-login-adm">
                 <label for="">E-mail Corporativo</label>
-                <input type="email" placeholder="seunome@genericfilms.com.br" id="email" required>
+                <input type="email" placeholder="seunome@genericfilms.com.br" id="email" name="email" required>
                 <label for="">Senha</label>
-                <input type="password" id="password" placeholder="Sua senha" required>
+                <input type="password" id="password" placeholder="Sua senha" name="password" required>
             </form>
 
         </main>
@@ -45,7 +45,7 @@
     </main>
     
     <footer class="btn-footer">
-        <button id="btn-footer" title="Acessar Administrador" aria-label="Clique para Acessar Administrador" disabled onclick="clickBtnFooter()">
+        <button id="btn-footer" title="Acessar Administrador" aria-label="Clique para Acessar Administrador" disabled onclick="loginAdm()">
             <h2>Acessar</h2>
         </button>
     </footer>

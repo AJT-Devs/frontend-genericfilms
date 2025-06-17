@@ -76,7 +76,7 @@ function goToRooms(btn) {
     
     console.log(card, cinemaId);
 
-    window.location.href = `../../adm/screens/rooms.html?cinema=${cinemaId}`;
+    window.location.href = `../../adm/screens/rooms.html?id=${cinemaId}`;
 }
 
 //Route Create Cinema

@@ -1,9 +1,11 @@
 // Load reserves by reserve
 async function loadReservesByUser(){
     const urlParam = new URLSearchParams(window.location.search);
-    const reserveId = urlParam.get("id");
+    const userId = urlParam.get("id");
 
-    const response = await fetch(`http://localhost:3000/reserve/list/${reserveId}`);
+    if(!userId) return;
+
+    const response = await fetch(`http://localhost:3000/ticket/list/${userId}`);
     const data = await response.json();
 
     const listReserve = document.getElementById("cards-list");
@@ -20,45 +22,69 @@ async function loadReservesByUser(){
         console.error("Erro 404: ", error);
     }
 
-    //console.log(data);
+    const userResponse = await fetch(`http://localhost:3000/user/${userId}`);
+    const userData = await userResponse.json();
+    const user = userData.user;
+
+    //console.log("User: ", user);
+
+    if(userResponse.status === 500) {
+        const error = await userResponse.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(userResponse.status === 404) {
+        const error = await userResponse.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+
+    const header = document.querySelector("#main-header h1");
+
+    header.innerHTML = `${user.name} - Reservas`;
+
 
     const reserves = data || [];
 
     // console.log(reserves);
 
     reserves.forEach(reserve =>{
-        console.log(reserve);
+        //console.log(reserve);
 
         const ticket = {
             id: reserve.id,
             isPCD: reserve.isPCD ? "(PCD)" : "",
-            isHalf: reserve.isHalf,
+            //isHalf: reserve.isHalf,
             seat : reserve.seat,
             typeReserve: reserve.typeReserve,
             startDate : reserve.startDate,
             startHour : reserve.startHour,
             endHour : reserve.endHour,
-            format : reserve.format,
-            language : reserve.language,
-            roomName : reserve.name,   
-            cinemaName : reserve.name,
-            cinemaAddress : reserve.address,
-            cinemaCity : reserve.city,
-            cinemaUF : reserve.uf,
-            movieTitle : reserve.title,
-            moviePoster : reserve.poster,
-            price: reserve.price,
-            qrcode: reserve.qrcode
+            //format : reserve.format,
+            //language : reserve.language,
+            //roomName : reserve.name,   
+            cinemaName : reserve.cinemaName,
+            //cinemaAddress : reserve.address,
+            //cinemaCity : reserve.city,
+            //cinemaUF : reserve.uf,
+            movieTitle : reserve.movieTitle,
+            //moviePoster : reserve.poster,
+            //price: reserve.price,
+            //qrcode: reserve.qrcode
         }
 
+        //console.log("Ticket: ", ticket);
+
         listReserve.innerHTML += `
-            <section class="card" id="${ticket.id}" tabindex="0" aria-label="${ticket.typeReserve} - ${ticket.seat} - dd/mm - Titulo do filme - Localização - 00:00 - 00:00; [ID#0000]">
-                <div aria-label="Reservas de [Usuário]; [ID#0000]">
+            <section class="card" id="${ticket.id}" tabindex="0" aria-label="${ticket.typeReserve} - ${ticket.seat} - ${ticket.startDate} - ${ticket.movieTitle} - ${ticket.cinemaName} - ${ticket.startHour} - ${ticket.endHour}; ID#${ticket.id}">
+                <div aria-label="Reservas de ${user.name}; ID#${ticket.id}">
                     <i aria-label="Ícone de ingresso">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-reserve-icon lucide-reserve"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>    
                     </i>
-                    <p title="[Inteira - E5 - dd/mm - Titulo do filme - Localização - 00:00 - 00:00]">[Inteira - E5 - dd/mm - Titulo do filme - Localização - 00:00 - 00:00]</p>
-                    <p>ID#0000</p>
+                    <p title="${ticket.typeReserve} - ${ticket.seat} - ${ticket.startDate} - ${ticket.movieTitle} - ${ticket.cinemaName} - ${ticket.startHour} - ${ticket.endHour}">${ticket.typeReserve} - ${ticket.seat} - ${ticket.startDate} - ${ticket.movieTitle} - ${ticket.cinemaName} - ${ticket.startHour} - ${ticket.endHour}</p>
+                    <p>ID#${ticket.id}</p>
                 </div>
                 <div>
                     <button onclick="goToreservePreview(this)">Acessar ingresso</button>
@@ -67,6 +93,9 @@ async function loadReservesByUser(){
             </section>
         `;
     })
+
+    console.log("User ID: ", userId);
+    console.log("Reserves: ", reserves);
     
 }
 
@@ -94,9 +123,9 @@ function addReserve() {
 //Edit Reserve Function
 function editReserve(btn) {
     const card = btn.closest(".card");
-    const reserveId = card.getAttribute("id");
+    const userId = card.getAttribute("id");
   
-    window.location.href = `../../adm/screens/edit/edit-reserve.html?id=${reserveId}`;
+    window.location.href = `../../adm/screens/edit/edit-reserve.html?id=${userId}`;
 
 }
 
@@ -104,9 +133,9 @@ function editReserve(btn) {
 
 function goToreservePreview(btn){
     const card = btn.closest(".card");
-    const reserveId = card.getAttribute("id");
+    const userId = card.getAttribute("id");
   
-    window.location.href = `../../adm/screens/preview-reserve.html?id=${reserveId}`;
+    window.location.href = `../../adm/screens/preview-reserve.html?id=${userId}`;
 }
 
 let indexQtdMeias = 0;

@@ -9,7 +9,7 @@
     <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/style.css">
     <title>ADM - Editar Administrador</title>
-<body>
+<body onload="fillEditForm()">
     <header class="simple-header">
         <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
             <i>
@@ -34,16 +34,16 @@
 
             <form action="" id="form-edit-adm">
                 <label for="full-name-adm">Nome Completo*</label>
-                <input type="text" placeholder="Nome do usuário" id="full-name-adm" title="[Nome do usuário]" value="[Nome do usuário]" required>
+                <input type="text" placeholder="Nome do usuário" id="full-name-adm" name="name" title="[Nome do usuário]" value="[Nome do usuário]" required>
                 
                 <label for="email-adm">E-mail Corporativo*</label>
-                <input type="text" id="email-adm" placeholder="Email do usuário" value="[Email do usuário]" required>
+                <input type="text" id="email-adm" placeholder="Email do usuário" name="email" value="[Email do usuário]" required>
                 
                 <label for="cargo">Cargo*</label>
-                <input type="text" id="cargo" placeholder="Informe o cargo" value="[Cargo]" required>
+                <input type="text" id="cargo" placeholder="Informe o cargo" name="cargo" value="[Cargo]" required>
 
                 <label for="password-adm">Senha</label>
-                <input type="password" id="password-adm" placeholder="Senha do usuário">
+                <input type="password" id="password-adm" name="password" placeholder="Senha do usuário">
             
         </form> 
 
@@ -52,12 +52,12 @@
     </main>
     
     <footer class="btn-footer">
-        <button id="btn-footer" title="Editar Usuário" aria-label="Clique para Editar Usuário" onclick="clickBtnFooter()"> <!-- disabled -->
+        <button id="btn-footer" title="Editar Usuário" aria-label="Clique para Editar Usuário" onclick="updadeAdmin()"> <!-- disabled -->
             <h2>Editar Administrador</h2>
         </button>
     </footer>
 
     <script src="../../js/script.js"></script>
-    <script src="../../js/controller/user.js"></script>
+    <script src="../../js/controller/admin.js"></script>
 </body>
 </html>

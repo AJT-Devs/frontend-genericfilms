@@ -34,16 +34,16 @@
 
             <form action="" id="form-register-adm">
                 <label for="full-name-adm">Nome Completo*</label>
-                <input type="text" placeholder="Nome do usuário" id="full-name-adm" title="[Nome do usuário]" oninput="enableBtnFooter()" required>
+                <input type="text" placeholder="Nome do usuário" id="full-name-adm" name="name" title="[Nome do usuário]" oninput="enableBtnFooter()" required>
                 
                 <label for="email-adm">E-mail Corporativo*</label>
-                <input type="email" id="email-adm" placeholder="Email do usuário" oninput="enableBtnFooter()" required>
+                <input type="email" id="email-adm" placeholder="seunome@genericfilms.com.br" name="email" oninput="enableBtnFooter()" required>
                 
                 <label for="cargo">Cargo*</label>
-                <input type="text" id="cargo" placeholder="Informe o cargo" oninput="enableBtnFooter()" required>
+                <input type="text" id="cargo" placeholder="Informe o cargo" name="cargo" oninput="enableBtnFooter()" required>
 
                 <label for="password-adm">Senha*</label>
-                <input type="password" id="password-adm" placeholder="Senha do usuário" oninput="enableBtnFooter()" required>
+                <input type="password" id="password-adm" placeholder="Senha do usuário" name="password" oninput="enableBtnFooter()" required>
         </form> 
 
         </main>
@@ -51,7 +51,7 @@
     </main>
     
     <footer class="btn-footer">
-        <button id="btn-footer" title="Cadastrar Administrador" aria-label="Clique para Cadastrar Administrador" disabled onclick="clickBtnFooter()">
+        <button id="btn-footer" title="Cadastrar Administrador" aria-label="Clique para Cadastrar Administrador" disabled onclick="createAdmin()">
             <h2>Cadastrar Administrador</h2>
         </button>
     </footer>
