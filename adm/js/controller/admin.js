@@ -78,7 +78,7 @@ async function createAdmin() {
         password: form.password.value
     }
 
-    const response = await fetch("http://localhost:3000/admin/", {
+    const response = await fetch("http://localhost:3000/admin/signup", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -107,7 +107,7 @@ async function createAdmin() {
     }
 
     alert("Administrador cadastrado com sucesso!");
-    window.location.href = "../../screens/admins.html";
+    //window.location.href = "../../screens/admins.html";
     
 }
 
