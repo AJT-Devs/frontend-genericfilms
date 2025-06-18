@@ -5,7 +5,7 @@ async function loadRooms() {
 
     if(!cinemaId) return;
 
-    const response = await fetch(`http://localhost:3000/room/list/${cinemaId}`,{
+    const response = await fetch(`http://localhost:3000/room/list/${cinemaId}`, {
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -29,7 +29,11 @@ async function loadRooms() {
     }
 
     const cinema = await getCinema();
-    if(!cinema) return;
+    if(!cinema) {
+        alert("Cinema não encontrado.");
+
+        return
+    } ;
 
     const header = document.querySelector("#main-header h1");
     const title = document.querySelector("title");
@@ -58,7 +62,6 @@ async function loadRooms() {
     })
 
 }
-
 
 async function loadRegisterRoom(){
     const cinema = await getCinema();
