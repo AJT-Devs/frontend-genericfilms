@@ -34,7 +34,7 @@
 
             <form action="" id="form-register-cliente" style="margin-bottom: 60px;">
                 <label for="title-movie">Titulo: Subtitulo</label>
-                <input type="text" placeholder="Titulo do filme: Subtitulo do filme" value="[Titulo do filme: Subtitulo do filme]" id="title-movie" title="[Titulo do filme: Subtitulo do filme]" required>
+                <input type="text" placeholder="Titulo do filme: Subtitulo do filme" value="[Titulo do filme: Subtitulo do filme]" id="title-movie" name="titleMovie" title="[Titulo do filme: Subtitulo do filme]" required>
                 
                 <div class="div-group-inputs div-inputs-movie">
                     <div class="div-poster-movie">
@@ -43,7 +43,7 @@
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                             </span>
-                            <input type="file" id="poster-movie" required accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
+                            <input type="file" id="poster-movie" name="posterMovie" required accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
                         </label>
                     </div>
                     <div class="div-banner-movie">
@@ -52,19 +52,19 @@
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                             </span>
-                            <input type="file" id="banner-movie" required accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
+                            <input type="file" id="banner-movie" name="bannerMovie" required accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
                         </label>
                     </div>
                 </div>
                 <label for="resume-movie">Sinopse</label>
-                <textarea id="resume-movie" placeholder="Resumo sobre a filme...">[Resumo sobre a filme...]</textarea>
+                <textarea id="resume-movie" name="resumeMovie" placeholder="Resumo sobre a filme...">[Resumo sobre a filme...]</textarea>
                 <label for="link-trailer-movie">Link Trailer</label>
-                <input type="url" id="link-trailer-movie" placeholder="Link do trailer" value="[Link do trailer]" required>
+                <input type="url" id="link-trailer-movie" name="linkTrailerMovie" placeholder="Link do trailer" value="[Link do trailer]" required>
                 <div class="div-group-inputs">
                     <div>
                         <label for="classification-movie">Classificação</label>
                         <div class="div-select">
-                            <select name="" id="classification-movie" required>
+                            <select name="classificationMovie" id="classification-movie" required>
                                 <option value="?" selected>?</option>
                                 <option value="L">L</option>
                                 <option value="10">10</option>
@@ -80,18 +80,18 @@
                     </div>
                     <div>
                         <label for="release-date-movie">Data de estreia</label>
-                        <input type="date" placeholder="DD/MM/AAAA" id="release-date-movie" required>
+                        <input type="date" placeholder="DD/MM/AAAA" id="release-date-movie" name="releaseDateMovie" required>
                     </div>
                 </div>
                 <div class="div-group-inputs">
                     <div>
                         <label for="duration-movie">Duração (Em minutos)</label>
-                        <input type="text" placeholder="120" id="duration-movie" value="120" required>
+                        <input type="text" placeholder="120" id="duration-movie" name="durationMovie" value="120" required>
                     </div>
                     <div>
                         <label for="status-movie">Status</label>
                         <div class="div-select">
-                            <select name="" id="status-movie" required>
+                            <select name="statusMovie" id="status-movie" required>
                                 <option value="Em cartaz" selected>Em cartaz</option>
                                 <option value="Em breve">Em breve</option>
                                 <option value="Indisponível">Indisponível</option>
@@ -103,9 +103,9 @@
                     </div>
                 </div>
                 <label for="director-movie">Diretor(es)</label>
-                <input type="text" id="director-movie" placeholder="Nome do(s) diretor(es)" value="[Nome do(s) diretor(es)]" required>
+                <input type="text" id="director-movie" name="directorMovie" placeholder="Nome do(s) diretor(es)" value="[Nome do(s) diretor(es)]" required>
                 <label for="cast-movie">Elenco</label>
-                <input type="text" id="cast-movie" placeholder="Nome do pessoal do elenco" value="[Nome do pessoal do elenco]" required>
+                <input type="text" id="cast-movie" name="castMovie" placeholder="Nome do pessoal do elenco" value="[Nome do pessoal do elenco]" required>
 
             
             </form>

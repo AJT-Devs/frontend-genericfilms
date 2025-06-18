@@ -1,7 +1,13 @@
 // Function loadAdmins
 
 async function loadAdmins() {
-    const response = await fetch("http://localhost:3000/admin/list");
+    const response = await fetch("http://localhost:3000/admin/list", {
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        }
+    });
     const data = await response.json();
 
     const listAdmin = document.getElementById("cards-list");
@@ -81,6 +87,7 @@ async function createAdmin() {
     const response = await fetch("http://localhost:3000/admin/signup", {
         method: "POST",
         headers: {
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
         body: JSON.stringify(admin)
@@ -125,6 +132,7 @@ async function updadeAdmin(){
     const response = await fetch(`http://localhost:3000/admin/${admin.id}`, {
         method: "PUT",
         headers: {
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
         body: JSON.stringify(updatedAdmin)
@@ -179,7 +187,13 @@ async function getAdmin() {
 
     // console.log("ID do usuário: ", adminId);
 
-    const response = await fetch(`http://localhost:3000/admin/${adminId}`);
+    const response = await fetch(`http://localhost:3000/admin/${adminId}`, {
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        }
+    });
     
     if(response.status === 404) {
         const error = await response.json();
@@ -212,6 +226,7 @@ async function deleteAdmin(card) {
     const response = fetch(`http://localhost:3000/admin/${adminId}`, {
         method: "DELETE",
         headers: {
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         }
     })

@@ -300,3 +300,12 @@ async function loginAdm() {
 
   window.location.href = origin + "/adm/screens/cinemas.html";
 }
+
+function getToken() {
+    const token = localStorage.getItem('admToken');
+    if (!token) {
+        console.error("Token não encontrado. Verifique se o usuário está logado.");
+        return null;
+    }
+    return token;
+}
