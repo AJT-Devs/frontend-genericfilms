@@ -1,11 +1,11 @@
 //Load Rooms Function
 async function loadRooms() {
     const urlParams = new URLSearchParams(window.location.search);
-    const cinemaId = urlParams.get("id");
+    const cinemaId = urlParams.get("cinema");
 
     if(!cinemaId) return;
 
-    const response = await fetch(`http://localhost:3000/room/list/${cinemaId}`,{
+    const response = await fetch(`http://localhost:3000/room/list/${cinemaId}`, {
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -29,7 +29,11 @@ async function loadRooms() {
     }
 
     const cinema = await getCinema();
-    if(!cinema) return;
+    if(!cinema) {
+        alert("Cinema não encontrado.");
+
+        return
+    } ;
 
     const header = document.querySelector("#main-header h1");
     const title = document.querySelector("title");
@@ -58,7 +62,6 @@ async function loadRooms() {
     })
 
 }
-
 
 async function loadRegisterRoom(){
     const cinema = await getCinema();
@@ -188,7 +191,7 @@ function openModalConfirmDelete(btn){
 //Add Room Function
 function addRoom() {
     const urlParams = new URLSearchParams(window.location.search);
-    const cinemaId = urlParams.get("id");
+    const cinemaId = urlParams.get("cinema");
 
     if(!cinemaId) return;
     window.location.href = `../../adm/screens/register/register-room.html?cinema=${cinemaId}`;
@@ -199,7 +202,7 @@ function editRoom(btn) {
     const card = btn.closest(".card");
     const roomId = card.getAttribute("id");
     const urlParams = new URLSearchParams(window.location.search);
-    const cinemaId = urlParams.get("id");
+    const cinemaId = urlParams.get("cinema");
     if(!cinemaId) return;
     window.location.href = `../../adm/screens/edit/edit-room.html?cinema=${cinemaId}&room=${roomId}`;
 }
@@ -252,7 +255,7 @@ async function createRoom() {
     }
     
     alert("Sala cadastrada com sucesso!");
-    window.location.href = `../../screens/rooms.html?id=${cinemaId}`;
+    window.location.href = `../../screens/rooms.html?cinema=${cinemaId}`;
 }
 
 //Route Edit Room
@@ -299,7 +302,7 @@ async function updateRoom() {
     }
 
     alert("Sala atualizada com sucesso!");
-    window.location.href = `../../screens/rooms.html?id=${cinemaId}`;
+    window.location.href = `../../screens/rooms.html?cinema=${cinemaId}`;
 }
 
 //Delete Room Function
