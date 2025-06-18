@@ -36,16 +36,16 @@
                 <div class="div-group-inputs">
                     <div>
                         <label for="cinema">Cinema</label>
-                        <input type="text" placeholder="Cinema" id="cinema" value="[Cinema]" disabled required>
+                        <input type="text" placeholder="Cinema" id="cinema" name="cinema" value="[Cinema]" disabled required>
                     </div>
                     <div>
                         <label for="room">Sala</label>
-                        <input type="text" placeholder="sala" id="room" value="[Sala 1]" disabled required>
+                        <input type="text" placeholder="sala" id="room" name="room" value="[Sala 1]" disabled required>
                     </div>
                 </div>
                 <label for="select-movie">Filme*</label>
                 <div class="div-select">
-                    <select name="" id="select-movie" required>
+                    <select id="select-movie" name="selectMovie" required>
                         <option value="">Selecione o filme</option>
                         <option value="id#0001" selected>Filme 1</option>
                         <option value="id#0002">Filme 2</option>
@@ -59,21 +59,21 @@
                 <div class="div-group-inputs">
                     <div>
                         <label for="date">Data</label>
-                        <input type="date" value="2000-01-01" id="date" required>
+                        <input type="date" value="2000-01-01" id="date" name="date" required>
                     </div>
                     <div>
                         <label for="price">Preço do Ingresso (Inteiro)</label>
-                        <input type="text" placeholder="R$ 22,00" id="price" value="R$ 22,00" required>
+                        <input type="text" placeholder="R$ 22,00" id="price" name="price" value="R$ 22,00" required>
                     </div>
                 </div>
                 <div class="div-group-inputs">
                     <div>
                         <label for="timeStart">Hora de inicio</label>
-                        <input type="time" placeholder="HH:MM" value="00:00" id="timeStart" required>
+                        <input type="time" placeholder="HH:MM" value="00:00" id="timeStart" name="timeStart" required>
                     </div>
                     <div>
                         <label for="timeEnd">Hora de termino</label>
-                        <input type="time" placeholder="HH:MM" value="00:00" id="TimeEnd" required>
+                        <input type="time" placeholder="HH:MM" value="00:00" id="TimeEnd" name="timeEnd" required>
                     </div>
                     
                 </div>
@@ -81,7 +81,7 @@
                     <div>
                         <label for="select-format">Formato</label>
                         <div class="div-select">
-                            <select name="" id="select-format" required>
+                            <select id="select-format" name="selectFormat" required>
                                 <option value="2D" selected>2D</option>
                                 <option value="3D">3D</option>
                             </select>
@@ -93,7 +93,7 @@
                     <div>
                         <label for="select-language">Idioma</label>
                         <div class="div-select">
-                            <select name="" id="select-language" required >
+                            <select  id="select-language" name="selectLanguage" required >
                                 <option value="Dublado" selected>Dublado</option>
                                 <option value="Legendado">Legendado</option>
                                 <option value="Ingles">Ingles</option>

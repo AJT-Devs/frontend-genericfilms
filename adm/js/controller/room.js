@@ -233,7 +233,8 @@ async function createRoom() {
     const response = await fetch("http://localhost:3000/room/", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify(room)
     });

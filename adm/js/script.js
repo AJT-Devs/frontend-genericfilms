@@ -290,5 +290,8 @@ async function loginAdm() {
     return;
   }
 
+  const data = await response.json();
+  localStorage.setItem('token', data.token);
+
   window.location.href = origin + "/adm/screens/cinemas.html";
 }

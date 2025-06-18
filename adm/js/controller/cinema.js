@@ -92,7 +92,8 @@ async function createCinema() {
     const response = await fetch("http://localhost:3000/cinema/create", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "authorization": "Bearer " + localStorage.getItem("token")
         },
         body: JSON.stringify(cinema)
     });
