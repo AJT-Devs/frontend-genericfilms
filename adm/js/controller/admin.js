@@ -6,7 +6,8 @@ async function loadAdmins() {
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
-        }
+        },
+        credentials: "include"
     });
     const data = await response.json();
 

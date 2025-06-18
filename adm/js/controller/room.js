@@ -1,7 +1,7 @@
 //Load Rooms Function
 async function loadRooms() {
     const urlParams = new URLSearchParams(window.location.search);
-    const cinemaId = urlParams.get("id");
+    const cinemaId = urlParams.get("cinema");
 
     if(!cinemaId) return;
 
@@ -188,7 +188,7 @@ function openModalConfirmDelete(btn){
 //Add Room Function
 function addRoom() {
     const urlParams = new URLSearchParams(window.location.search);
-    const cinemaId = urlParams.get("id");
+    const cinemaId = urlParams.get("cinema");
 
     if(!cinemaId) return;
     window.location.href = `../../adm/screens/register/register-room.html?cinema=${cinemaId}`;
@@ -199,7 +199,7 @@ function editRoom(btn) {
     const card = btn.closest(".card");
     const roomId = card.getAttribute("id");
     const urlParams = new URLSearchParams(window.location.search);
-    const cinemaId = urlParams.get("id");
+    const cinemaId = urlParams.get("cinema");
     if(!cinemaId) return;
     window.location.href = `../../adm/screens/edit/edit-room.html?cinema=${cinemaId}&room=${roomId}`;
 }
@@ -252,7 +252,7 @@ async function createRoom() {
     }
     
     alert("Sala cadastrada com sucesso!");
-    window.location.href = `../../screens/rooms.html?id=${cinemaId}`;
+    window.location.href = `../../screens/rooms.html?cinema=${cinemaId}`;
 }
 
 //Route Edit Room
@@ -299,7 +299,7 @@ async function updateRoom() {
     }
 
     alert("Sala atualizada com sucesso!");
-    window.location.href = `../../screens/rooms.html?id=${cinemaId}`;
+    window.location.href = `../../screens/rooms.html?cinema=${cinemaId}`;
 }
 
 //Delete Room Function

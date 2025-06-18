@@ -37,7 +37,7 @@
                     <div>
                         <label for="cinema">Cinema</label>
                         <div class="div-select">
-                            <select name="" id="select-cinema" required>
+                            <select name="selectCinema" id="select-cinema" required>
                                 <option value="" selected>Selecione o cinema</option>
                                 <option value="id#0001">Cinema 1</option>
                                 <option value="id#0002">Cinema 2</option>
@@ -52,7 +52,7 @@
                     <div>
                         <label for="select-movie">Filme</label>
                         <div class="div-select">
-                            <select name="" id="select-movie" required>
+                            <select name="selectMovie" id="select-movie" required>
                                 <option value="" selected>Selecione o filme</option>
                                 <option value="id#0001">Filme 1</option>
                                 <option value="id#0002">Filme 2</option>
@@ -67,7 +67,7 @@
                 </div>
                 <label for="select-session">Sessão</label>
                 <div class="div-select">
-                    <select name="" id="select-session" required>
+                    <select name="selectSession" id="select-session" required>
                         <option value="" selected>Selecione a sessão</option>
                         <option value="id#0001">Sessão 1</option>
                         <option value="id#0002">Sessão 2</option>
@@ -535,7 +535,7 @@
 
 
                 <label for="numHalf">Quantas meias</label>
-                <input type="number" placeholder="0" value="0" id="numHalf" min="0" max="10" required oninput="validValueInputNumTicket()">
+                <input type="number" placeholder="0" value="0" id="numHalf" name="numHalf min="0" max="10" required oninput="validValueInputNumTicket()">
 
                 <section id="is-half" style="display: block;">
                     <!-- <label for="docHalfPass#0">Documento de meia entrada #0</label>
@@ -544,7 +544,7 @@
 
                 <label for="select-payment">Método de pagamento</label>
                 <div class="div-select">
-                    <select name="" id="select-payment" required>
+                    <select name="selectPayment" id="select-payment" required>
                         <option value="PIX">PIX</option>
                         <option value="Cartão de crédito">Cartão de crédito</option>
                         <option value="Cartão de débito">Cartão de débito</option>

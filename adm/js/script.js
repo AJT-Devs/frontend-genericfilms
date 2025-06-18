@@ -266,6 +266,8 @@ async function loginAdm() {
     headers: {
       'Content-Type': 'application/json'
     },
+    credentials: 'include',
+    // Authorization: `Bearer ${getToken()}`,
     body: JSON.stringify(loginData)
   });
 

@@ -177,6 +177,8 @@ function addInputDocHalfPass(){
     input.setAttribute('type', 'text');
     input.setAttribute('placeholder', 'Informe o código do documento comprobatório')
     input.setAttribute('id', `docHalfPass#${i}`)
+    input.setAttribute('name', `docHalfPass#${i}`);
+    input.setAttribute('aria-label', `Documento de meia entrada #${i}`);
     input.required = true;
     input.addEventListener('input', checkFormStatus);
 
