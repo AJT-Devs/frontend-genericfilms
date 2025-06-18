@@ -5,7 +5,13 @@ async function loadRooms() {
 
     if(!cinemaId) return;
 
-    const response = await fetch(`http://localhost:3000/room/list/${cinemaId}`);
+    const response = await fetch(`http://localhost:3000/room/list/${cinemaId}`,{
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        }
+    });
     const data = await response.json();
 
     const listRoom = document.getElementById("cards-list");
@@ -22,22 +28,8 @@ async function loadRooms() {
         console.error("Erro 404: ", error);
     }
 
-    const cinemaResponse = await fetch(`http://localhost:3000/cinema/${cinemaId}`);
-    const cinemaData = await cinemaResponse.json();
-    const cinema = cinemaData.cinema;
-
-    if(cinemaResponse.status === 500) {
-        const error = await cinemaResponse.json();
-        console.error("Erro 500: ", error);
-        alert(error.message);
-        return;
-    }
-    else if(cinemaResponse.status === 404) {
-        const error = await cinemaResponse.json();
-        console.error("Erro 404: ", error);
-        alert(error.message);
-        return;
-    }
+    const cinema = await getCinema();
+    if(!cinema) return;
 
     const header = document.querySelector("#main-header h1");
     const title = document.querySelector("title");
@@ -117,7 +109,13 @@ async function getRoom() {
 
     if(!roomId) return;
 
-    const Response = await fetch(`http://localhost:3000/room/${roomId}`);
+    const Response = await fetch(`http://localhost:3000/room/${roomId}`,{
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        }
+    });
     const data = await Response.json();
     const room = data.room;
 
@@ -148,6 +146,7 @@ async function getCinema() {
     const response = await fetch(`http://localhost:3000/cinema/${cinemaId}`, {
         method: "GET",
         headers: {
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         }
     });
@@ -233,8 +232,8 @@ async function createRoom() {
     const response = await fetch("http://localhost:3000/room/", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
-            "authorization": `Bearer ${localStorage.getItem("token")}`
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(room)
     });
@@ -274,6 +273,7 @@ async function updateRoom() {
     const response = await fetch(`http://localhost:3000/room/${roomId}`, {
         method: "PUT",
         headers: {
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
         body: JSON.stringify(room)
@@ -310,6 +310,7 @@ async function deleteRoom(card) {
     const response = fetch(`http://localhost:3000/room/${+roomId}`, {
         method: "DELETE",
         headers: {
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         }
     });

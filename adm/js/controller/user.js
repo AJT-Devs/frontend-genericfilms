@@ -1,6 +1,12 @@
 //Load Users Function
 async function loadUsers() {
-    const response = await fetch("http://localhost:3000/user/all");
+    const response = await fetch("http://localhost:3000/user/all", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        }
+    });
     const data = await response.json();
 
     const listUser = document.getElementById("cards-list");
@@ -102,6 +108,7 @@ async function createUser() {
     const response = await fetch("http://localhost:3000/auth/signup", {
         method: "POST",
         headers: {
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
         body: JSON.stringify(user)
@@ -157,6 +164,7 @@ async function getUser() {
     const response = await fetch(`http://localhost:3000/user/${userId}`, {
         method: "GET",
         headers: {
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         }
     });
@@ -184,44 +192,47 @@ async function getUser() {
 }
 
 // Função para atualizar o usuário
-// async function updateUser() {
-//     const form = document.getElementById("form-edit-cliente");
-//     const userId = new URLSearchParams(window.location.search).get("id");
+async function updateUser() {
+    const form = document.getElementById("form-edit-cliente");
+    const userId = new URLSearchParams(window.location.search).get("id");
 
-//     const user = {
-//         name: form.name.value,
-//         cpf: form.cpf.value,
-//         birthdate: form.birthdate.value,
-//         email: form.email.value,
-//         telNumber: form.telNumber.value
-//     };
+    fillEditForm();
 
-//     const response = await fetch(`http://localhost:3000/user/${userId}`, {
-//         method: "PUT",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(user)
-//     });
+    const user = {
+        name: form.name.value,
+        cpf: form.cpf.value,
+        birthdate: form.birthdate.value,
+        email: form.email.value,
+        telNumber: form.telNumber.value
+    };
 
-//     if(response.status === 400) {
-//         const error = await response.json();
-//         console.error("Erro 400: ", error);
-//         alert(error.message);
-//         return;
-//     }
-//     else if(response.status === 404) {
-//         const error = await response.json();
-//         console.error("Erro 404: ", error);
-//         alert(error.message);
-//         return;
-//     }
-//     else if(response.status === 500) {
-//         const error = await response.json();
-//         console.error("Erro 500: ", error);
-//         alert(error.message);
-//         return;
-//     }
+    const response = await fetch(`http://localhost:3000/user/${userId}`, {
+        method: "PUT",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+    });
 
-//     window.location.href = "../../screens/users.html";
-// }
+    if(response.status === 400) {
+        const error = await response.json();
+        console.error("Erro 400: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    window.location.href = "../../screens/users.html";
+}

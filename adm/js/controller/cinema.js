@@ -1,6 +1,12 @@
 //Load Cinemas Function
 async function loadCinemas() {
-    const response = await fetch("http://localhost:3000/cinema/list");
+    const response = await fetch("http://localhost:3000/cinema/list", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        }
+    });
     const data = await response.json();
 
     const listCinema = document.getElementById("cards-list");
@@ -92,8 +98,8 @@ async function createCinema() {
     const response = await fetch("http://localhost:3000/cinema/create", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
-            "authorization": "Bearer " + localStorage.getItem("token")
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(cinema)
     });
@@ -141,6 +147,7 @@ async function getCinema() {
     const response = await fetch(`http://localhost:3000/cinema/${cinemaId}`, {
         method: "GET",
         headers: {
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         }
     });
@@ -183,6 +190,7 @@ async function updateCinema() {
     const response = await fetch(`http://localhost:3000/cinema/${cinemaId}`, {
         method: "PUT",
         headers: {
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
         body: JSON.stringify(cinema)
@@ -219,6 +227,7 @@ async function deleteCinema(card) {
     const response = await fetch(`http://localhost:3000/cinema/${cinemaId}`, {
         method: "DELETE",
         headers: {
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         }
     });

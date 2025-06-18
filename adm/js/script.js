@@ -263,13 +263,11 @@ async function loginAdm() {
 
   const response = await fetch(`http://localhost:3000/admin/login`, {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(loginData)
   });
-
 
   if (response.status === 400) {
     const error = await response.json();
@@ -291,7 +289,23 @@ async function loginAdm() {
   }
 
   const data = await response.json();
-  localStorage.setItem('token', data.token);
+
+  token = data.token;
+
+  if (!token) return alert("Token não encontrado. Verifique se o servidor está funcionando corretamente.");
+
+  console.log("Token: ", response);
+
+  localStorage.setItem('admToken', token);
 
   window.location.href = origin + "/adm/screens/cinemas.html";
+}
+
+function getToken() {
+    const token = localStorage.getItem('admToken');
+    if (!token) {
+        console.error("Token não encontrado. Verifique se o usuário está logado.");
+        return null;
+    }
+    return token;
 }
