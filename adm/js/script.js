@@ -2,7 +2,27 @@
 
 function isLogin() {
     // Adicionar verificação se é um adm logado, se não redirecionar para a página de login
+}
 
+async function alreadyLogged() {
+    // Adicionar verificação se é um adm logado, se sim redirecionar para a página inicial do adm
+  const token = localStorage.getItem('admToken');
+  if (token) {
+    const response = await fetch(`http://localhost:3000/admin/alreadyLoggedAdmin`, {
+    method: 'GET',
+    headers: {
+      "Authorization" : `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include'
+  });
+
+  const data = await response.json();
+  if (data.message === "Administrador já está logado!"){
+    goToStart();
+  }
+  }
+  
 }
 
 function openSearch() {
