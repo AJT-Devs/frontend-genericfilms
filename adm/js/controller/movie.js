@@ -190,10 +190,11 @@ function showPreviewImageOfBD(input, url){
 
 async function createMovie() {
     const form = document.getElementById("form-register-movie");
+    
     const movie = {
         title: form.titleMovie.value,
-        poster: form.posterMovie.value,
-        banner: form.bannerMovie.value,
+        poster: form.poster.value,
+        banner: form.banner.value,
         synopsis: form.resumeMovie.value,
         trailer: form.linkTrailerMovie.value,
         gender: form.genderMovie.value,
@@ -205,16 +206,18 @@ async function createMovie() {
         cast: form.castMovie.value
     }
 
+    const formData = new FormData(form);
+
     console.log(movie);
 
-    const response = await fetch("http://localhost:3000/movie/", {
+    const response = await fetch("http://localhost:3000/movie/movie", {
         method: "POST",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
         credentials: 'include',
-        body: JSON.stringify(movie)
+        body: formData
     });
 
     if(response.status === 400) {

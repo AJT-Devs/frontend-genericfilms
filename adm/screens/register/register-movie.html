@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="@joaoapassos, @AngeLoLTPK, @TulioKenji">
-    <meta name="description" content="Ticket sales website for the fictitious cinema chain Generic Films. A Web Development II project featuring complete information on screenings and Rooms.">
+    <meta name="description"
+        content="Ticket sales website for the fictitious cinema chain Generic Films. A Web Development II project featuring complete information on screenings and Rooms.">
     <meta name="keywords" content="cinema, tickets, movies, screenings, Generic Films">
     <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/style.css">
     <title>ADM - Cadastrar Filme</title>
+
 <body>
     <header class="simple-header">
-        <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
+        <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior"
+            style="visibility: auto;">
             <i>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chevron-left-icon lucide-chevron-left">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
             </i>
         </button>
         <p id="title-pagina-p">Cadastrar Filme</p>
-        <button id="btn-sair" onclick="goToStart()" title="Sair" aria-label="Clique para sair da página e voltar para o início" style="visibility: auto;">
+        <button id="btn-sair" onclick="goToStart()" title="Sair"
+            aria-label="Clique para sair da página e voltar para o início" style="visibility: auto;">
             <i>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-x-icon lucide-x">
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                </svg>
             </i>
         </button>
     </header>
@@ -32,47 +46,66 @@
 
         <main id="main-forms">
 
-            <form action="" id="form-register-movie" style="margin-bottom: 60px;">
+            <form action="http://localhost:3000/movie/movie" id="form-register-movie" style="margin-bottom: 60px;"
+                enctype="multipart/form-data">
                 <label for="title-movie">Titulo: Subtitulo</label>
-                <input type="text" placeholder="Titulo do filme: Subtitulo do filme" id="title-movie" name="titleMovie" title="[Titulo do filme: Subtitulo do filme]" required>
-                
+                <input type="text" placeholder="Titulo do filme: Subtitulo do filme" id="title-movie" name="title"
+                    title="[Titulo do filme: Subtitulo do filme]" required>
+
                 <div class="div-group-inputs div-inputs-movie">
                     <div class="div-poster-movie">
                         <label for="">Capa</label>
-                        <label for="poster-movie" class="label-input-file" ondragover="onDrag(this)" ondragend="offDrag(this)" ondragleave="offDrag(this)" ondrop="offDrag(this)">
+                        <label for="poster-movie" class="label-input-file" ondragover="onDrag(this)"
+                            ondragend="offDrag(this)" ondragleave="offDrag(this)" ondrop="offDrag(this)">
                             <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus">
+                                    <path d="M5 12h14" />
+                                    <path d="M12 5v14" />
+                                </svg>
                             </span>
-                            <input type="file" id="poster-movie" name="posterMovie" required accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
+                            <input type="file" id="poster-movie" name="poster" required
+                                accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
                         </label>
                     </div>
                     <div class="div-banner-movie">
                         <label for="">Banner</label>
-                        <label for="banner-movie" class="label-input-file" ondragover="onDrag(this)" ondragend="offDrag(this)" ondragleave="offDrag(this)" ondrop="offDrag(this)">
+                        <label for="banner-movie" class="label-input-file" ondragover="onDrag(this)"
+                            ondragend="offDrag(this)" ondragleave="offDrag(this)" ondrop="offDrag(this)">
                             <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus">
+                                    <path d="M5 12h14" />
+                                    <path d="M12 5v14" />
+                                </svg>
                             </span>
-                            <input type="file" id="banner-movie" name="bannerMovie" required accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
+                            <input type="file" id="banner-movie" name="banner" required
+                                accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
                         </label>
                     </div>
                 </div>
                 <label for="resume-movie">Sinopse</label>
-                <textarea id="resume-movie" name="resumeMovie" placeholder="Resumo sobre a filme..." required></textarea>
+                <textarea id="resume-movie" name="synopsis" placeholder="Resumo sobre a filme..."
+                    required></textarea>
                 <div class="div-group-inputs">
                     <div>
                         <label for="link-trailer-movie">Link Trailer</label>
-                        <input type="url" id="link-trailer-movie" name="linkTrailerMovie" placeholder="Link do trailer" required>
+                        <input type="url" id="link-trailer-movie" name="trailer" placeholder="Link do trailer"
+                            required>
                     </div>
                     <div>
                         <label for="gender-movie">Gênero</label>
-                        <input type="url" id="gender-movie" name="genderMovie" placeholder="Ação, Aventura,..." required>
+                        <input type="text" id="gender-movie" name="gender" placeholder="Ação, Aventura,..."
+                            required>
                     </div>
                 </div>
                 <div class="div-group-inputs">
                     <div>
                         <label for="classification-movie">Classificação</label>
                         <div class="div-select">
-                            <select id="classification-movie" name="classificationMovie" required>
+                            <select id="classification-movie" name="classification" required>
                                 <option value="?" selected>?</option>
                                 <option value="L">L</option>
                                 <option value="10">10</option>
@@ -82,53 +115,64 @@
                                 <option value="18">18</option>
                             </select>
                             <i>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down">
+                                    <path d="m6 9 6 6 6-6" />
+                                </svg>
                             </i>
                         </div>
                     </div>
                     <div>
                         <label for="release-date-movie">Data de estreia</label>
-                        <input type="date" placeholder="DD/MM/AAAA" id="release-date-movie" name="releaseDateMovie" required>
+                        <input type="date" placeholder="DD/MM/AAAA" id="release-date-movie" name="releaseDate"
+                            required>
                     </div>
                 </div>
                 <div class="div-group-inputs">
                     <div>
                         <label for="duration-movie">Duração (Em minutos)</label>
-                        <input type="text" placeholder="120" id="duration-movie" name="durationMovie" required>
+                        <input type="text" placeholder="120" id="duration-movie" name="duration" required>
                     </div>
-                    <div>
-                        <label for="status-movie">Status</label>
-                        <div class="div-select">
-                            <select id="status-movie" name="statusMovie" required>
-                                <option value="Em cartaz" selected>Em cartaz</option>
-                                <option value="Em breve">Em breve</option>
-                                <option value="Indisponível">Indisponível</option>
-                            </select>
-                            <i>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
-                            </i>
-                        </div>
-                    </div>
+
                 </div>
                 <label for="director-movie">Diretor(es)</label>
-                <input type="text" id="director-movie" name="directorMovie" placeholder="Nome do(s) diretor(es)" required>
+                <input type="text" id="director-movie" name="director" placeholder="Nome do(s) diretor(es)"
+                    required>
                 <label for="cast-movie">Elenco</label>
-                <input type="text" id="cast-movie" name="castMovie" placeholder="Nome do pessoal do elenco" required>
+                <input type="text" id="cast-movie" name="cast" placeholder="Nome do pessoal do elenco" required>
 
-            
+                <button type="submit" id="btn-footer" title="Cadastrar Filme" aria-label="Clique para Cadastrar Filme"
+                    disabled>
+                    <h2>Cadastrar Filme</h2>
+                </button>
+
             </form>
 
         </main>
 
     </main>
-    
+
     <footer class="btn-footer">
-        <button id="btn-footer" title="Cadastrar Filme" aria-label="Clique para Cadastrar Filme" disabled onclick="createMovie()">
-            <h2>Cadastrar Filme</h2>
-        </button>
+
     </footer>
 
     <script src="../../js/script.js"></script>
     <script src="../../js/controller/movie.js"></script>
+
+    <script>
+        const form = document.querySelector('#form-register-movie');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Impede o envio padrão do formulário
+            const formData = new FormData(form);
+
+            await fetch('http://localhost:3000/movie/movie', {
+                method: 'POST',
+                body: formData
+                // Não defina o Content-Type, o navegador faz isso automaticamente!
+            });
+        });
+    </script>
 </body>
+
 </html>
