@@ -83,16 +83,16 @@ async function fillEditForm(){
     const form = document.getElementById("form-edit-movie");
     console.log(form.titleMovie);
 
-    form.titleMovie.value = movie.title;
-    form.resumeMovie.value = movie.synopsis;
-    form.linkTrailerMovie.value = movie.trailer;
-    form.genderMovie.value = movie.gender;
-    form.classificationMovie.value = movie.classification;
-    form.releaseDateMovie.value = movie.releaseDate;
-    form.durationMovie.value = movie.duration;
-    form.directorMovie.value = movie.director;
-    form.castMovie.value = movie.cast;
-    // form.statusMovie.value = movie.status;
+    form.title.value = movie.title;
+    form.resume.value = movie.synopsis;
+    form.linkTrailer.value = movie.trailer;
+    form.gender.value = movie.gender;
+    form.classification.value = movie.classification;
+    form.releaseDate.value = movie.releaseDate;
+    form.duration.value = movie.duration;
+    form.director.value = movie.director;
+    form.cast.value = movie.cast;
+    // form.status.value = movie.status;
 
     showPreviewImageOfBD(form.posterMovie, movie.poster);
     showPreviewImageOfBD(form.bannerMovie, movie.banner);
@@ -190,22 +190,36 @@ function showPreviewImageOfBD(input, url){
 
 async function createMovie() {
     const form = document.getElementById("form-register-movie");
-    const movie = {
-        title: form.titleMovie.value,
-        poster: form.posterMovie.value,
-        banner: form.bannerMovie.value,
-        synopsis: form.resumeMovie.value,
-        trailer: form.linkTrailerMovie.value,
-        gender: form.genderMovie.value,
-        classification: form.classificationMovie.value,
-        releaseDate: form.releaseDateMovie.value,
-        duration: form.durationMovie.value,
-        //status: form.statusMovie.value,
-        director: form.directorMovie.value,
-        cast: form.castMovie.value
+    const movie =  {
+        title: form.title.value,
+        synopsis: form.synopsis.value,
+        trailer: form.trailer.value,
+        gender: form.gender.value,
+        classification: form.classification.value,
+        releaseDate: form.releaseDate.value,
+        duration: form.duration.value,
+        director: form.director.value,
+        cast: form.cast.value,
+        poster: form.poster.files[0] ? await convertFileToUrl(form.poster.files[0]) : null,
+        banner: form.banner.files[0] ? await convertFileToUrl(form.banner.files[0]) : null
     }
 
+    const formData = new FormData();
+
+    formData.append("title", movie.title);
+    formData.append("synopsis", movie.synopsis);
+    formData.append("trailer", movie.trailer);
+    formData.append("gender", movie.gender);
+    formData.append("classification", movie.classification);
+    formData.append("releaseDate", movie.releaseDate);
+    formData.append("duration", movie.duration);
+    formData.append("director", movie.director);
+    formData.append("cast", movie.cast);
+    formData.append("poster", movie.poster);
+    formData.append("banner", movie.banner);
+    
     console.log(movie);
+
 
     const response = await fetch("http://localhost:3000/movie/", {
         method: "POST",
@@ -214,8 +228,10 @@ async function createMovie() {
             "Content-Type": "application/json"
         },
         credentials: 'include',
-        body: JSON.stringify(movie)
+        body: formData
     });
+
+    console.log(JSON.stringify(formData));
 
     if(response.status === 400) {
         const error = await response.json();
@@ -240,6 +256,20 @@ async function createMovie() {
     //window.location.href = `../../screens/movies.html`;
 }
 
+// Função de conversão do arquivo para Base64
+async function convertFileToUrl(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            resolve(event.target.result);
+        };
+        reader.onerror = function(error) {
+            reject(error);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
 //Router update movie
 async function updateMovie() {
     const movie = await getMovie();
@@ -248,18 +278,18 @@ async function updateMovie() {
 
     const form = document.getElementById("form-edit-movie");
     const updatedMovie = {
-        title: form.titleMovie.value,
-        poster: form.posterMovie.value,
-        banner: form.bannerMovie.value,
-        synopsis: form.resumeMovie.value,
-        trailer: form.linkTrailerMovie.value,
-        gender: form.genderMovie.value,
-        classification: form.classificationMovie.value,
-        releaseDate: form.releaseDateMovie.value,
-        duration: form.durationMovie.value,
-        //status: form.statusMovie.value,
-        director: form.directorMovie.value,
-        cast: form.castMovie.value
+        title: form.title.value,
+        synopsis: form.synopsis.value,
+        trailer: form.trailer.value,
+        gender: form.gender.value,
+        classification: form.classification.value,
+        releaseDate: form.releaseDate.value,
+        duration: form.duration.value,
+        //status: form.status.value,
+        director: form.director.value,
+        cast: form.cast.value,
+        poster: form.poster.value,
+        banner: form.banner.value
     }
 
     const response = await fetch(`http://localhost:3000/movie/put/${movieId}`, {
