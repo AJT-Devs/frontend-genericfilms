@@ -188,44 +188,58 @@ function showPreviewImageOfBD(input, url){
 
 //Router create movie
 
-async function createMovie() {
+function ativarSubmitDoForm() {
     const form = document.getElementById("form-register-movie");
-    const movie =  {
-        title: form.title.value,
-        synopsis: form.synopsis.value,
-        trailer: form.trailer.value,
-        gender: form.gender.value,
-        classification: form.classification.value,
-        releaseDate: form.releaseDate.value,
-        duration: form.duration.value,
-        director: form.director.value,
-        cast: form.cast.value,
-        poster: form.poster.files[0] ? await convertFileToUrl(form.poster.files[0]) : null,
-        banner: form.banner.files[0] ? await convertFileToUrl(form.banner.files[0]) : null
-    }
 
-    const formData = new FormData();
+    form.addEventListener("submit", (event)=>{
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        createMovie(event);
+    });
 
-    formData.append("title", movie.title);
-    formData.append("synopsis", movie.synopsis);
-    formData.append("trailer", movie.trailer);
-    formData.append("gender", movie.gender);
-    formData.append("classification", movie.classification);
-    formData.append("releaseDate", movie.releaseDate);
-    formData.append("duration", movie.duration);
-    formData.append("director", movie.director);
-    formData.append("cast", movie.cast);
-    formData.append("poster", movie.poster);
-    formData.append("banner", movie.banner);
+    form.requestSubmit();
+}
+
+async function createMovie(formData) {
+    const form = document.getElementById("form-register-movie");
+    // const movie =  {
+    //     title: form.title.value,
+    //     synopsis: form.synopsis.value,
+    //     trailer: form.trailer.value,
+    //     gender: form.gender.value,
+    //     classification: form.classification.value,
+    //     releaseDate: form.releaseDate.value,
+    //     duration: form.duration.value,
+    //     director: form.director.value,
+    //     cast: form.cast.value,
+    //     poster: form.poster.files[0] ? await convertFileToUrl(form.poster.files[0]) : null,
+    //     banner: form.banner.files[0] ? await convertFileToUrl(form.banner.files[0]) : null
+    // }
+
+    console.log(formData)
+
     
-    console.log(movie);
+
+    // formData.append("title", movie.title);
+    // formData.append("synopsis", movie.synopsis);
+    // formData.append("trailer", movie.trailer);
+    // formData.append("gender", movie.gender);
+    // formData.append("classification", movie.classification);
+    // formData.append("releaseDate", movie.releaseDate);
+    // formData.append("duration", movie.duration);
+    // formData.append("director", movie.director);
+    // formData.append("cast", movie.cast);
+    // formData.append("poster", movie.poster);
+    // formData.append("banner", movie.banner);
+    
+    // console.log(movie);
 
 
     const response = await fetch("http://localhost:3000/movie/", {
         method: "POST",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
-            "Content-Type": "application/json"
+            // "Content-Type": "application/json"
         },
         credentials: 'include',
         body: formData
