@@ -73,7 +73,7 @@ function editAdmin(btn) {
     const card = btn.closest(".card");
     const adminId = card.getAttribute("id");
   
-    window.location.href = `../../adm/screens/edit/edit-user-adm.html?id=${adminId}`;
+    window.location.href = `../../adm/screens/edit/edit-user-adm.html?admin=${adminId}`;
 }
 
 async function createAdmin() {
@@ -91,6 +91,7 @@ async function createAdmin() {
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify(admin)
     });
 
@@ -115,7 +116,7 @@ async function createAdmin() {
     }
 
     alert("Administrador cadastrado com sucesso!");
-    //window.location.href = "../../screens/admins.html";
+    window.location.href = "../../screens/admins.html";
     
 }
 
@@ -136,6 +137,7 @@ async function updadeAdmin(){
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify(updatedAdmin)
     });
 
@@ -179,7 +181,7 @@ async function fillEditForm(){
 
 async function getAdmin() {
     const urlParams = new URLSearchParams(window.location.search);
-    const adminId = urlParams.get("id");
+    const adminId = urlParams.get("admin");
     
     // console.log("ID do usuário: ", adminId);
 
@@ -193,7 +195,8 @@ async function getAdmin() {
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
-        }
+        },
+        credentials: 'include'
     });
     
     if(response.status === 404) {
@@ -229,7 +232,8 @@ async function deleteAdmin(card) {
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
-        }
+        },
+        credentials: 'include'
     })
 
     if(response.status === 404) {

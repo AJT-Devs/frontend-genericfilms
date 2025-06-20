@@ -1,9 +1,8 @@
 //Load Rooms Function
 async function loadRooms() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const cinemaId = urlParams.get("cinema");
-
-    if(!cinemaId) return;
+    const cinema = await getCinema();
+    if(!cinema) return;
+    const cinemaId = +cinema.id;
 
     const response = await fetch(`http://localhost:3000/room/list/${cinemaId}`, {
         method: "GET",
@@ -27,13 +26,6 @@ async function loadRooms() {
         const error = await response.json();
         console.error("Erro 404: ", error);
     }
-
-    const cinema = await getCinema();
-    if(!cinema) {
-        alert("Cinema não encontrado.");
-
-        return
-    } ;
 
     const header = document.querySelector("#main-header h1");
     const title = document.querySelector("title");
@@ -106,76 +98,6 @@ async function fillEditForm() {
     form.localization.value = cinema.name; 
 }
 
-async function getRoom() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const roomId = urlParams.get("room");
-
-    if(!roomId) return;
-
-    const Response = await fetch(`http://localhost:3000/room/${roomId}`,{
-        method: "GET",
-        headers: {
-            "Authorization" : `Bearer ${getToken()}`,
-            "Content-Type": "application/json"
-        }
-    });
-    const data = await Response.json();
-    const room = data.room;
-
-    if(Response.status === 500) {
-        const error = await Response.json();
-        console.error("Erro 500: ", error);
-        alert(error.message);
-        return;
-    }
-    else if(Response.status === 404) {
-        const error = await Response.json();
-        console.error("Erro 404: ", error);
-        alert(error.message);
-        return;
-    }
-
-    return room;
-}
-
-async function getCinema() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const cinemaId = urlParams.get("cinema");
-
-    if(!cinemaId) return;
-
-    // console.log("ID do usuário: ", cinemaId);
-
-    const response = await fetch(`http://localhost:3000/cinema/${cinemaId}`, {
-        method: "GET",
-        headers: {
-            "Authorization" : `Bearer ${getToken()}`,
-            "Content-Type": "application/json"
-        }
-    });
-    
-    if(response.status === 404) {
-        const error = await response.json();
-        console.error("Erro 404: ", error);
-        alert(error.message);
-        return;
-    }
-    else if(response.status === 500) {
-        const error = await response.json();
-        console.error("Erro 500: ", error);
-        alert(error.message);
-        return;
-    }
-
-    const data = await response.json();
-
-    const cinema = data.cinema;
-
-    // console.log(cinema);
-
-    return cinema;
-}
-
 function openModalConfirmDelete(btn){
     const card = btn.closest(".card");
     const modal = document.getElementById("modal-confirm-delete");
@@ -209,11 +131,13 @@ function editRoom(btn) {
 
 //Go to Sessions Function
 
-function goToSessions(btn){
+async function goToSessions(btn){
     const card = btn.closest(".card");
     const roomId = card.getAttribute("id");
+    const cinema = await getCinema();
+    const cinemaId = cinema.id;
 
-    window.location.href = `../../adm/screens/sessions.html?id=${roomId}`;
+    window.location.href = `../../adm/screens/sessions.html?cinema=${cinemaId}&room=${roomId}`;
 }
 
 //Route Create Room
@@ -238,6 +162,7 @@ async function createRoom() {
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify(room)
     });
 

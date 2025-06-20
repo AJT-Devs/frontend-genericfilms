@@ -32,7 +32,7 @@
 
         <main id="main-forms">
 
-            <form action="" id="form-register-cliente" style="margin-bottom: 60px;">
+            <form action="" id="form-register-movie" style="margin-bottom: 60px;">
                 <label for="title-movie">Titulo: Subtitulo</label>
                 <input type="text" placeholder="Titulo do filme: Subtitulo do filme" id="title-movie" name="titleMovie" title="[Titulo do filme: Subtitulo do filme]" required>
                 
@@ -58,8 +58,16 @@
                 </div>
                 <label for="resume-movie">Sinopse</label>
                 <textarea id="resume-movie" name="resumeMovie" placeholder="Resumo sobre a filme..." required></textarea>
-                <label for="link-trailer-movie">Link Trailer</label>
-                <input type="url" id="link-trailer-movie" name="linkTrailerMovie" placeholder="Link do trailer" required>
+                <div class="div-group-inputs">
+                    <div>
+                        <label for="link-trailer-movie">Link Trailer</label>
+                        <input type="url" id="link-trailer-movie" name="linkTrailerMovie" placeholder="Link do trailer" required>
+                    </div>
+                    <div>
+                        <label for="gender-movie">Gênero</label>
+                        <input type="url" id="gender-movie" name="genderMovie" placeholder="Ação, Aventura,..." required>
+                    </div>
+                </div>
                 <div class="div-group-inputs">
                     <div>
                         <label for="classification-movie">Classificação</label>
@@ -115,7 +123,7 @@
     </main>
     
     <footer class="btn-footer">
-        <button id="btn-footer" title="Cadastrar Filme" aria-label="Clique para Cadastrar Filme" disabled onclick="clickBtnFooter()">
+        <button id="btn-footer" title="Cadastrar Filme" aria-label="Clique para Cadastrar Filme" disabled onclick="createMovie()">
             <h2>Cadastrar Filme</h2>
         </button>
     </footer>

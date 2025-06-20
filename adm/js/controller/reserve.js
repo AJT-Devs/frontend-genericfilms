@@ -1,11 +1,18 @@
 // Load reserves by reserve
 async function loadReservesByUser(){
-    const urlParam = new URLSearchParams(window.location.search);
-    const userId = urlParam.get("id");
+   const user = await getUser();
+    if(!user) return;
+    const userId = user.id;
 
-    if(!userId) return;
 
-    const response = await fetch(`http://localhost:3000/ticket/list/${userId}`);
+    const response = await fetch(`http://localhost:3000/ticket/list/${userId}`,{
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
     const data = await response.json();
 
     const listReserve = document.getElementById("cards-list");
@@ -22,24 +29,6 @@ async function loadReservesByUser(){
         console.error("Erro 404: ", error);
     }
 
-    const userResponse = await fetch(`http://localhost:3000/user/${userId}`);
-    const userData = await userResponse.json();
-    const user = userData.user;
-
-    //console.log("User: ", user);
-
-    if(userResponse.status === 500) {
-        const error = await userResponse.json();
-        console.error("Erro 500: ", error);
-        alert(error.message);
-        return;
-    }
-    else if(userResponse.status === 404) {
-        const error = await userResponse.json();
-        console.error("Erro 404: ", error);
-        alert(error.message);
-        return;
-    }
 
     const header = document.querySelector("#main-header h1");
 
@@ -87,15 +76,12 @@ async function loadReservesByUser(){
                     <p>ID#${ticket.id}</p>
                 </div>
                 <div>
-                    <button onclick="goToreservePreview(this)">Acessar ingresso</button>
+                    <button onclick="goToReservePreview(this)">Acessar ingresso</button>
                     <button onclick="openModalConfirmDelete(this)">Deletar</button>
                 </div>
             </section>
         `;
     })
-
-    console.log("User ID: ", userId);
-    console.log("Reserves: ", reserves);
     
 }
 
@@ -131,11 +117,11 @@ function editReserve(btn) {
 
 //Go to reserve preview
 
-function goToreservePreview(btn){
+function goToReservePreview(btn){
     const card = btn.closest(".card");
-    const userId = card.getAttribute("id");
+    const ticketId = card.getAttribute("id");
   
-    window.location.href = `../../adm/screens/preview-reserve.html?id=${userId}`;
+    window.location.href = `../../adm/screens/preview-ticket.html?ticket=${ticketId}`;
 }
 
 let indexQtdMeias = 0;
@@ -203,11 +189,11 @@ function removeInputDocHalfPass(){
     indexQtdMeias--;
 }
 
-function validValueInputNumreserve(){
+function validValueInputNumTicket(){
     const input = document.querySelector('input[type="number"]');
     const numMax = ifCheckboxFilled()
 
-    console.log(numMax)
+    // console.log(numMax)
 
     if(!input) return;
 

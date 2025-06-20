@@ -1,5 +1,12 @@
 async function loadMovies() {
-    const response = await fetch("http://localhost:3000/movie/list");
+    const response = await fetch("http://localhost:3000/movie/list",{
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
     const data = await response.json();
 
     const listMovie = document.getElementById("cards-list");
@@ -42,13 +49,6 @@ async function loadMovies() {
 
 }
 
-//Delete Movie Function
-
-function deleteMovie(card) {
-    // Aqui você pode adicionar a lógica para remover o item do banco de dados.
-    card.remove();
-}
-
 function openModalConfirmDelete(btn){
     const card = btn.closest(".card");
     const modal = document.getElementById("modal-confirm-delete");
@@ -73,7 +73,68 @@ function editMovie(btn) {
     
     // console.log(card, movieId);
 
-    window.location.href = `../../adm/screens/edit/edit-movie.html?id=${movieId}`;
+    window.location.href = `../../adm/screens/edit/edit-movie.html?movie=${movieId}`;
+}
+
+async function fillEditForm(){
+    const movie = await getMovie();
+    if(!movie) return;
+    
+    const form = document.getElementById("form-edit-movie");
+    console.log(form.titleMovie);
+
+    form.titleMovie.value = movie.title;
+    form.resumeMovie.value = movie.synopsis;
+    form.linkTrailerMovie.value = movie.trailer;
+    form.genderMovie.value = movie.gender;
+    form.classificationMovie.value = movie.classification;
+    form.releaseDateMovie.value = movie.releaseDate;
+    form.durationMovie.value = movie.duration;
+    form.directorMovie.value = movie.director;
+    form.castMovie.value = movie.cast;
+    // form.statusMovie.value = movie.status;
+
+    showPreviewImageOfBD(form.posterMovie, movie.poster);
+    showPreviewImageOfBD(form.bannerMovie, movie.banner);
+}
+
+async function getMovie() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieId = +urlParams.get("movie");
+
+
+    if(!movieId) {
+        alert("ID do filme não encontrado.");
+        return;
+    }
+
+    const response = await fetch(`http://localhost:3000/movie/${movieId}`, {
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+
+    if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    const data = await response.json();
+
+    console.log(data.movie);
+
+    return data.movie;
 }
 
 function onDrag(label) {
@@ -110,4 +171,156 @@ function showImagePreview(input) {
     } else {
         preview.style.backgroundImage = "none";
     }
+}
+
+function showPreviewImageOfBD(input, url){
+    const preview = document.querySelector(`label[for="${input.id}"]`);
+    preview.querySelector("span").style.display = "inline";
+
+    if (url) {
+        preview.style.backgroundImage = `url(${url})`;
+
+        preview.querySelector("span").style.display = "none";
+    } else {
+        preview.style.backgroundImage = "none";
+    }
+}
+
+//Router create movie
+
+async function createMovie() {
+    const form = document.getElementById("form-register-movie");
+    const movie = {
+        title: form.titleMovie.value,
+        poster: form.posterMovie.value,
+        banner: form.bannerMovie.value,
+        synopsis: form.resumeMovie.value,
+        trailer: form.linkTrailerMovie.value,
+        gender: form.genderMovie.value,
+        classification: form.classificationMovie.value,
+        releaseDate: form.releaseDateMovie.value,
+        duration: form.durationMovie.value,
+        //status: form.statusMovie.value,
+        director: form.directorMovie.value,
+        cast: form.castMovie.value
+    }
+
+    console.log(movie);
+
+    const response = await fetch("http://localhost:3000/movie/", {
+        method: "POST",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include',
+        body: JSON.stringify(movie)
+    });
+
+    if(response.status === 400) {
+        const error = await response.json();
+        console.error("Erro 400: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    
+    alert("Filme cadastrada com sucesso!");
+    //window.location.href = `../../screens/movies.html`;
+}
+
+//Router update movie
+async function updateMovie() {
+    const movie = await getMovie();
+    if(!movie) return;
+    const movieId = movie.id;
+
+    const form = document.getElementById("form-edit-movie");
+    const updatedMovie = {
+        title: form.titleMovie.value,
+        poster: form.posterMovie.value,
+        banner: form.bannerMovie.value,
+        synopsis: form.resumeMovie.value,
+        trailer: form.linkTrailerMovie.value,
+        gender: form.genderMovie.value,
+        classification: form.classificationMovie.value,
+        releaseDate: form.releaseDateMovie.value,
+        duration: form.durationMovie.value,
+        //status: form.statusMovie.value,
+        director: form.directorMovie.value,
+        cast: form.castMovie.value
+    }
+
+    const response = await fetch(`http://localhost:3000/movie/put/${movieId}`, {
+        method: "PUT",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(movie)
+    });
+
+     if(response.status === 400) {
+        const error = await response.json();
+        console.error("Erro 400: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    alert("Filmes atualizado com sucesso!");
+    window.location.href = `../../screens/movies.html`;
+}
+
+//Delete Movie Function
+
+async function deleteMovie(card) {
+    const movieId = card.getAttribute("id");
+
+    const response = fetch(`http://localhost:3000/movie/${+movieId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+
+
+    if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    card.remove();
 }

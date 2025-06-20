@@ -3,9 +3,10 @@ async function loadUsers() {
     const response = await fetch("http://localhost:3000/user/all", {
         method: "GET",
         headers: {
-            "Authorization": `Bearer ${getToken()}`,
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
-        }
+        },
+        credentials: 'include'
     });
     const data = await response.json();
 
@@ -50,13 +51,6 @@ async function loadUsers() {
 
 }
 
-//Delete User Function
-
-function deleteUser(card) {
-    // Aqui você pode adicionar a lógica para remover o item do banco de dados.
-    card.remove();
-}
-
 function openModalConfirmDelete(btn){
     const card = btn.closest(".card");
     const modal = document.getElementById("modal-confirm-delete");
@@ -79,7 +73,7 @@ function editUser(btn) {
     const card = btn.closest(".card");
     const userId = card.getAttribute("id");
   
-    window.location.href = `../../adm/screens/edit/edit-user-client.html?id=${userId}`;
+    window.location.href = `../../adm/screens/edit/edit-user-client.html?user=${userId}`;
 
 }
 
@@ -89,7 +83,7 @@ function goToReserves(btn){
     const card = btn.closest(".card");
     const userId = card.getAttribute("id");
   
-    window.location.href = `../../adm/screens/reserves.html?id=${userId}`;
+    window.location.href = `../../adm/screens/reserves.html?user=${userId}`;
 }
 
 //Route Create User
@@ -111,6 +105,7 @@ async function createUser() {
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify(user)
     });
 
@@ -152,49 +147,12 @@ async function fillEditForm() {
     form.telNumber.value = user.telNumber;
 }
 
-// Get User Function
-async function getUser() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get("id");
-
-    if(!userId) return;
-
-    // console.log("ID do usuário: ", userId);
-
-    const response = await fetch(`http://localhost:3000/user/${userId}`, {
-        method: "GET",
-        headers: {
-            "Authorization" : `Bearer ${getToken()}`,
-            "Content-Type": "application/json"
-        }
-    });
-    
-    if(response.status === 404) {
-        const error = await response.json();
-        console.error("Erro 404: ", error);
-        alert(error.message);
-        return;
-    }
-    else if(response.status === 500) {
-        const error = await response.json();
-        console.error("Erro 500: ", error);
-        alert(error.message);
-        return;
-    }
-
-    const data = await response.json();
-
-    const user = data.user;
-
-    // console.log(user);
-
-    return user;
-}
-
 // Função para atualizar o usuário
 async function updateUser() {
     const form = document.getElementById("form-edit-cliente");
-    const userId = new URLSearchParams(window.location.search).get("id");
+    const userData = await getUser();
+    if (!user) return;
+    const userId = userData.id;
 
     fillEditForm();
 
@@ -212,6 +170,7 @@ async function updateUser() {
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify(user)
     });
 
@@ -235,4 +194,38 @@ async function updateUser() {
     }
 
     window.location.href = "../../screens/users.html";
+}
+
+//Delete User Function
+async function deleteUser(btn) {
+    const card = btn.closest(".card");
+    const userId = +card.getAttribute("id");
+
+    console.log("Deletando usuário com ID:", userId);
+    
+
+    const response = fetch(`http://localhost:3000/user/${userId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    })
+
+    if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+
+    card.remove();
 }

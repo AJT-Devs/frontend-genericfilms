@@ -9,7 +9,7 @@
     <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/style.css">
     <title>ADM - Editar Filme</title>
-<body>
+<body onload="fillEditForm()">
     <header class="simple-header">
         <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
             <i>
@@ -32,7 +32,7 @@
 
         <main id="main-forms">
 
-            <form action="" id="form-register-cliente" style="margin-bottom: 60px;">
+            <form action="" id="form-edit-movie" style="margin-bottom: 60px;">
                 <label for="title-movie">Titulo: Subtitulo</label>
                 <input type="text" placeholder="Titulo do filme: Subtitulo do filme" value="[Titulo do filme: Subtitulo do filme]" id="title-movie" name="titleMovie" title="[Titulo do filme: Subtitulo do filme]" required>
                 
@@ -43,7 +43,7 @@
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                             </span>
-                            <input type="file" id="poster-movie" name="posterMovie" required accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
+                            <input type="file" id="poster-movie" name="posterMovie" accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
                         </label>
                     </div>
                     <div class="div-banner-movie">
@@ -52,14 +52,22 @@
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                             </span>
-                            <input type="file" id="banner-movie" name="bannerMovie" required accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
+                            <input type="file" id="banner-movie" name="bannerMovie" accept="image/jpg, image/jpeg, image/png, image/webp" onchange="showImagePreview(this)">
                         </label>
                     </div>
                 </div>
                 <label for="resume-movie">Sinopse</label>
                 <textarea id="resume-movie" name="resumeMovie" placeholder="Resumo sobre a filme...">[Resumo sobre a filme...]</textarea>
-                <label for="link-trailer-movie">Link Trailer</label>
-                <input type="url" id="link-trailer-movie" name="linkTrailerMovie" placeholder="Link do trailer" value="[Link do trailer]" required>
+                <div class="div-group-inputs">
+                    <div>
+                        <label for="link-trailer-movie">Link Trailer</label>
+                        <input type="url" id="link-trailer-movie" name="linkTrailerMovie" placeholder="Link do trailer" required>
+                    </div>
+                    <div>
+                        <label for="gender-movie">Gênero</label>
+                        <input type="url" id="gender-movie" name="genderMovie" placeholder="Ação, Aventura,..." required>
+                    </div>
+                </div>
                 <div class="div-group-inputs">
                     <div>
                         <label for="classification-movie">Classificação</label>
@@ -115,7 +123,7 @@
     </main>
     
     <footer class="btn-footer">
-        <button id="btn-footer" title="Editar Filme" aria-label="Clique para Editar Filme" disabled onclick="clickBtnFooter()">
+        <button id="btn-footer" title="Editar Filme" aria-label="Clique para Editar Filme" disabled onclick="updateMovie()">
             <h2>Editar Filme</h2>
         </button>
     </footer>

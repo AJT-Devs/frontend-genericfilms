@@ -267,7 +267,6 @@ async function loginAdm() {
       'Content-Type': 'application/json'
     },
     credentials: 'include',
-    // Authorization: `Bearer ${getToken()}`,
     body: JSON.stringify(loginData)
   });
 
@@ -303,6 +302,8 @@ async function loginAdm() {
   window.location.href = origin + "/adm/screens/cinemas.html";
 }
 
+//Gets
+
 function getToken() {
     const token = localStorage.getItem('admToken');
     if (!token) {
@@ -310,4 +311,120 @@ function getToken() {
         return null;
     }
     return token;
+}
+
+//Get Cinema
+
+async function getCinema() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const cinemaId = urlParams.get("cinema");
+
+    if(!cinemaId) return;
+
+    // console.log("ID do usuário: ", cinemaId);
+
+    const response = await fetch(`http://localhost:3000/cinema/${cinemaId}`, {
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+    
+    if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    const data = await response.json();
+
+    const cinema = data.cinema;
+
+    // console.log(cinema);
+
+    return cinema;
+}
+
+//Get Room
+
+async function getRoom() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomId = urlParams.get("room");
+
+    if(!roomId) return;
+
+    const Response = await fetch(`http://localhost:3000/room/${roomId}`,{
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+    const data = await Response.json();
+    const room = data.room;
+
+    if(Response.status === 500) {
+        const error = await Response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(Response.status === 404) {
+        const error = await Response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+
+    return room;
+}
+
+// Get User Function
+async function getUser() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get("user");
+
+    if(!userId) return;
+
+    // console.log("ID do usuário: ", userId);
+
+    const response = await fetch(`http://localhost:3000/user/${userId}`, {
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+    
+    if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    const data = await response.json();
+
+    const user = data.user;
+
+    // console.log(user);
+
+    return user;
 }

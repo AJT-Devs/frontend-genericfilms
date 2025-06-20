@@ -3,9 +3,10 @@ async function loadCinemas() {
     const response = await fetch("http://localhost:3000/cinema/list", {
         method: "GET",
         headers: {
-            "Authorization": `Bearer ${getToken()}`,
+            "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
-        }
+        },
+        credentials: 'include'
     });
     const data = await response.json();
 
@@ -71,7 +72,7 @@ function editCinema(btn) {
     
     console.log(card, cinemaId);
 
-    window.location.href = `../../adm/screens/edit/edit-cinema.html?id=${cinemaId}`;
+    window.location.href = `../../adm/screens/edit/edit-cinema.html?cinema=${cinemaId}`;
 }
 
 //Ir para Salas do cinema
@@ -101,6 +102,7 @@ async function createCinema() {
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify(cinema)
     });
 
@@ -135,45 +137,6 @@ async function fillEditForm() {
     form.city.value = cinema.city;
 }
 
-// Get cinema Function
-async function getCinema() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const cinemaId = urlParams.get("id");
-
-    if(!cinemaId) return;
-
-    // console.log("ID do usuário: ", cinemaId);
-
-    const response = await fetch(`http://localhost:3000/cinema/${cinemaId}`, {
-        method: "GET",
-        headers: {
-            "Authorization" : `Bearer ${getToken()}`,
-            "Content-Type": "application/json"
-        }
-    });
-    
-    if(response.status === 404) {
-        const error = await response.json();
-        console.error("Erro 404: ", error);
-        alert(error.message);
-        return;
-    }
-    else if(response.status === 500) {
-        const error = await response.json();
-        console.error("Erro 500: ", error);
-        alert(error.message);
-        return;
-    }
-
-    const data = await response.json();
-
-    const cinema = data.cinema;
-
-    // console.log(cinema);
-
-    return cinema;
-}
-
 // Update Cinema Function
 
 async function updateCinema() {
@@ -193,6 +156,7 @@ async function updateCinema() {
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify(cinema)
     });
 
@@ -229,7 +193,8 @@ async function deleteCinema(card) {
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
             "Content-Type": "application/json"
-        }
+        },
+        credentials: 'include'
     });
 
     if(response.status === 404) {
