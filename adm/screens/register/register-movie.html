@@ -166,11 +166,38 @@
             e.preventDefault(); // Impede o envio padrão do formulário
             const formData = new FormData(form);
 
-            await fetch('http://localhost:3000/movie/movie', {
+            const response = await fetch('http://localhost:3000/movie/movie', {
                 method: 'POST',
+                headers: {
+                    "Authorization" : `Bearer ${getToken()}`,
+                    // "Content-Type": "application/json"
+                },
+                credentials: 'include',
                 body: formData
                 // Não defina o Content-Type, o navegador faz isso automaticamente!
             });
+
+            if(response.status === 400) {
+                const error = await response.json();
+                console.error("Erro 400: ", error);
+                alert(error.message);
+                return;
+            }
+            else if(response.status === 500) {
+                const error = await response.json();
+                console.error("Erro 500: ", error);
+                alert(error.message);
+                return;
+            }
+            else if(response.status === 404) {
+                const error = await response.json();
+                console.error("Erro 404: ", error);
+                alert(error.message);
+                return;
+            }
+            
+            alert("Filme cadastrada com sucesso!");
+            //window.location.href = `../../screens/movies.html`;
         });
     </script>
 </body>

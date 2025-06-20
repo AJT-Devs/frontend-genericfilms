@@ -188,73 +188,73 @@ function showPreviewImageOfBD(input, url){
 
 //Router create movie
 
-async function createMovie() {
-    const form = document.getElementById("form-register-movie");
-    const movie =  {
-        title: form.title.value,
-        synopsis: form.synopsis.value,
-        trailer: form.trailer.value,
-        gender: form.gender.value,
-        classification: form.classification.value,
-        releaseDate: form.releaseDate.value,
-        duration: form.duration.value,
-        director: form.director.value,
-        cast: form.cast.value,
-        poster: form.poster.files[0] ? await convertFileToUrl(form.poster.files[0]) : null,
-        banner: form.banner.files[0] ? await convertFileToUrl(form.banner.files[0]) : null
-    }
+// async function createMovie() {
+//     const form = document.getElementById("form-register-movie");
+//     const movie =  {
+//         title: form.title.value,
+//         synopsis: form.synopsis.value,
+//         trailer: form.trailer.value,
+//         gender: form.gender.value,
+//         classification: form.classification.value,
+//         releaseDate: form.releaseDate.value,
+//         duration: form.duration.value,
+//         director: form.director.value,
+//         cast: form.cast.value,
+//         poster: form.poster.files[0] ? await convertFileToUrl(form.poster.files[0]) : null,
+//         banner: form.banner.files[0] ? await convertFileToUrl(form.banner.files[0]) : null
+//     }
 
-    const formData = new FormData();
+//     const formData = new FormData();
 
-    formData.append("title", movie.title);
-    formData.append("synopsis", movie.synopsis);
-    formData.append("trailer", movie.trailer);
-    formData.append("gender", movie.gender);
-    formData.append("classification", movie.classification);
-    formData.append("releaseDate", movie.releaseDate);
-    formData.append("duration", movie.duration);
-    formData.append("director", movie.director);
-    formData.append("cast", movie.cast);
-    formData.append("poster", movie.poster);
-    formData.append("banner", movie.banner);
+//     formData.append("title", movie.title);
+//     formData.append("synopsis", movie.synopsis);
+//     formData.append("trailer", movie.trailer);
+//     formData.append("gender", movie.gender);
+//     formData.append("classification", movie.classification);
+//     formData.append("releaseDate", movie.releaseDate);
+//     formData.append("duration", movie.duration);
+//     formData.append("director", movie.director);
+//     formData.append("cast", movie.cast);
+//     formData.append("poster", movie.poster);
+//     formData.append("banner", movie.banner);
     
-    console.log(movie);
+//     console.log(movie);
 
 
-    const response = await fetch("http://localhost:3000/movie/", {
-        method: "POST",
-        headers: {
-            "Authorization" : `Bearer ${getToken()}`,
-            "Content-Type": "application/json"
-        },
-        credentials: 'include',
-        body: formData
-    });
+//     const response = await fetch("http://localhost:3000/movie/", {
+//         method: "POST",
+//         headers: {
+//             "Authorization" : `Bearer ${getToken()}`,
+//             "Content-Type": "application/json"
+//         },
+//         credentials: 'include',
+//         body: formData
+//     });
 
-    console.log(JSON.stringify(formData));
+//     console.log(JSON.stringify(formData));
 
-    if(response.status === 400) {
-        const error = await response.json();
-        console.error("Erro 400: ", error);
-        alert(error.message);
-        return;
-    }
-    else if(response.status === 500) {
-        const error = await response.json();
-        console.error("Erro 500: ", error);
-        alert(error.message);
-        return;
-    }
-    else if(response.status === 404) {
-        const error = await response.json();
-        console.error("Erro 404: ", error);
-        alert(error.message);
-        return;
-    }
+//     if(response.status === 400) {
+//         const error = await response.json();
+//         console.error("Erro 400: ", error);
+//         alert(error.message);
+//         return;
+//     }
+//     else if(response.status === 500) {
+//         const error = await response.json();
+//         console.error("Erro 500: ", error);
+//         alert(error.message);
+//         return;
+//     }
+//     else if(response.status === 404) {
+//         const error = await response.json();
+//         console.error("Erro 404: ", error);
+//         alert(error.message);
+//         return;
+//     }
     
-    alert("Filme cadastrada com sucesso!");
-    //window.location.href = `../../screens/movies.html`;
-}
+//     alert("Filme cadastrada com sucesso!");
+//     //window.location.href = `../../screens/movies.html`;
+// }
 
 // Função de conversão do arquivo para Base64
 async function convertFileToUrl(file) {
