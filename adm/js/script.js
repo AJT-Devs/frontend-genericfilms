@@ -7,7 +7,9 @@ async function isLogin() {
     const token = getToken();
     const name = getNameAdmin();
     if (!token) {
-      window.location.href = origin + "/adm";
+      if(!window.location.href.includes(origin + "/adm")){
+        window.location.href = origin + "/adm";
+      }
     }
 
     const response = await fetch(`${urlServer}/admin/alreadyLoggedAdmin`, {
@@ -20,8 +22,11 @@ async function isLogin() {
   });
   
   if(response.status !== 200) {
-    window.location.href = origin + "/adm";
+    if(!window.location.href.includes(origin + "/adm")){
+      window.location.href = origin + "/adm";
+    }
   }
+  
   console.log(name)
   const aHeader = document.querySelector(".perfil");
   aHeader.textContent = name;
@@ -568,4 +573,4 @@ async function getMovie() {
     return data.movie;
 }
 
-document.addEventListener("DOMContentLoaded", isLogin());
+document.addEventListener("DOMContentLoaded", isLogin);
