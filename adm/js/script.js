@@ -173,7 +173,7 @@ function goToChangePasswordAdm() {
 
 // Função que verifica todo o formulário e habilita/desabilita o botão
 
-function checkFormStatus() {
+async function checkFormStatus() {
   const inputsFilled = isInputsFilled();
   const selectsFilled = isSelectsFilled();
   const textareaFilled = isTextareaFilled();
@@ -223,7 +223,7 @@ function ifCheckboxFilled() {
   if (checkboxes.length === 0) return true;
 
   const marked = checkboxes.filter(cb => cb.checked).length;
-  
+
   // deve ter pelo menos um marcado
   return marked > 0 ? marked : 0;
 }
@@ -421,6 +421,34 @@ async function getCinema() {
     return cinema;
 }
 
+async function getAllCinemas(){
+    const response = await fetch(`${urlServer}/cinema/list`, {
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+
+    if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+    }
+
+    const data = await response.json();
+
+    const cinemas = data || [];
+
+    return cinemas;
+}
+
 //Get Room
 
 async function getRoom() {
@@ -575,6 +603,68 @@ async function getMovie() {
     // console.log(data.movie);
 
     return data.movie;
+}
+
+async function getMovieById(movieId) {
+    if (!movieId) {
+        alert("ID do filme não encontrado.");
+        return;
+    }
+
+    const response = await fetch(`${urlServer}/movie/${movieId}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+
+    if (response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if (response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    const data = await response.json();
+
+    // console.log(data.movie);
+
+    return data.movie;
+}
+
+async function getAllMovies() {
+    const response = await fetch(`${urlServer}/movie/list`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+    const data = await response.json();
+
+    if (response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+    else if (response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+    }
+
+    const movies = data.movies || [];
+
+    return movies;
 }
 
 async function getSession() {

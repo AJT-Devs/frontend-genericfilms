@@ -61,79 +61,6 @@ async function loadSessions() {
         `;
     }
 }
-//Delete Session Function
-
-async function getMovieById(movieId) {
-    if (!movieId) {
-        alert("ID do filme não encontrado.");
-        return;
-    }
-
-    const response = await fetch(`${urlServer}/movie/${movieId}`, {
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${getToken()}`,
-            "Content-Type": "application/json"
-        },
-        credentials: 'include'
-    });
-
-    if (response.status === 404) {
-        const error = await response.json();
-        console.error("Erro 404: ", error);
-        alert(error.message);
-        return;
-    }
-    else if (response.status === 500) {
-        const error = await response.json();
-        console.error("Erro 500: ", error);
-        alert(error.message);
-        return;
-    }
-
-    const data = await response.json();
-
-    // console.log(data.movie);
-
-    return data.movie;
-}
-
-//Delete Session Function
-
-async function getMovieById(movieId) {
-    if (!movieId) {
-        alert("ID do filme não encontrado.");
-        return;
-    }
-
-    const response = await fetch(`${urlServer}/movie/${movieId}`, {
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${getToken()}`,
-            "Content-Type": "application/json"
-        },
-        credentials: 'include'
-    });
-
-    if (response.status === 404) {
-        const error = await response.json();
-        console.error("Erro 404: ", error);
-        alert(error.message);
-        return;
-    }
-    else if (response.status === 500) {
-        const error = await response.json();
-        console.error("Erro 500: ", error);
-        alert(error.message);
-        return;
-    }
-
-    const data = await response.json();
-
-    // console.log(data.movie);
-
-    return data.movie;
-}
 
 function openModalConfirmDelete(btn) {
     const card = btn.closest(".card");
@@ -315,7 +242,7 @@ async function updateSession() {
 
 }
 
-async function loadRegisterMovies() {
+async function loadRegisterSession() {
     const cinema = await getCinema();
     if (!cinema) return;
 
@@ -337,33 +264,6 @@ async function loadRegisterMovies() {
         <option value="${movie.id}">${movie.title}</option>
         `;
     });
-}
-
-async function getAllMovies() {
-    const response = await fetch(`${urlServer}/movie/list`, {
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${getToken()}`,
-            "Content-Type": "application/json"
-        },
-        credentials: 'include'
-    });
-    const data = await response.json();
-
-    if (response.status === 500) {
-        const error = await response.json();
-        console.error("Erro 500: ", error);
-        alert(error.message);
-        return;
-    }
-    else if (response.status === 404) {
-        const error = await response.json();
-        console.error("Erro 404: ", error);
-    }
-
-    const movies = data.movies || [];
-
-    return movies;
 }
 
 

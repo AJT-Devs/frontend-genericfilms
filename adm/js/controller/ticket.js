@@ -94,7 +94,7 @@ async function previewTicket(){
 
                 <div class="information-session">
                     <div class="img-poster-div">
-                        <img src="${data.moviePoster}" id="img-poster">
+                        <img src="${urlServer}${data.moviePoster}" id="img-poster">
                     </div>
                     <div class="other-informations">
                         <h2>Informações da sessão</h2>
