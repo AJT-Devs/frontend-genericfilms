@@ -567,3 +567,5 @@ async function getMovie() {
 
     return data.movie;
 }
+
+document.addEventListener("DOMContentLoaded", isLogin());
