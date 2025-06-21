@@ -5,28 +5,28 @@ async function loadSessions() {
     if(!room) return;
     const roomId = +room.id;
 
-    // const response = await fetch(`${urlServer}/session/list/${roomId}`, {
-    //     method: "GET",
-    //     headers: {
-    //         "Authorization" : `Bearer ${getToken()}`,
-    //         "Content-Type": "application/json"
-    //     }
-    // });
-    // const data = await response.json();
+    const response = await fetch(`${urlServer}/session/list/${roomId}`, {
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        }
+    });
+    const data = await response.json();
 
-    // const listSession = document.getElementById("cards-list");
-    // listSession.innerHTML = "";
+    const listSession = document.getElementById("cards-list");
+    listSession.innerHTML = "";
 
-    // if(response.status === 500) {
-    //     const error = await response.json();
-    //     console.error("Erro 500: ", error);
-    //     alert(error.message);
-    //     return;
-    // }
-    // else if(response.status === 404) {
-    //     const error = await response.json();
-    //     console.error("Erro 404: ", error);
-    // }
+    if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+    }
 
     const header = document.querySelector("#main-header h1");
     const title = document.querySelector("title");
