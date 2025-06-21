@@ -5,35 +5,37 @@ async function loadSessions() {
     if(!room) return;
     const roomId = +room.id;
 
-    // const response = await fetch(`http://localhost:3000/session/list/${roomId}`, {
-    //     method: "GET",
-    //     headers: {
-    //         "Authorization" : `Bearer ${getToken()}`,
-    //         "Content-Type": "application/json"
-    //     }
-    // });
-    // const data = await response.json();
+    const response = await fetch(`http://localhost:3000/session/list/${roomId}`, {
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        }
+    });
+    const data = await response.json();
+    
+    const sessions = data.sessions;
 
-    // const listSession = document.getElementById("cards-list");
-    // listSession.innerHTML = "";
+    const listSession = document.getElementById("cards-list");
+    listSession.innerHTML = '';
 
-    // if(response.status === 500) {
-    //     const error = await response.json();
-    //     console.error("Erro 500: ", error);
-    //     alert(error.message);
-    //     return;
-    // }
-    // else if(response.status === 404) {
-    //     const error = await response.json();
-    //     console.error("Erro 404: ", error);
-    // }
+    if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+    }
 
-    const header = document.querySelector("#main-header h1");
-    const title = document.querySelector("title");
-    header.innerHTML = `${cinema.name} - Sala ${room.name} - Sessões`;
-    title.innerHTML = `ADM - Sessões de ${room.name} de ${cinema.name}`;
+    // const header = document.querySelector("#main-header h1");
+    // const title = document.querySelector("title");
+    // header.innerHTML = `${cinema.name} - Sala ${room.name} - Sessões`;
+    // title.innerHTML = `ADM - Sessões de ${room.name} de ${cinema.name}`;
 
-    //const sessions = data || [];
+    // const sessions = data || [];
 
     // sessions.forEach(session =>{
     //     listSession.innerHTML += `
@@ -62,10 +64,12 @@ function openModalConfirmDelete(btn){
 
 //Get Session Function
 
-function getAllSessions() {
+async function getAllSessions(id) {
     const cardsList = document.getElementById("cards-list");
     // cardsList é a section onde os cards de Session serão exibidos.
     // Aqui você pode adicionar a lógica para buscar os Sessions do banco de dados.
+
+    const response = await fetch(`http://localhost:3000/session/list/`, {})
 }
 
 //Add Session Function
