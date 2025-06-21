@@ -39,10 +39,10 @@ async function loadSessions() {
 
         const movie = await getMovieById(session.idMovie);
 
-        session.startTime = new Date(session.startDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        session.startTime = session.startTime.replace(":", "h");
-        session.startDate = new Date(session.startDate).toISOString().split('T')[0];
-        session.startDate = session.startDate.split("-").reverse().join("/");
+
+        const [datePart, timePart] = session.startDate.split("T");
+        session.startTime = timePart.substring(0,5).replace(":", "h");
+        session.startDate = datePart.split("-").reverse().join("/");
 
         listSession.innerHTML += `
             <section class="card" id="${session.id}" tabindex="0" aria-label="Sessão em ${cinema.name}; do filme ${movie.tile}; em ${session.startDate} e ${session.startTime}; ID#${session.id}">
@@ -98,18 +98,50 @@ async function getMovieById(movieId) {
     return data.movie;
 }
 
-function deleteSession(card) {
-    // Aqui você pode adicionar a lógica para remover o item do banco de dados.
-    card.remove();
+//Delete Session Function
+
+async function getMovieById(movieId) {
+    if(!movieId) {
+        alert("ID do filme não encontrado.");
+        return;
+    }
+
+    const response = await fetch(`${urlServer}/movie/${movieId}`, {
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+
+    if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    const data = await response.json();
+
+    // console.log(data.movie);
+
+    return data.movie;
 }
 
-function openModalConfirmDelete(btn){
+function openModalConfirmDelete(btn) {
     const card = btn.closest(".card");
     const modal = document.getElementById("modal-confirm-delete");
     modal.closest(".area-modal").style.display = "flex";
     modal.style.display = "block";
     const btnConfirmDelete = modal.querySelector("#btn-confirm-delete");
-    btnConfirmDelete.addEventListener("click", function() {
+    btnConfirmDelete.addEventListener("click", function () {
         deleteSession(card);
         closeModal("modal-confirm-delete");
     });
@@ -123,7 +155,7 @@ async function addSession() {
 
     const room = await getRoom();
     const roomId = room.id;
-    
+
     window.location.href = `../../adm/screens/register/register-session.html?cinema=${cinemaId}&room=${roomId}`;
 }
 
@@ -138,8 +170,111 @@ async function editSession(btn) {
 
     const room = await getRoom();
     const roomId = room.id;
-    
+
     console.log(card, sessionId);
 
     window.location.href = `../../adm/screens/edit/edit-session.html??cinema=${cinemaId}&room=${roomId}&session=${sessionId}`;
+}
+
+async function createSession() {
+    const room = await getRoom();
+    if (!room) return;
+
+    const form = document.getElementById("form-register-session");
+
+    const startDate = new Date(form.startDate.value).toISOString().split('T')[0] + "T" + form.timeStart.value + ":00.000Z";
+    const endHour = new Date(form.startDate.value).toISOString().split('T')[0] + "T" + form.timeEnd.value + ":00.000Z";
+
+    const sessionData = {
+        idRoom: +room.id,
+        idMovie: +form.selectMovie.value,
+        startDate: startDate,
+        endHour: endHour,
+        price: +form.price.value.replace('R$', '').replace(',', '.').trim(),
+        format: form.selectFormat.value,
+        language: form.selectLanguage.value,
+    };
+
+    const response = await fetch(`${urlServer}/session/`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(sessionData),
+        credentials: 'include'
+    });
+    if (response.status === 400) {
+        const error = await response.json();
+        console.error("Erro 400: ", error);
+        alert(error.message);
+        return;
+    }
+    if (response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    alert("Sessão criada com sucesso!");
+    window.location.href = `../../screens/sessions.html?cinema=${room.idCinema}&room=${room.id}`;
+
+}
+
+async function loadRegisterMovies() {
+    const cinema = await getCinema();
+    if (!cinema) return;
+
+    const movies = await getAllMovies();
+    if (!movies) return;
+
+    const room = await getRoom();
+    if (!room) return;
+
+    const inputCinemaName = document.querySelector("#cinema");
+    const inputRoomName = document.querySelector("#room");
+    inputCinemaName.value = cinema.name;
+    inputRoomName.value = "Sala " + room.name;
+
+    const selectMovie = document.getElementById("select-movie");
+
+    movies.forEach(movie => {
+        selectMovie.innerHTML += `
+        <option value="${movie.id}">${movie.title}</option>
+        `;
+    });
+}
+
+async function getAllMovies() {
+    const response = await fetch(`${urlServer}/movie/list`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+    const data = await response.json();
+
+    if (response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+    else if (response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+    }
+
+    const movies = data.movies || [];
+
+    return movies;
+}
+
+
+function deleteSession(card) {
+    // Aqui você pode adicionar a lógica para remover o item do banco de dados.
+    card.remove();
 }
