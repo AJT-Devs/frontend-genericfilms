@@ -179,48 +179,6 @@ async function fillEditForm(){
     form.cargo.value = admin.cargo;
 }
 
-async function getAdmin() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const adminId = urlParams.get("admin");
-    
-    // console.log("ID do usuário: ", adminId);
-
-    if(!adminId) return;
-
-
-    // console.log("ID do usuário: ", adminId);
-
-    const response = await fetch(`${urlServer}/admin/${adminId}`, {
-        method: "GET",
-        headers: {
-            "Authorization" : `Bearer ${getToken()}`,
-            "Content-Type": "application/json"
-        },
-        credentials: 'include'
-    });
-    
-    if(response.status === 404) {
-        const error = await response.json();
-        console.error("Erro 404: ", error);
-        alert(error.message);
-        return;
-    }
-    else if(response.status === 500) {
-        const error = await response.json();
-        console.error("Erro 500: ", error);
-        alert(error.message);
-        return;
-    }
-
-    const data = await response.json();
-
-    const admin = data.admin;
-
-    // console.log(user);
-
-    return admin;
-}
-
 //Delete Admin Function
 
 async function deleteAdmin(card) {
