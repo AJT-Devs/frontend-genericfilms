@@ -27,8 +27,9 @@ async function isLogin() {
     }
   }
   
-  console.log(name)
   const aHeader = document.querySelector(".perfil");
+  if(!aHeader) return;
+
   aHeader.textContent = name;
   aHeader.ariaLabel = `Clique para acessar usuário de ${name}`;
     

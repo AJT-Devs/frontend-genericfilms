@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <title>ADM - Perfil</title>
 </head>
-<body>
+<body onload= "previewTicket()">
     
     <header class="simple-header">
         <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior">
@@ -25,13 +25,13 @@
             </i>
         </button>
 
-        <button id="download-ticket-btn" onclick="downloadTicket('ID#0000')">Baixar Ingresso</button>
+        <button id="download-ticket-btn" onclick="downloadTicket()">Baixar Ingresso</button>
     </header>
     
     
-    <main class="preview-ticket-main">
+    <main class="preview-ticket-main" >
         <div id="preview-ticket-div">
-            <div class="ticket">
+            <div class="ticket" id="ticket">
                 <span>
                     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
                     <svg
