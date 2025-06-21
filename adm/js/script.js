@@ -345,6 +345,8 @@ async function loginAdm() {
 
   const token = data.token;
 
+  const idAdmin = data.id;
+
   const nameAdmin = data.name;
   
 
@@ -354,6 +356,7 @@ async function loginAdm() {
 
   localStorage.setItem('admToken', token);
   localStorage.setItem('admName', nameAdmin);
+  localStorage.setItem('admId', idAdmin);
 
   window.location.href = origin + "/adm/screens/cinemas.html";
 }

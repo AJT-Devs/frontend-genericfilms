@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <title>ADM - Perfil</title>
 </head>
-<body>
+<body onload="loadProfile()">
     
     <header class="simple-header">
         <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior">
@@ -36,34 +36,19 @@
 
         <main id="information-user-adm">
 
-            <form action="">
+            <form  id="profileData" action="">
                 <label for="">Nome</label>
-                <input type="text" placeholder="Seu nome" value="Seu nome" disabled>
-                <div class="div-group-inputs">
-                    <div>
-                        <label for="">CPF</label>
-                        <input type="text" placeholder="000.000.000-00" value="000.000.000-00" disabled>
-                    </div>
-                    <div>
-                        <label for="">Data de Nascimento</label>
-                        <input type="date" placeholder="DD/MM/AAAA" value="DD/MM/AAAA" disabled>
-                    </div>
-                </div>
-                <div class="div-group-inputs">
+                <input name="name" type="text" placeholder="Seu nome" value="Seu nome" disabled>
                     <div>
                         <label for="">E-mail Corporativo</label>
-                        <input type="email" placeholder="seunome@genericfilms.com.br" value="seunome@genericfilms.com.br" disabled>
+                        <input name="email" type="email" placeholder="seunome@genericfilms.com.br" value="seunome@genericfilms.com.br" disabled>
                     </div>
-                    <div>
-                        <label for="">Telefone</label>
-                        <input type="text" placeholder="(00) 0000-0000" value="(00) 0000-0000" disabled>
-                    </div>
-                </div>
             </form>
 
         </main>
     </main>
 
     <script src="../js/script.js"></script>
+    <script src="../js/controller/perfil.js"></script>
 </body>
 </html>
