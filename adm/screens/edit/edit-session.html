@@ -9,7 +9,7 @@
     <link rel="icon" href="../../../icons/favicon-adm.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/style.css">
     <title>ADM - Editar Sessão</title>
-<body>
+<body onload="fillEditForm()">
     <header class="simple-header">
         <button id="btn-voltar" onclick="goToBack()" title="Voltar" aria-label="Clique para voltar para página anterior" style="visibility: auto;">
             <i>
@@ -32,7 +32,7 @@
 
         <main id="main-forms">
 
-            <form action="">
+            <form action="" id="form-edit-session">
                 <div class="div-group-inputs">
                     <div>
                         <label for="cinema">Cinema</label>
@@ -47,9 +47,6 @@
                 <div class="div-select">
                     <select id="select-movie" name="selectMovie" required>
                         <option value="">Selecione o filme</option>
-                        <option value="id#0001" selected>Filme 1</option>
-                        <option value="id#0002">Filme 2</option>
-                        <option value="id#0003">Filme 3</option>
     
                     </select>
                     <i>
@@ -59,7 +56,7 @@
                 <div class="div-group-inputs">
                     <div>
                         <label for="date">Data</label>
-                        <input type="date" value="2000-01-01" id="date" name="date" required>
+                        <input type="date" value="2000-01-01" id="date" name="startDate" required>
                     </div>
                     <div>
                         <label for="price">Preço do Ingresso (Inteiro)</label>
@@ -114,11 +111,12 @@
     </main>
     
     <footer class="btn-footer">
-        <button id="btn-footer" title="Editar Sessão" aria-label="Clique para Editar Sessão" disabled onclick="clickBtnFooter()">
+        <button id="btn-footer" title="Editar Sessão" aria-label="Clique para Editar Sessão" disabled onclick="updateSession()">
             <h2>Editar Sessão</h2>
         </button>
     </footer>
 
     <script src="../../js/script.js"></script>
+    <script src="../../js/controller/session.js"></script>
 </body>
 </html>

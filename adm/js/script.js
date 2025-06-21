@@ -577,4 +577,42 @@ async function getMovie() {
     return data.movie;
 }
 
+async function getSession() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = +urlParams.get("session");
+
+    if(!sessionId) {
+        alert("ID da sessão não encontrado.");
+        return;
+    }
+
+    const response = await fetch(`${urlServer}/session/${sessionId}`, {
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+
+    if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    const data = await response.json();
+
+    // console.log(data.session);
+
+    return data.session;
+}
+
 document.addEventListener("DOMContentLoaded", isLogin);

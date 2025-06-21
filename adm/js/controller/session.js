@@ -1,14 +1,14 @@
 async function loadSessions() {
     const cinema = await getCinema();
-    if(!cinema) return;
+    if (!cinema) return;
     const room = await getRoom();
-    if(!room) return;
+    if (!room) return;
     const roomId = +room.id;
 
     const response = await fetch(`${urlServer}/session/list/${roomId}`, {
         method: "GET",
         headers: {
-            "Authorization" : `Bearer ${getToken()}`,
+            "Authorization": `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         }
     });
@@ -17,13 +17,13 @@ async function loadSessions() {
     const listSession = document.getElementById("cards-list");
     listSession.innerHTML = "";
 
-    if(response.status === 500) {
+    if (response.status === 500) {
         const error = await response.json();
         console.error("Erro 500: ", error);
         alert(error.message);
         return;
     }
-    else if(response.status === 404) {
+    else if (response.status === 404) {
         const error = await response.json();
         console.error("Erro 404: ", error);
     }
@@ -35,13 +35,13 @@ async function loadSessions() {
 
     const sessions = data.sessions || [];
 
-    for(const session of sessions) {
+    for (const session of sessions) {
 
         const movie = await getMovieById(session.idMovie);
 
 
         const [datePart, timePart] = session.startDate.split("T");
-        session.startTime = timePart.substring(0,5).replace(":", "h");
+        session.startTime = timePart.substring(0, 5).replace(":", "h");
         session.startDate = datePart.split("-").reverse().join("/");
 
         listSession.innerHTML += `
@@ -64,7 +64,7 @@ async function loadSessions() {
 //Delete Session Function
 
 async function getMovieById(movieId) {
-    if(!movieId) {
+    if (!movieId) {
         alert("ID do filme não encontrado.");
         return;
     }
@@ -72,19 +72,19 @@ async function getMovieById(movieId) {
     const response = await fetch(`${urlServer}/movie/${movieId}`, {
         method: "GET",
         headers: {
-            "Authorization" : `Bearer ${getToken()}`,
+            "Authorization": `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
         credentials: 'include'
     });
 
-    if(response.status === 404) {
+    if (response.status === 404) {
         const error = await response.json();
         console.error("Erro 404: ", error);
         alert(error.message);
         return;
     }
-    else if(response.status === 500) {
+    else if (response.status === 500) {
         const error = await response.json();
         console.error("Erro 500: ", error);
         alert(error.message);
@@ -101,7 +101,7 @@ async function getMovieById(movieId) {
 //Delete Session Function
 
 async function getMovieById(movieId) {
-    if(!movieId) {
+    if (!movieId) {
         alert("ID do filme não encontrado.");
         return;
     }
@@ -109,19 +109,19 @@ async function getMovieById(movieId) {
     const response = await fetch(`${urlServer}/movie/${movieId}`, {
         method: "GET",
         headers: {
-            "Authorization" : `Bearer ${getToken()}`,
+            "Authorization": `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         },
         credentials: 'include'
     });
 
-    if(response.status === 404) {
+    if (response.status === 404) {
         const error = await response.json();
         console.error("Erro 404: ", error);
         alert(error.message);
         return;
     }
-    else if(response.status === 500) {
+    else if (response.status === 500) {
         const error = await response.json();
         console.error("Erro 500: ", error);
         alert(error.message);
@@ -159,6 +159,47 @@ async function addSession() {
     window.location.href = `../../adm/screens/register/register-session.html?cinema=${cinemaId}&room=${roomId}`;
 }
 
+async function fillEditForm() {
+    const cinema = await getCinema();
+    if (!cinema) return;
+
+    const room = await getRoom();
+    if (!room) return;
+
+    const form = document.getElementById("form-edit-session");
+
+    const session = await getSession();
+    console.log(session);
+    if (!session) return;
+
+    const sessionId = session.id;
+    const movies = await getAllMovies();
+    const movieId = +session.idMovie;
+
+    form.cinema.value = cinema.name;
+    form.room.value = "Sala " + room.name;
+    form.startDate.value = session.startDate ? new Date(session.startDate).toISOString().split('T')[0] : '';
+    form.timeStart.value = session.startDate ? session.startDate.split("T")[1].substring(0, 5) : '';
+    form.timeEnd.value = session.endHour ? session.endHour.split("T")[1].substring(0, 5) : '';
+    form.price.value = session.price ? `R$ ${session.price.replace('.', ',')}` : '';
+    form.selectFormat.value = session.format || '';
+    form.selectLanguage.value = session.language || '';
+
+    const selectMovie = document.getElementById("select-movie");
+
+    movies.forEach(movie => {
+        if (movie.id === movieId) {
+            selectMovie.innerHTML += `
+            <option value="${movie.id}" selected>${movie.title}</option>
+            `;
+        } else {
+            selectMovie.innerHTML += `
+            <option value="${movie.id}">${movie.title}</option>
+        `;
+        }
+    });
+}
+
 //Edit Session Function
 async function editSession(btn) {
     const card = btn.closest(".card");
@@ -173,7 +214,7 @@ async function editSession(btn) {
 
     console.log(card, sessionId);
 
-    window.location.href = `../../adm/screens/edit/edit-session.html??cinema=${cinemaId}&room=${roomId}&session=${sessionId}`;
+    window.location.href = `../../adm/screens/edit/edit-session.html?cinema=${cinemaId}&room=${roomId}&session=${sessionId}`;
 }
 
 async function createSession() {
@@ -219,6 +260,58 @@ async function createSession() {
 
     alert("Sessão criada com sucesso!");
     window.location.href = `../../screens/sessions.html?cinema=${room.idCinema}&room=${room.id}`;
+
+}
+
+async function updateSession() {
+    const form = document.getElementById("form-edit-session");
+    const session = await getSession();
+
+    const startDate = new Date(form.startDate.value).toISOString().split('T')[0] + "T" + form.timeStart.value + ":00.000Z";
+    const endHour = new Date(form.startDate.value).toISOString().split('T')[0] + "T" + form.timeEnd.value + ":00.000Z";
+
+    const sessionData = {
+        idRoom: session.idRoom,
+        idMovie: +form.selectMovie.value,
+        startDate: startDate,
+        endHour: endHour,
+        price: +form.price.value.replace('R$', '').replace(',', '.').trim(),
+        format: form.selectFormat.value,
+        language: form.selectLanguage.value,
+    };
+
+    const response = await fetch(`${urlServer}/session/${session.id}`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(sessionData),
+        credentials: 'include'
+    });
+    if (response.status === 400) {
+        const error = await response.json();
+        console.error("Erro 400: ", error);
+        alert(error.message);
+        return;
+    }
+    else if (response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if (response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    alert("Sessão atualizada com sucesso!");
+    const cinema = await getCinema();
+    if (!cinema) return;
+    window.location.href = `../../screens/sessions.html?cinema=${cinema.id}&room=${session.idRoom}`;
 
 }
 
@@ -274,7 +367,27 @@ async function getAllMovies() {
 }
 
 
-function deleteSession(card) {
-    // Aqui você pode adicionar a lógica para remover o item do banco de dados.
+async function deleteSession(card) {
+    const sessionId = card.getAttribute("id");
+    const response = fetch(`${urlServer}/session/${+sessionId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+    if (response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if (response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
     card.remove();
 }
