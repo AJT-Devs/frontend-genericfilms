@@ -75,6 +75,7 @@ async function loadReservesByUser(){
                 </div>
                 <div>
                     <button onclick="goToReservePreview(this)">Acessar ingresso</button>
+                    <button onclick="goToValidateReserve(${ticket.id})">Validar ingresso</button>
                     <button onclick="openModalConfirmDelete(this)">Deletar</button>
                 </div>
             </section>
@@ -93,6 +94,10 @@ function openModalConfirmDelete(btn){
         deleteReserve(card);
         closeModal("modal-confirm-delete");
     });
+}
+
+function goToValidateReserve(reserveId){
+    window.location.href = `../../adm/screens/validate.html?reserve=${reserveId}`;
 }
 //Add Reserve Function
 async function addReserve() {
