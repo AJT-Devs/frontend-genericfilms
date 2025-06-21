@@ -2,8 +2,31 @@ const urlServer = "http://localhost:3000";
 
 //Main
 
-function isLogin() {
+async function isLogin() {
     // Adicionar verificação se é um adm logado, se não redirecionar para a página de login
+    const token = getToken();
+    const name = getNameAdmin();
+    if (!token) {
+      window.location.href = origin + "/adm";
+    }
+
+    const response = await fetch(`${urlServer}/admin/alreadyLoggedAdmin`, {
+    method: 'GET',
+    headers: {
+      "Authorization" : `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include'
+  });
+  
+  if(response.status !== 200) {
+    window.location.href = origin + "/adm";
+  }
+  console.log(name)
+  const aHeader = document.querySelector(".perfil");
+  aHeader.textContent = name;
+  aHeader.ariaLabel = `Clique para acessar usuário de ${name}`;
+    
 }
 
 async function alreadyLogged() {
@@ -18,6 +41,7 @@ async function alreadyLogged() {
     },
     credentials: 'include'
   });
+  
 
   const data = await response.json();
   if (data.message === "Administrador já está logado!"){
@@ -315,14 +339,15 @@ async function loginAdm() {
 
   const token = data.token;
 
-  const nameAdmin = data.admin.name;
+  const nameAdmin = data.name;
+  
 
   if (!token) return alert("Token não encontrado. Verifique se o servidor está funcionando corretamente.");
 
   console.log("Token: ", response);
 
   localStorage.setItem('admToken', token);
-  localStorage.setItem('admNome', nameAdmin);
+  localStorage.setItem('admName', nameAdmin);
 
   window.location.href = origin + "/adm/screens/cinemas.html";
 }
@@ -338,7 +363,7 @@ function getToken() {
     return token;
 }
 function getNameAdmin() {
-    const name = localStorage.getItem('admNome');
+    const name = localStorage.getItem('admName');
     if (!name) {
         console.error("Nome não encontrado. Verifique se o usuário está logado.");
         return null;
