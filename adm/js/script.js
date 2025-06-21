@@ -528,3 +528,42 @@ async function getAdmin() {
 
     return admin;
 }
+
+async function getMovie() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieId = +urlParams.get("movie");
+
+
+    if(!movieId) {
+        alert("ID do filme não encontrado.");
+        return;
+    }
+
+    const response = await fetch(`${urlServer}/movie/${movieId}`, {
+        method: "GET",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            "Content-Type": "application/json"
+        },
+        credentials: 'include'
+    });
+
+    if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+
+    const data = await response.json();
+
+    // console.log(data.movie);
+
+    return data.movie;
+}
