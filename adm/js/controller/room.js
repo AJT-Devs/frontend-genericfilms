@@ -4,7 +4,7 @@ async function loadRooms() {
     if(!cinema) return;
     const cinemaId = +cinema.id;
 
-    const response = await fetch(`http://localhost:3000/room/list/${cinemaId}`, {
+    const response = await fetch(`${urlServer}/room/list/${cinemaId}`, {
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -156,7 +156,7 @@ async function createRoom() {
         numPCD: +form.numPCD.value
     }
 
-    const response = await fetch("http://localhost:3000/room/", {
+    const response = await fetch(`${urlServer}/room/`, {
         method: "POST",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -198,7 +198,7 @@ async function updateRoom() {
         numPCD: +form.numPCD.value
     }
 
-    const response = await fetch(`http://localhost:3000/room/${roomId}`, {
+    const response = await fetch(`${urlServer}/room/${roomId}`, {
         method: "PUT",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -235,7 +235,7 @@ async function updateRoom() {
 async function deleteRoom(card) {
     const roomId = card.getAttribute("id");
 
-    const response = fetch(`http://localhost:3000/room/${+roomId}`, {
+    const response = fetch(`${urlServer}/room/${+roomId}`, {
         method: "DELETE",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,

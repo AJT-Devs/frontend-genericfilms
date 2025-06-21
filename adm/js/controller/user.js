@@ -1,6 +1,6 @@
 //Load Users Function
 async function loadUsers() {
-    const response = await fetch("http://localhost:3000/user/all", {
+    const response = await fetch(`${urlServer}/user/all`, {
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -99,7 +99,7 @@ async function createUser() {
         password: form.password.value
     }
 
-    const response = await fetch("http://localhost:3000/auth/signup", {
+    const response = await fetch(`${urlServer}/auth/signup`, {
         method: "POST",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -164,7 +164,7 @@ async function updateUser() {
         telNumber: form.telNumber.value
     };
 
-    const response = await fetch(`http://localhost:3000/user/${userId}`, {
+    const response = await fetch(`${urlServer}/user/${userId}`, {
         method: "PUT",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -204,7 +204,7 @@ async function deleteUser(btn) {
     console.log("Deletando usuário com ID:", userId);
     
 
-    const response = fetch(`http://localhost:3000/user/${userId}`, {
+    const response = fetch(`${urlServer}/user/${userId}`, {
         method: "DELETE",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
