@@ -1,3 +1,5 @@
+const urlServer = "http://localhost:3000";
+
 //Main
 
 function isLogin() {
@@ -8,7 +10,7 @@ async function alreadyLogged() {
     // Adicionar verificação se é um adm logado, se sim redirecionar para a página inicial do adm
   const token = localStorage.getItem('admToken');
   if (token) {
-    const response = await fetch(`http://localhost:3000/admin/alreadyLoggedAdmin`, {
+    const response = await fetch(`${urlServer}/admin/alreadyLoggedAdmin`, {
     method: 'GET',
     headers: {
       "Authorization" : `Bearer ${token}`,
@@ -281,7 +283,7 @@ async function loginAdm() {
     password: form.password.value
   };
 
-  const response = await fetch(`http://localhost:3000/admin/login`, {
+  const response = await fetch(`${urlServer}/admin/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -343,7 +345,7 @@ async function getCinema() {
 
     // console.log("ID do usuário: ", cinemaId);
 
-    const response = await fetch(`http://localhost:3000/cinema/${cinemaId}`, {
+    const response = await fetch(`${urlServer}/cinema/${cinemaId}`, {
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -382,7 +384,7 @@ async function getRoom() {
 
     if(!roomId) return;
 
-    const Response = await fetch(`http://localhost:3000/room/${roomId}`,{
+    const Response = await fetch(`${urlServer}/room/${roomId}`,{
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -418,7 +420,7 @@ async function getUser() {
 
     // console.log("ID do usuário: ", userId);
 
-    const response = await fetch(`http://localhost:3000/user/${userId}`, {
+    const response = await fetch(`${urlServer}/user/${userId}`, {
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,

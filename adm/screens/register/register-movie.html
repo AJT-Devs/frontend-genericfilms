@@ -46,8 +46,7 @@
 
         <main id="main-forms">
 
-            <form action="http://localhost:3000/movie/movie" id="form-register-movie" style="margin-bottom: 60px;"
-                enctype="multipart/form-data">
+            <form action="http://localhost:3000/movie/movie" id="form-register-movie" style="margin-bottom: 60px;" enctype="multipart/form-data">
                 <label for="title-movie">Titulo: Subtitulo</label>
                 <input type="text" placeholder="Titulo do filme: Subtitulo do filme" id="title-movie" name="title"
                     title="[Titulo do filme: Subtitulo do filme]" required>
@@ -87,20 +86,9 @@
                     </div>
                 </div>
                 <label for="resume-movie">Sinopse</label>
-                <textarea id="resume-movie" name="synopsis" placeholder="Resumo sobre a filme..."
-                    required></textarea>
-                <div class="div-group-inputs">
-                    <div>
-                        <label for="link-trailer-movie">Link Trailer</label>
-                        <input type="url" id="link-trailer-movie" name="trailer" placeholder="Link do trailer"
-                            required>
-                    </div>
-                    <div>
-                        <label for="gender-movie">Gênero</label>
-                        <input type="text" id="gender-movie" name="gender" placeholder="Ação, Aventura,..."
-                            required>
-                    </div>
-                </div>
+                <textarea id="resume-movie" name="synopsis" placeholder="Resumo sobre a filme..." required></textarea>
+                <label for="link-trailer-movie">Link Trailer</label>
+                <input type="url" id="link-trailer-movie" name="trailer" placeholder="Link do trailer" required>
                 <div class="div-group-inputs">
                     <div>
                         <label for="classification-movie">Classificação</label>
@@ -125,8 +113,7 @@
                     </div>
                     <div>
                         <label for="release-date-movie">Data de estreia</label>
-                        <input type="date" placeholder="DD/MM/AAAA" id="release-date-movie" name="releaseDate"
-                            required>
+                        <input type="date" placeholder="DD/MM/AAAA" id="release-date-movie" name="releaseDate" required>
                     </div>
                 </div>
                 <div class="div-group-inputs">
@@ -134,7 +121,10 @@
                         <label for="duration-movie">Duração (Em minutos)</label>
                         <input type="text" placeholder="120" id="duration-movie" name="duration" required>
                     </div>
-
+                    <div>
+                        <label for="gender-movie">Gênero</label>
+                        <input type="text" id="gender-movie" name="gender" placeholder="Ação, Aventura,..." required>
+                    </div>
                 </div>
                 <label for="director-movie">Diretor(es)</label>
                 <input type="text" id="director-movie" name="director" placeholder="Nome do(s) diretor(es)"
@@ -142,20 +132,17 @@
                 <label for="cast-movie">Elenco</label>
                 <input type="text" id="cast-movie" name="cast" placeholder="Nome do pessoal do elenco" required>
 
-                <button type="submit" id="btn-footer" title="Cadastrar Filme" aria-label="Clique para Cadastrar Filme"
-                    disabled>
-                    <h2>Cadastrar Filme</h2>
-                </button>
+                <footer class="btn-footer">
+                    <button type="submit" id="btn-footer" title="Cadastrar Filme" aria-label="Clique para Cadastrar Filme" disabled>
+                        <h2>Cadastrar Filme</h2>
+                    </button>
+                </footer>
 
             </form>
 
         </main>
 
     </main>
-
-    <footer class="btn-footer">
-
-    </footer>
 
     <script src="../../js/script.js"></script>
     <script src="../../js/controller/movie.js"></script>
@@ -164,40 +151,7 @@
         const form = document.querySelector('#form-register-movie');
         form.addEventListener('submit', async (e) => {
             e.preventDefault(); // Impede o envio padrão do formulário
-            const formData = new FormData(form);
-
-            const response = await fetch('http://localhost:3000/movie/movie', {
-                method: 'POST',
-                headers: {
-                    "Authorization" : `Bearer ${getToken()}`,
-                    // "Content-Type": "application/json"
-                },
-                credentials: 'include',
-                body: formData
-                // Não defina o Content-Type, o navegador faz isso automaticamente!
-            });
-
-            if(response.status === 400) {
-                const error = await response.json();
-                console.error("Erro 400: ", error);
-                alert(error.message);
-                return;
-            }
-            else if(response.status === 500) {
-                const error = await response.json();
-                console.error("Erro 500: ", error);
-                alert(error.message);
-                return;
-            }
-            else if(response.status === 404) {
-                const error = await response.json();
-                console.error("Erro 404: ", error);
-                alert(error.message);
-                return;
-            }
-            
-            alert("Filme cadastrada com sucesso!");
-            //window.location.href = `../../screens/movies.html`;
+            createMovie();
         });
     </script>
 </body>

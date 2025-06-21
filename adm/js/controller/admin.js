@@ -1,7 +1,7 @@
 // Function loadAdmins
 
 async function loadAdmins() {
-    const response = await fetch("http://localhost:3000/admin/list", {
+    const response = await fetch(`${urlServer}/admin/list`, {
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -85,7 +85,7 @@ async function createAdmin() {
         password: form.password.value
     }
 
-    const response = await fetch("http://localhost:3000/admin/signup", {
+    const response = await fetch(`${urlServer}/admin/signup`, {
         method: "POST",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -131,7 +131,7 @@ async function updadeAdmin(){
         password: form.password.value || admin.password
     }
 
-    const response = await fetch(`http://localhost:3000/admin/${admin.id}`, {
+    const response = await fetch(`${urlServer}/admin/${admin.id}`, {
         method: "PUT",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -190,7 +190,7 @@ async function getAdmin() {
 
     // console.log("ID do usuário: ", adminId);
 
-    const response = await fetch(`http://localhost:3000/admin/${adminId}`, {
+    const response = await fetch(`${urlServer}/admin/${adminId}`, {
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -227,7 +227,7 @@ async function deleteAdmin(card) {
     
     const adminId = card.getAttribute("id");
     
-    const response = fetch(`http://localhost:3000/admin/${adminId}`, {
+    const response = fetch(`${urlServer}/admin/${adminId}`, {
         method: "DELETE",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,

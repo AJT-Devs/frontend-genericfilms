@@ -1,5 +1,5 @@
 async function loadMovies() {
-    const response = await fetch("http://localhost:3000/movie/list",{
+    const response = await fetch(`${urlServer}/movie/list`,{
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -81,21 +81,23 @@ async function fillEditForm(){
     if(!movie) return;
     
     const form = document.getElementById("form-edit-movie");
-    console.log(form.titleMovie);
 
     form.title.value = movie.title;
-    form.resume.value = movie.synopsis;
-    form.linkTrailer.value = movie.trailer;
+    form.synopsis.value = movie.synopsis;
+    form.trailer.value = movie.trailer;
     form.gender.value = movie.gender;
     form.classification.value = movie.classification;
-    form.releaseDate.value = movie.releaseDate;
+    form.releaseDate.value = movie.releaseDate ? new Date(movie.releaseDate).toISOString().split('T')[0] : '';
     form.duration.value = movie.duration;
     form.director.value = movie.director;
     form.cast.value = movie.cast;
     // form.status.value = movie.status;
 
-    showPreviewImageOfBD(form.posterMovie, movie.poster);
-    showPreviewImageOfBD(form.bannerMovie, movie.banner);
+    console.log(movie.poster);
+    console.log(movie.banner);
+
+    showPreviewImageOfBD(form.poster, movie.poster);
+    showPreviewImageOfBD(form.banner, movie.banner);
 }
 
 async function getMovie() {
@@ -108,7 +110,7 @@ async function getMovie() {
         return;
     }
 
-    const response = await fetch(`http://localhost:3000/movie/${movieId}`, {
+    const response = await fetch(`${urlServer}/movie/${movieId}`, {
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -174,11 +176,12 @@ function showImagePreview(input) {
 }
 
 function showPreviewImageOfBD(input, url){
+
     const preview = document.querySelector(`label[for="${input.id}"]`);
     preview.querySelector("span").style.display = "inline";
 
     if (url) {
-        preview.style.backgroundImage = `url(${url})`;
+        preview.style.backgroundImage = `url(${urlServer}${url})`;
 
         preview.querySelector("span").style.display = "none";
     } else {
@@ -188,73 +191,44 @@ function showPreviewImageOfBD(input, url){
 
 //Router create movie
 
-// async function createMovie() {
-//     const form = document.getElementById("form-register-movie");
-//     const movie =  {
-//         title: form.title.value,
-//         synopsis: form.synopsis.value,
-//         trailer: form.trailer.value,
-//         gender: form.gender.value,
-//         classification: form.classification.value,
-//         releaseDate: form.releaseDate.value,
-//         duration: form.duration.value,
-//         director: form.director.value,
-//         cast: form.cast.value,
-//         poster: form.poster.files[0] ? await convertFileToUrl(form.poster.files[0]) : null,
-//         banner: form.banner.files[0] ? await convertFileToUrl(form.banner.files[0]) : null
-//     }
+async function createMovie() {
+    const form = document.getElementById("form-register-movie");
 
-//     const formData = new FormData();
+    const formData = new FormData(form);
 
-//     formData.append("title", movie.title);
-//     formData.append("synopsis", movie.synopsis);
-//     formData.append("trailer", movie.trailer);
-//     formData.append("gender", movie.gender);
-//     formData.append("classification", movie.classification);
-//     formData.append("releaseDate", movie.releaseDate);
-//     formData.append("duration", movie.duration);
-//     formData.append("director", movie.director);
-//     formData.append("cast", movie.cast);
-//     formData.append("poster", movie.poster);
-//     formData.append("banner", movie.banner);
+
+    const response = await fetch(`${urlServer}/movie/movie`, {
+        method: "POST",
+        headers: {
+            "Authorization" : `Bearer ${getToken()}`,
+            // "Content-Type": "application/json"
+        },
+        credentials: 'include',
+        body: formData
+    });
+
+    if(response.status === 400) {
+        const error = await response.json();
+        console.error("Erro 400: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 500) {
+        const error = await response.json();
+        console.error("Erro 500: ", error);
+        alert(error.message);
+        return;
+    }
+    else if(response.status === 404) {
+        const error = await response.json();
+        console.error("Erro 404: ", error);
+        alert(error.message);
+        return;
+    }
     
-//     console.log(movie);
-
-
-//     const response = await fetch("http://localhost:3000/movie/", {
-//         method: "POST",
-//         headers: {
-//             "Authorization" : `Bearer ${getToken()}`,
-//             "Content-Type": "application/json"
-//         },
-//         credentials: 'include',
-//         body: formData
-//     });
-
-//     console.log(JSON.stringify(formData));
-
-//     if(response.status === 400) {
-//         const error = await response.json();
-//         console.error("Erro 400: ", error);
-//         alert(error.message);
-//         return;
-//     }
-//     else if(response.status === 500) {
-//         const error = await response.json();
-//         console.error("Erro 500: ", error);
-//         alert(error.message);
-//         return;
-//     }
-//     else if(response.status === 404) {
-//         const error = await response.json();
-//         console.error("Erro 404: ", error);
-//         alert(error.message);
-//         return;
-//     }
-    
-//     alert("Filme cadastrada com sucesso!");
-//     //window.location.href = `../../screens/movies.html`;
-// }
+    alert("Filme cadastrada com sucesso!");
+    window.location.href = `../../screens/movies.html`;
+}
 
 // Função de conversão do arquivo para Base64
 async function convertFileToUrl(file) {
@@ -277,28 +251,19 @@ async function updateMovie() {
     const movieId = movie.id;
 
     const form = document.getElementById("form-edit-movie");
-    const updatedMovie = {
-        title: form.title.value,
-        synopsis: form.synopsis.value,
-        trailer: form.trailer.value,
-        gender: form.gender.value,
-        classification: form.classification.value,
-        releaseDate: form.releaseDate.value,
-        duration: form.duration.value,
-        //status: form.status.value,
-        director: form.director.value,
-        cast: form.cast.value,
-        poster: form.poster.value,
-        banner: form.banner.value
-    }
 
-    const response = await fetch(`http://localhost:3000/movie/put/${movieId}`, {
+    form.setAttribute("action", `${urlServer}/movie/put/${movieId}`);
+    form.setAttribute("method", "PUT");
+
+    const formData = new FormData(form);
+
+    const response = await fetch(`${urlServer}/movie/put/${movieId}`, {
         method: "PUT",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
-            "Content-Type": "application/json"
         },
-        body: JSON.stringify(movie)
+        body: formData,
+        credentials: 'include'
     });
 
      if(response.status === 400) {
@@ -321,7 +286,7 @@ async function updateMovie() {
     }
 
     alert("Filmes atualizado com sucesso!");
-    window.location.href = `../../screens/movies.html`;
+    // window.location.href = `../../screens/movies.html`;
 }
 
 //Delete Movie Function
@@ -329,7 +294,7 @@ async function updateMovie() {
 async function deleteMovie(card) {
     const movieId = card.getAttribute("id");
 
-    const response = fetch(`http://localhost:3000/movie/${+movieId}`, {
+    const response = fetch(`${urlServer}/movie/${+movieId}`, {
         method: "DELETE",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,

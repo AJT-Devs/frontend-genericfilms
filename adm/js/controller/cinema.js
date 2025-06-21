@@ -1,6 +1,6 @@
 //Load Cinemas Function
 async function loadCinemas() {
-    const response = await fetch("http://localhost:3000/cinema/list", {
+    const response = await fetch(`${urlServer}/cinema/list`, {
         method: "GET",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -96,7 +96,7 @@ async function createCinema() {
         city: form.city.value
     }
 
-    const response = await fetch("http://localhost:3000/cinema/create", {
+    const response = await fetch(`${urlServer}/cinema/create`, {
         method: "POST",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -150,7 +150,7 @@ async function updateCinema() {
         city: form.city.value
     }
 
-    const response = await fetch(`http://localhost:3000/cinema/${cinemaId}`, {
+    const response = await fetch(`${urlServer}/cinema/${cinemaId}`, {
         method: "PUT",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,
@@ -188,7 +188,7 @@ async function updateCinema() {
 async function deleteCinema(card) {
     const cinemaId = card.getAttribute("id");
 
-    const response = await fetch(`http://localhost:3000/cinema/${cinemaId}`, {
+    const response = await fetch(`${urlServer}/cinema/${cinemaId}`, {
         method: "DELETE",
         headers: {
             "Authorization" : `Bearer ${getToken()}`,

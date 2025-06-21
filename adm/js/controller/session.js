@@ -5,7 +5,7 @@ async function loadSessions() {
     if(!room) return;
     const roomId = +room.id;
 
-    // const response = await fetch(`http://localhost:3000/session/list/${roomId}`, {
+    // const response = await fetch(`${urlServer}/session/list/${roomId}`, {
     //     method: "GET",
     //     headers: {
     //         "Authorization" : `Bearer ${getToken()}`,
