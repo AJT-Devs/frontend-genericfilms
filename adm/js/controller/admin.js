@@ -30,7 +30,9 @@ async function loadAdmins() {
 
     const admins = data.admins || [];
 
+   
     admins.forEach(admin =>{
+        if(admin.id !== +localStorage.getItem("admId")) {
         listAdmin.innerHTML += `
            <section class="card" id="${admin.id}" tabindex="0" aria-label="${admin.name} - ${admin.cargo}; ID#${admin.id}">
                 <div aria-label="${admin.name} - ${admin.cargo}; ID#${admin.id}">
@@ -43,10 +45,9 @@ async function loadAdmins() {
                 <div>
                     <button onclick="editAdmin(this)">Editar</button>
                     <button onclick="openModalConfirmDelete(this)">Deletar</button>
-                    <button onclick="testMessage()">Teste mensagem</button>
                 </div>
             </section>
-        `;
+        `;}
     })
 
 }
