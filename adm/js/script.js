@@ -7,7 +7,7 @@ async function isLogin() {
     const token = getToken();
     const name = getNameAdmin();
     if (!token) {
-      if(!window.location.href.includes(origin + "/adm")){
+      if(window.location.href !== origin + "/adm/"){
         window.location.href = origin + "/adm";
       }
     }
