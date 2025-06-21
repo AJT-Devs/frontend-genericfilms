@@ -313,13 +313,16 @@ async function loginAdm() {
 
   const data = await response.json();
 
-  token = data.token;
+  const token = data.token;
+
+  const nameAdmin = data.admin.name;
 
   if (!token) return alert("Token não encontrado. Verifique se o servidor está funcionando corretamente.");
 
   console.log("Token: ", response);
 
   localStorage.setItem('admToken', token);
+  localStorage.setItem('admNome', nameAdmin);
 
   window.location.href = origin + "/adm/screens/cinemas.html";
 }
@@ -333,6 +336,14 @@ function getToken() {
         return null;
     }
     return token;
+}
+function getNameAdmin() {
+    const name = localStorage.getItem('admNome');
+    if (!name) {
+        console.error("Nome não encontrado. Verifique se o usuário está logado.");
+        return null;
+    }
+    return name;
 }
 
 //Get Cinema
